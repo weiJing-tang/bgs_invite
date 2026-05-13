@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#160d0b">
+  <title>快和我一起玩博德之门3</title>
+  <style>
+    :root {
+      --bg: #130d0b;
+      --ink: #fff6e8;
+      --muted: #d6b988;
+      --gold: #d9a441;
+      --red: #a93625;
+      --green: #7aa66a;
+      --panel: rgba(23, 15, 12, 0.72);
+      --line: rgba(255, 224, 158, 0.24);
+      color-scheme: dark;
+      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(181, 62, 38, 0.26), transparent 30rem),
+        radial-gradient(circle at 85% 26%, rgba(122, 166, 106, 0.22), transparent 28rem),
+        linear-gradient(145deg, #080605 0%, var(--bg) 48%, #22130f 100%);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image:
+        linear-gradient(90deg, rgba(10, 6, 5, 0.34), rgba(10, 6, 5, 0.9)),
+        url("https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/page_bg_generated_v6b.jpg?t=1777363040");
+      background-position: center top;
+      background-size: cover;
+      opacity: 0.78;
+      filter: saturate(1.08);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(10, 6, 5, 0.1), rgba(10, 6, 5, 0.98) 88%),
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 4px);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(10, 6, 5, 0.68);
+      border-bottom: 1px solid rgba(255, 231, 169, 0.13);
+    }
+
+    .topbar .shell {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: min(170px, 42vw);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.52));
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 246, 232, 0.78);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .nav a {
+      padding: 10px 12px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+    }
+
+    .nav a:hover {
+      border-color: var(--line);
+      background: rgba(255, 235, 184, 0.08);
+    }
+
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      align-items: center;
+      padding: 54px 0 36px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.78fr);
+      gap: 46px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      margin-bottom: 20px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 221, 151, 0.28);
+      border-radius: 999px;
+      background: rgba(16, 9, 7, 0.62);
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(46px, 8.2vw, 104px);
+      line-height: 0.96;
+      letter-spacing: 0;
+      text-wrap: balance;
+      text-shadow: 0 10px 35px rgba(0, 0, 0, 0.72);
+    }
+
+    .hero-copy {
+      margin: 24px 0 0;
+      max-width: 690px;
+      color: rgba(255, 246, 232, 0.82);
+      font-size: clamp(18px, 2.4vw, 25px);
+      line-height: 1.65;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 20px;
+      border: 1px solid rgba(255, 231, 169, 0.34);
+      border-radius: 999px;
+      background: rgba(255, 238, 194, 0.1);
+      color: var(--ink);
+      font-weight: 700;
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22);
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 231, 169, 0.68);
+      background: rgba(255, 238, 194, 0.16);
+    }
+
+    .button.primary {
+      border-color: rgba(255, 198, 92, 0.7);
+      background: linear-gradient(135deg, #f0bd62, #a93625);
+      color: #130b08;
+    }
+
+    .poster {
+      position: relative;
+      min-height: 520px;
+      border: 1px solid rgba(255, 231, 169, 0.18);
+      border-radius: 8px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(10, 6, 5, 0.04), rgba(10, 6, 5, 0.75)),
+        url("https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/hero_capsule.jpg?t=1777363040");
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.46);
+    }
+
+    .poster::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(160deg, rgba(255, 220, 141, 0.12), transparent 34%),
+        linear-gradient(0deg, rgba(11, 7, 6, 0.86), transparent 52%);
+    }
+
+    .dice {
+      position: absolute;
+      right: 22px;
+      bottom: 22px;
+      width: 132px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 231, 169, 0.28);
+      border-radius: 8px;
+      background: rgba(11, 7, 6, 0.72);
+      color: var(--gold);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 54px;
+      font-weight: 700;
+      box-shadow: inset 0 0 34px rgba(217, 164, 65, 0.12);
+    }
+
+    .poster-note {
+      position: absolute;
+      left: 22px;
+      right: 172px;
+      bottom: 28px;
+      color: rgba(255, 246, 232, 0.88);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .poster-note strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #fff0cf;
+      font-size: 18px;
+    }
+
+    section {
+      padding: 44px 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .section-title p {
+      margin: 0;
+      max-width: 460px;
+      color: rgba(255, 246, 232, 0.68);
+      line-height: 1.7;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      padding: 22px;
+      border: 1px solid rgba(255, 231, 169, 0.16);
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: var(--panel);
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.26);
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(10, 6, 5, 0.88), rgba(10, 6, 5, 0.12));
+    }
+
+    .card > * {
+      position: relative;
+    }
+
+    .card small {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .card h3 {
+      margin: 10px 0 8px;
+      font-size: 23px;
+      letter-spacing: 0;
+    }
+
+    .card p {
+      margin: 0;
+      color: rgba(255, 246, 232, 0.74);
+      line-height: 1.6;
+    }
+
+    .plan {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(300px, 1.1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .join-panel {
+      padding: 28px;
+      border: 1px solid rgba(255, 231, 169, 0.18);
+      border-radius: 8px;
+      background: rgba(16, 9, 7, 0.76);
+      box-shadow: 0 20px 54px rgba(0, 0, 0, 0.28);
+    }
+
+    .join-panel h2 {
+      margin-bottom: 18px;
+    }
+
+    .join-panel p {
+      margin: 0 0 20px;
+      color: rgba(255, 246, 232, 0.78);
+      line-height: 1.75;
+    }
+
+    .checks {
+      display: grid;
+      gap: 12px;
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .checks li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 231, 169, 0.12);
+      border-radius: 8px;
+      background: rgba(255, 241, 205, 0.06);
+    }
+
+    .checks span {
+      width: 28px;
+      height: 28px;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: rgba(122, 166, 106, 0.18);
+      color: #bde4a7;
+      font-weight: 800;
+    }
+
+    .party {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .class-tile {
+      min-height: 176px;
+      padding: 18px;
+      border: 1px solid rgba(255, 231, 169, 0.14);
+      border-radius: 8px;
+      background: rgba(16, 9, 7, 0.66);
+    }
+
+    .class-tile img {
+      width: 76px;
+      height: 76px;
+      object-fit: contain;
+      display: block;
+      margin-bottom: 18px;
+      filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.44));
+    }
+
+    .class-tile h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .class-tile p {
+      margin: 0;
+      color: rgba(255, 246, 232, 0.68);
+      line-height: 1.56;
+    }
+
+    .final {
+      padding: 42px 0 64px;
+      text-align: center;
+    }
+
+    .final-box {
+      padding: 42px 24px;
+      border: 1px solid rgba(255, 231, 169, 0.2);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(169, 54, 37, 0.22), rgba(122, 166, 106, 0.18)),
+        rgba(16, 9, 7, 0.78);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.36);
+    }
+
+    .final-box p {
+      width: min(680px, 100%);
+      margin: 18px auto 0;
+      color: rgba(255, 246, 232, 0.76);
+      line-height: 1.75;
+    }
+
+    footer {
+      padding: 22px 0 28px;
+      border-top: 1px solid rgba(255, 231, 169, 0.13);
+      color: rgba(255, 246, 232, 0.54);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    footer a {
+      color: rgba(255, 226, 164, 0.86);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    @media (max-width: 860px) {
+      .topbar .shell {
+        min-height: 64px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .hero-grid,
+      .plan {
+        grid-template-columns: 1fr;
+      }
+
+      .poster {
+        min-height: 390px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        display: block;
+      }
+
+      .section-title p {
+        margin-top: 12px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .shell {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .hero-copy {
+        font-size: 17px;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .poster {
+        min-height: 330px;
+      }
+
+      .dice {
+        width: 92px;
+        right: 16px;
+        bottom: 16px;
+        font-size: 40px;
+      }
+
+      .poster-note {
+        left: 16px;
+        right: 120px;
+        bottom: 18px;
+        font-size: 13px;
+      }
+
+      .party {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell">
+      <a class="brand" href="#top" aria-label="回到顶部">
+        <img src="https://baldursgate3.game/png/logo-bg3.png" alt="Baldur's Gate 3">
+      </a>
+      <nav class="nav" aria-label="页面导航">
+        <a href="#why">为什么现在玩</a>
+        <a href="#party">队伍配置</a>
+        <a href="#join">加入队伍</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <div class="eyebrow">私人开团邀请 · 非官方粉丝页</div>
+          <h1>快和我一起玩博德之门3</h1>
+          <p class="hero-copy">
+            队伍缺你。今晚从营地出发，骰子交给命运，选择交给我们。你负责嘴硬、整活、过检定，剩下的让冒险自己长出来。
+          </p>
+          <div class="cta-row">
+            <a class="button primary" href="#join">🎲 我加入</a>
+            <a class="button" href="https://store.steampowered.com/app/1086940/Baldurs_Gate_3/" target="_blank" rel="noreferrer">看 Steam 页面</a>
+          </div>
+        </div>
+        <aside class="poster" aria-label="博德之门3官方视觉素材">
+          <div class="poster-note">
+            <strong>目标：四人小队成团</strong>
+            休闲推进，剧情优先，可以失败，可以嘴炮，也可以把计划执行得很离谱。
+          </div>
+          <div class="dice" aria-hidden="true">20</div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="why">
+      <div class="shell">
+        <div class="section-title">
+          <h2>这次不当独狼</h2>
+          <p>博德之门3最快乐的地方，是几个人一起做出离谱但合理的决定，然后一起承担后果。</p>
+        </div>
+        <div class="cards">
+          <article class="card" style="background-image: url('https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/extras/3a7b2cb2594e1a27c2f3f0fa61d14d7d.webp?t=1777363040');">
+            <small>01</small>
+            <h3>一起过剧情</h3>
+            <p>对话、选择、阵营、关系，全都能现场争论，现场后悔。</p>
+          </article>
+          <article class="card" style="background-image: url('https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/extras/fc234958f310d0a7380388308455d02f.webp?t=1777363040');">
+            <small>02</small>
+            <h3>一起打架</h3>
+            <p>你推人，我放火，他补刀。战斗计划也许会成功，也许会变成名场面。</p>
+          </article>
+          <article class="card" style="background-image: url('https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/extras/de1c3f817c6e0604f5b039f2e7a95199.webp?t=1777363040');">
+            <small>03</small>
+            <h3>一起整活</h3>
+            <p>摸箱子、开锁、潜行、乱试法术。只要存档还在，世界就还有救。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="party">
+      <div class="shell plan">
+        <div class="join-panel">
+          <h2>队伍急招</h2>
+          <p>
+            不限职业，不限流派。会玩当然好，不会玩也完全可以。你只需要带着好奇心来，剩下的我们边走边学。
+          </p>
+          <ul class="checks">
+            <li><span>✓</span> 可以慢慢看剧情，不催主线</li>
+            <li><span>✓</span> 可以语音聊天，也可以安静打字</li>
+            <li><span>✓</span> 可以认真打，也可以适度整活</li>
+          </ul>
+        </div>
+
+        <div class="party" aria-label="推荐职业方向">
+          <article class="class-tile">
+            <img src="https://baldursgate3.game/classes/bard.png" alt="Bard icon">
+            <h3>吟游诗人</h3>
+            <p>嘴炮担当。能打，能奶，能过检定，还能把场面聊得更热闹。</p>
+          </article>
+          <article class="class-tile">
+            <img src="https://baldursgate3.game/classes/wizard.png" alt="Wizard icon">
+            <h3>法师</h3>
+            <p>负责把问题变复杂，再用更大的法术把问题解决。</p>
+          </article>
+          <article class="class-tile">
+            <img src="https://baldursgate3.game/classes/rogue.png" alt="Rogue icon">
+            <h3>游荡者</h3>
+            <p>开锁、偷袭、潜入，最适合第一个说“我有个想法”的人。</p>
+          </article>
+          <article class="class-tile">
+            <img src="https://baldursgate3.game/classes/paladin.png" alt="Paladin icon">
+            <h3>圣武士</h3>
+            <p>正面开团担当。誓言很硬，伤害也很硬。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="join" class="final">
+      <div class="shell">
+        <div class="final-box">
+          <h2>今晚就开局？</h2>
+          <p>
+            看到这里就说明命运已经投出了骰子。把这页发给你，就是想说：快来，队里真的差你一个。
+          </p>
+          <div class="cta-row" style="justify-content: center;">
+            <a class="button primary" href="weixin://">微信回我：我来！</a>
+            <a class="button" href="https://baldursgate3.game/" target="_blank" rel="noreferrer">官方主页</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      本页为私人游戏邀请页，非 Larian Studios、Wizards of the Coast 或 Steam 官方页面。Baldur's Gate 3、相关商标、角色、图片与素材归各自权利方所有。页面引用公开官方素材：<a href="https://baldursgate3.game/" target="_blank" rel="noreferrer">Baldur's Gate 3 官方网站</a>、<a href="https://store.steampowered.com/app/1086940/Baldurs_Gate_3/" target="_blank" rel="noreferrer">Steam 商店页</a>。
+    </div>
+  </footer>
+</body>
+</html>
