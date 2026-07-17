@@ -166,6 +166,23 @@
     }
     .d20.rolling { animation: roll 600ms cubic-bezier(.2,.8,.2,1); }
     .roll-note { min-height: 26px; margin: 14px 18px 0; color: var(--paper-dim); }
+    .inspiration-strip {
+      display: grid;
+      grid-template-columns: auto auto 1fr;
+      align-items: center;
+      gap: 9px;
+      max-width: 430px;
+      margin: 17px auto 0;
+      padding: 10px 12px;
+      border: 1px solid rgba(214,170,87,.22);
+      background: rgba(9,7,6,.5);
+      color: rgba(241,228,199,.6);
+      font-size: 12px;
+      line-height: 1.45;
+      text-align: left;
+    }
+    .inspiration-label { color: var(--gold); text-transform: uppercase; }
+    .inspiration-strip strong { min-width: 20px; color: var(--gold-light); font: 700 19px/1 Georgia, serif; }
     .manifest { padding: 34px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(22, 15, 12, .72); }
     .manifest h3 { margin: 0 0 22px; font: 700 30px/1.2 "STKaiti", "KaiTi", serif; }
     .facts { display: grid; gap: 0; }
@@ -267,6 +284,61 @@
       font-size: 12px;
       line-height: 1.7;
     }
+    .rune-trigger {
+      position: relative;
+      color: inherit;
+      cursor: crosshair;
+      border-bottom: 1px dotted rgba(214,170,87,.28);
+      transition: color 180ms ease, text-shadow 180ms ease, border-color 180ms ease;
+    }
+    .rune-trigger::after {
+      content: attr(data-rune);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 5;
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(243,215,149,.7);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(142,48,41,.96), rgba(27,15,12,.96) 58%, rgba(9,7,6,.94));
+      color: var(--gold-light);
+      font: 700 25px/1 Georgia, "STKaiti", serif;
+      text-shadow: 0 0 8px rgba(243,215,149,.92), 0 0 18px rgba(142,48,41,.8);
+      box-shadow: 0 0 0 3px rgba(9,7,6,.72), 0 0 24px rgba(142,48,41,.72), inset 0 0 14px rgba(214,170,87,.16);
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(.4) rotate(-16deg);
+      transition: opacity 180ms ease, transform 240ms cubic-bezier(.2,.8,.2,1);
+    }
+    .rune-trigger:hover,
+    .rune-trigger:focus-visible,
+    .rune-trigger.rune-found {
+      color: var(--gold-light);
+      border-color: var(--gold);
+      text-shadow: 0 0 16px rgba(243,215,149,.62);
+    }
+    .rune-trigger:hover::after,
+    .rune-trigger:focus-visible::after,
+    .rune-trigger.rune-found::after { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0); }
+    .rune-armor {
+      position: absolute;
+      z-index: 3;
+      top: 28%;
+      right: 15%;
+      width: 29%;
+      height: 34%;
+      border: 1px solid rgba(214,170,87,.2);
+      border-radius: 50%;
+      background: radial-gradient(circle at 42% 38%, rgba(243,215,149,.42), rgba(214,170,87,.08) 35%, transparent 70%);
+      opacity: .22;
+    }
+    .role:hover .rune-armor,
+    .role:focus-visible .rune-armor,
+    .rune-armor:focus-visible { opacity: .82; }
+    .rune-armor::after { width: 52px; height: 52px; font-size: 31px; }
 
     .creed { overflow: hidden; background: linear-gradient(135deg, #18110d, #0b0807 60%); }
     .creed::before { content: "III"; position: absolute; right: -18px; top: 10px; color: rgba(214,170,87,.035); font: 700 360px/1 Georgia, serif; }
@@ -299,32 +371,28 @@
     footer { padding: 30px 0; border-top: 1px solid var(--line); color: rgba(241,228,199,.42); font-size: 12px; line-height: 1.75; }
     .footer-inner { display: flex; justify-content: space-between; gap: 32px; }
     footer a { color: rgba(243,215,149,.7); text-decoration: underline; text-underline-offset: 3px; }
+    .cipher-mark { color: rgba(241,228,199,.15); letter-spacing: 1px; user-select: all; }
 
-    dialog { width: min(500px, calc(100% - 28px)); padding: 0; border: 1px solid var(--gold); border-radius: 6px; background: #130e0b; color: var(--paper); box-shadow: 0 30px 100px #000; }
+    dialog { width: min(760px, calc(100% - 28px)); max-height: min(88svh, 860px); padding: 0; overflow: auto; border: 1px solid var(--gold); border-radius: 6px; background: #130e0b; color: var(--paper); box-shadow: 0 30px 100px #000; }
     dialog::backdrop { background: rgba(4,3,2,.82); backdrop-filter: blur(5px); }
+    dialog.damage-shake { animation: damage-shake 430ms cubic-bezier(.36,.07,.19,.97) both; }
+    body.damage-flash::before { content: ""; position: fixed; inset: 0; z-index: 25; pointer-events: none; background: rgba(142,48,41,.2); animation: red-flash 430ms ease-out both; }
     .dialog-body { padding: 34px; }
     .dialog-top { display: flex; align-items: start; justify-content: space-between; gap: 20px; }
     .dialog-top h3 { margin: 0; font: 700 30px/1.2 "STKaiti", "KaiTi", serif; }
     .close { width: 34px; height: 34px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-size: 19px; }
     .riddle { margin: 20px 0; padding: 16px; border-left: 2px solid var(--gold); background: rgba(214,170,87,.06); color: var(--paper-dim); line-height: 1.8; }
+    .riddle strong { display: block; margin-bottom: 5px; color: var(--gold-light); font-family: "STKaiti", "KaiTi", serif; font-size: 20px; }
     .puzzle-panel { display: grid; gap: 14px; margin-top: 18px; }
-    .puzzle-step {
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: rgba(255,255,255,.018);
-    }
-    .puzzle-step.locked { opacity: .55; }
+    .puzzle-step { padding: 16px; border: 1px solid var(--line); border-radius: 6px; background: rgba(255,255,255,.018); }
+    .puzzle-step.locked { opacity: .52; }
     .puzzle-step.done { border-color: rgba(243,215,149,.5); box-shadow: inset 0 0 0 1px rgba(243,215,149,.24); }
+    .puzzle-step.active { border-color: rgba(214,170,87,.55); }
     .step-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 10px; }
     .step-head strong { font-size: 15px; }
     .step-head span { color: rgba(241,228,199,.5); font-size: 12px; }
     .step-copy { margin: 0 0 14px; color: rgba(241,228,199,.68); line-height: 1.75; }
-    .glyph-row, .sound-row, .digit-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-    }
+    .glyph-row, .sound-row, .digit-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
     .digit-row { grid-template-columns: repeat(7, minmax(0, 1fr)); }
     .glyph, .sound-chip, .digit-slot {
       min-height: 52px;
@@ -342,38 +410,17 @@
       transition: transform 180ms ease, border-color 180ms ease, color 180ms ease;
     }
     .glyph:hover, .sound-chip:hover { transform: translateY(-1px); border-color: rgba(243,215,149,.46); color: var(--paper); }
-    .glyph.revealed {
-      border-color: rgba(243,215,149,.55);
-      color: var(--gold-light);
-      background: rgba(214,170,87,.09);
-    }
-    .sound-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 10px;
-    }
+    .glyph.revealed { border-color: rgba(243,215,149,.55); color: var(--gold-light); background: rgba(214,170,87,.09); }
+    .sound-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
     .sound-chip {
       padding: 0 12px;
       cursor: pointer;
       transition: transform 180ms ease, border-color 180ms ease, color 180ms ease, background 180ms ease;
       text-transform: lowercase;
     }
-    .sound-chip.good {
-      border-color: rgba(243,215,149,.55);
-      color: var(--gold-light);
-      background: rgba(214,170,87,.09);
-    }
-    .sound-chip.bad {
-      border-color: rgba(142,48,41,.6);
-      color: #f1b4ab;
-    }
-    .pad-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 14px;
-    }
+    .sound-chip.good { border-color: rgba(243,215,149,.55); color: var(--gold-light); background: rgba(214,170,87,.09); }
+    .sound-chip.bad { border-color: rgba(142,48,41,.6); color: #f1b4ab; }
+    .pad-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
     .pad-key {
       min-height: 64px;
       padding: 8px 10px;
@@ -388,21 +435,160 @@
     .pad-key:hover { transform: translateY(-1px); border-color: rgba(243,215,149,.5); background: rgba(214,170,87,.08); }
     .pad-key strong { display: block; font: 700 22px/1 Georgia, serif; color: var(--gold-light); }
     .pad-key small { display: block; margin-top: 6px; color: rgba(241,228,199,.52); letter-spacing: 1px; text-transform: uppercase; }
-    .digit-slot {
-      font: 700 24px/1 Georgia, serif;
-      color: rgba(243,215,149,.38);
-    }
-    .digit-slot.filled {
-      border-color: rgba(243,215,149,.55);
-      color: var(--gold-light);
-      background: rgba(214,170,87,.1);
-    }
+    .digit-slot { font: 700 24px/1 Georgia, serif; color: rgba(243,215,149,.38); }
+    .digit-slot.filled { border-color: rgba(243,215,149,.55); color: var(--gold-light); background: rgba(214,170,87,.1); }
+    .ultimate-gate { display: grid; gap: 14px; margin-top: 8px; animation: reveal 520ms ease-out both; }
+    .ultimate-gate.locked { display: none; }
+    .ultimate-divider { display: flex; align-items: center; gap: 12px; margin: 8px 0 2px; color: var(--gold-light); font: 700 14px/1.3 "STKaiti", "KaiTi", serif; }
+    .ultimate-divider::before, .ultimate-divider::after { content: ""; height: 1px; flex: 1; background: linear-gradient(90deg, transparent, rgba(214,170,87,.55)); }
+    .ultimate-divider::after { transform: scaleX(-1); }
+    .rune-discovery-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .rune-slot, .rune-piece, .god-card { border: 1px solid var(--line); border-radius: 5px; background: #0d0908; }
+    .rune-slot { min-height: 82px; display: grid; place-items: center; gap: 4px; padding: 10px; color: rgba(241,228,199,.4); text-align: center; }
+    .rune-slot strong { font: 700 31px/1 "STKaiti", "KaiTi", serif; }
+    .rune-slot small { font-size: 11px; }
+    .rune-slot.found { border-color: rgba(243,215,149,.55); color: var(--gold-light); background: rgba(214,170,87,.09); box-shadow: 0 0 20px rgba(214,170,87,.08); }
+    .pairing-board { display: grid; grid-template-columns: 1fr 1.25fr; gap: 14px; align-items: stretch; }
+    .rune-pieces, .god-board { display: grid; gap: 9px; }
+    .rune-piece, .god-card { min-height: 74px; padding: 11px 13px; color: var(--paper-dim); text-align: left; cursor: pointer; transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, opacity 180ms ease; }
+    .rune-piece:hover, .rune-piece:focus-visible, .god-card:hover, .god-card:focus-visible { transform: translateY(-1px); border-color: rgba(243,215,149,.5); color: var(--paper); }
+    .rune-piece strong { display: block; color: var(--gold-light); font: 700 27px/1 "STKaiti", "KaiTi", serif; }
+    .rune-piece small, .god-card small { display: block; margin-top: 6px; color: rgba(241,228,199,.52); line-height: 1.45; }
+    .rune-piece.selected { border-color: var(--gold-light); background: rgba(214,170,87,.13); box-shadow: 0 0 18px rgba(214,170,87,.12); }
+    .rune-piece.matched, .god-card.matched { border-color: rgba(101,119,97,.9); background: rgba(101,119,97,.12); color: #d6e3d2; cursor: default; }
+    .rune-piece.matched { opacity: .7; }
+    .god-card strong { color: var(--gold-light); font: 700 21px/1.1 "STKaiti", "KaiTi", serif; }
+    .god-card[data-god="bane"] { border-left: 2px solid #7d8c91; }
+    .god-card[data-god="bhaal"] { border-left: 2px solid var(--blood); }
+    .god-card[data-god="myrkul"] { border-left: 2px solid #8c7e6f; }
+    .pairing-status { min-height: 23px; margin: 13px 0 0; color: var(--paper-dim); line-height: 1.6; }
+    .oath-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+    .oath-form input { min-width: 0; height: 48px; padding: 0 15px; border: 1px solid var(--line); border-radius: 4px; background: #090706; color: var(--paper); letter-spacing: 2px; text-transform: uppercase; }
+    .cipher-source { margin: 0 0 14px; padding: 13px 14px; border-left: 2px solid var(--blood); background: rgba(142,48,41,.08); color: rgba(241,228,199,.66); line-height: 1.65; }
+    .cipher-source code { color: var(--gold-light); font-family: "Courier New", monospace; letter-spacing: 1px; user-select: all; }
+    .inspiration-panel { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: center; gap: 10px; margin-top: 16px; padding: 12px 13px; border: 1px solid rgba(214,170,87,.28); background: rgba(214,170,87,.05); }
+    .inspiration-panel strong { color: var(--gold-light); }
+    .inspiration-panel span { color: rgba(241,228,199,.62); font-size: 12px; line-height: 1.55; }
+    .inspiration-panel .btn { min-height: 38px; padding: 0 12px; font-size: 12px; }
     .puzzle-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .reset-puzzle { margin-left: auto; }
     .step-note { min-height: 24px; margin: 12px 0 0; color: var(--paper-dim); line-height: 1.6; }
-    .code-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
-    .code-row input { min-width: 0; height: 48px; padding: 0 15px; border: 1px solid var(--line); border-radius: 4px; background: #090706; color: var(--paper); letter-spacing: 0; }
     .secret-result { min-height: 25px; margin: 14px 0 0; color: var(--paper-dim); line-height: 1.6; }
     .secret-result.success { color: var(--gold-light); }
+    body.final-ritual-open { overflow: hidden; }
+    .final-ritual {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 28px;
+      overflow: hidden;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at center, rgba(142,48,41,.32), rgba(9,7,6,.96) 52%, #040302 78%),
+        #040302;
+    }
+    .final-ritual::before {
+      content: "";
+      position: absolute;
+      width: 720px;
+      height: 720px;
+      border: 1px solid rgba(214,170,87,.12);
+      border-radius: 50%;
+      background: repeating-conic-gradient(from 12deg, rgba(214,170,87,.12) 0 1deg, transparent 1deg 14deg);
+      -webkit-mask-image: radial-gradient(circle, transparent 0 24%, black 25% 70%, transparent 71%);
+      mask-image: radial-gradient(circle, transparent 0 24%, black 25% 70%, transparent 71%);
+      opacity: 0;
+    }
+    .final-ritual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      box-shadow: inset 0 0 120px 45px rgba(0,0,0,.94), inset 0 0 30px rgba(142,48,41,.65);
+    }
+    .final-ritual.active { visibility: visible; animation: ritual-scene 4.6s ease both; }
+    .final-ritual.active::before { animation: ritual-vortex 4.6s cubic-bezier(.2,.75,.2,1) both; }
+    .ritual-sigil { position: relative; z-index: 2; width: 340px; height: 340px; }
+    .ritual-ring {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      box-shadow: 0 0 28px rgba(142,48,41,.5), inset 0 0 24px rgba(214,170,87,.1);
+    }
+    .ritual-ring-outer { inset: 0; border: 2px solid rgba(214,170,87,.72); }
+    .ritual-ring-outer::before, .ritual-ring-outer::after {
+      content: "";
+      position: absolute;
+      inset: 17px;
+      border: 1px solid rgba(142,48,41,.8);
+      transform: rotate(45deg);
+    }
+    .ritual-ring-outer::after { inset: 39px; border-color: rgba(214,170,87,.26); transform: rotate(22.5deg); }
+    .ritual-ring-inner { inset: 68px; border: 1px dashed rgba(243,215,149,.66); }
+    .final-ritual.active .ritual-ring-outer { animation: ritual-ring-outer 4.6s cubic-bezier(.2,.8,.2,1) both; }
+    .final-ritual.active .ritual-ring-inner { animation: ritual-ring-inner 4.6s cubic-bezier(.2,.8,.2,1) both; }
+    .ritual-rune {
+      position: absolute;
+      z-index: 3;
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(243,215,149,.56);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(142,48,41,.96), rgba(17,10,8,.98) 66%);
+      color: var(--gold-light);
+      font: 700 30px/1 Georgia, "STKaiti", serif;
+      text-shadow: 0 0 14px rgba(243,215,149,.9);
+      box-shadow: 0 0 26px rgba(142,48,41,.72);
+      opacity: 0;
+    }
+    .ritual-rune-one { left: 50%; top: -4px; transform: translateX(-50%); }
+    .ritual-rune-two { left: 19px; bottom: 38px; }
+    .ritual-rune-three { right: 19px; bottom: 38px; }
+    .final-ritual.active .ritual-rune-one { animation: ritual-rune 4s 220ms ease both; }
+    .final-ritual.active .ritual-rune-two { animation: ritual-rune 4s 390ms ease both; }
+    .final-ritual.active .ritual-rune-three { animation: ritual-rune 4s 560ms ease both; }
+    .ritual-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 4;
+      width: 116px;
+      height: 116px;
+      display: grid;
+      place-items: center;
+      border: 2px solid #d4a34f;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 34%, #b74b3d, #7b251f 52%, #280c0a 100%);
+      color: #f7dc99;
+      font: 700 34px/1 Georgia, serif;
+      text-shadow: 0 2px 0 #3a100c, 0 0 18px rgba(243,215,149,.84);
+      box-shadow: 0 0 0 8px rgba(9,7,6,.82), 0 0 50px rgba(142,48,41,.9), inset 0 0 24px rgba(0,0,0,.62);
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(.2);
+    }
+    .final-ritual.active .ritual-core { animation: ritual-core 4.6s ease both; }
+    .ritual-copy { position: relative; z-index: 3; text-align: center; opacity: 0; }
+    .ritual-copy strong { display: block; color: var(--gold-light); font: 700 42px/1.2 "STKaiti", "KaiTi", serif; letter-spacing: 0; text-shadow: 0 0 26px rgba(214,170,87,.52), 0 4px 18px #000; }
+    .ritual-copy span { display: block; margin-top: 10px; color: rgba(241,228,199,.72); font-size: 14px; letter-spacing: 0; }
+    .final-ritual.active .ritual-copy { animation: ritual-copy 4.6s ease both; }
+    .ritual-sparks { position: absolute; left: 50%; top: 45%; z-index: 4; }
+    .ritual-sparks i {
+      position: absolute;
+      width: 3px;
+      height: 14px;
+      border-radius: 2px;
+      background: var(--gold-light);
+      box-shadow: 0 0 10px var(--gold), 0 0 22px var(--blood);
+      opacity: 0;
+    }
+    .final-ritual.active .ritual-sparks i { animation: ritual-spark 2.3s var(--delay) cubic-bezier(.2,.7,.2,1) both; }
     .toast { position: fixed; left: 50%; bottom: 24px; z-index: 30; transform: translate(-50%, 20px); padding: 12px 16px; border: 1px solid var(--line); border-radius: 4px; background: rgba(15,10,8,.94); color: var(--paper); opacity: 0; pointer-events: none; transition: opacity 180ms ease, transform 180ms ease; }
     .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
@@ -410,6 +596,16 @@
     @keyframes reveal { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
     @keyframes roll { 0% { transform: rotate(0) scale(1); } 45% { transform: rotate(190deg) scale(.82); } 100% { transform: rotate(360deg) scale(1); } }
     @keyframes pulse { 50% { background: rgba(214,170,87,.35); box-shadow: 0 0 16px rgba(214,170,87,.5); } }
+    @keyframes damage-shake { 0%, 100% { transform: translateX(0); } 16% { transform: translateX(-9px) rotate(-.5deg); } 33% { transform: translateX(8px) rotate(.5deg); } 50% { transform: translateX(-6px); } 66% { transform: translateX(5px); } 83% { transform: translateX(-2px); } }
+    @keyframes red-flash { 0% { opacity: 0; } 20% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes ritual-scene { 0% { opacity: 0; } 8%, 86% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+    @keyframes ritual-vortex { 0% { opacity: 0; transform: scale(.45) rotate(-90deg); } 24% { opacity: .85; } 78% { opacity: .45; } 100% { opacity: 0; transform: scale(1.22) rotate(42deg); } }
+    @keyframes ritual-ring-outer { 0% { opacity: 0; transform: scale(.18) rotate(-170deg); } 28% { opacity: 1; transform: scale(1.05) rotate(8deg); } 64% { opacity: .92; transform: scale(1) rotate(26deg); } 100% { opacity: 0; transform: scale(1.12) rotate(50deg); } }
+    @keyframes ritual-ring-inner { 0%, 10% { opacity: 0; transform: scale(.2) rotate(150deg); } 36% { opacity: 1; transform: scale(1.08) rotate(-8deg); } 72% { opacity: .9; transform: scale(1) rotate(-32deg); } 100% { opacity: 0; transform: scale(.86) rotate(-58deg); } }
+    @keyframes ritual-rune { 0%, 14% { opacity: 0; filter: blur(8px); scale: .7; } 28% { opacity: 1; filter: blur(0); scale: 1.28; } 42%, 78% { opacity: 1; filter: blur(0); scale: 1; } 100% { opacity: 0; filter: blur(5px); scale: .7; } }
+    @keyframes ritual-core { 0%, 28% { opacity: 0; transform: translate(-50%, -50%) scale(.2) rotate(-24deg); } 46% { opacity: 1; transform: translate(-50%, -50%) scale(1.16) rotate(3deg); } 58%, 82% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.35); } }
+    @keyframes ritual-copy { 0%, 48% { opacity: 0; transform: translateY(22px); } 62%, 86% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-8px); } }
+    @keyframes ritual-spark { 0%, 20% { opacity: 0; transform: translate(0,0) scale(.3) rotate(0); } 36% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(.1) rotate(220deg); } }
 
     @media (max-width: 900px) {
       .nav a:not(.nav-cta) { display: none; }
@@ -444,10 +640,21 @@
       .creed-item { padding: 26px 20px; }
       .contract-paper, .dialog-body { padding: 26px 20px; }
       .contract-actions { grid-template-columns: 1fr; }
-      .code-row { grid-template-columns: 1fr; }
-      .glyph-row, .sound-row { grid-template-columns: 1fr 1fr 1fr; }
+      .oath-form { grid-template-columns: 1fr; }
+      .rune-discovery-grid, .pairing-board { grid-template-columns: 1fr; }
+      .glyph-row, .sound-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .digit-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
       .sound-grid, .pad-grid { grid-template-columns: 1fr 1fr; }
+      .inspiration-panel { grid-template-columns: auto 1fr; }
+      .inspiration-panel .btn { grid-column: 1 / -1; width: 100%; }
+      .reset-puzzle { margin-left: 0; }
+      .ritual-sigil { width: 250px; height: 250px; }
+      .ritual-ring-inner { inset: 50px; }
+      .ritual-rune { width: 46px; height: 46px; font-size: 25px; }
+      .ritual-rune-two { left: 8px; bottom: 24px; }
+      .ritual-rune-three { right: 8px; bottom: 24px; }
+      .ritual-core { width: 92px; height: 92px; font-size: 28px; }
+      .ritual-copy strong { font-size: 30px; }
       .footer-inner { display: block; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -494,6 +701,11 @@
               <div class="d20" id="d20" aria-live="polite">20</div>
               <button class="btn btn-primary" id="rollButton" type="button">掷一次 D20</button>
               <p class="roll-note" id="rollNote">墨迹还没干，名单却已经给你预留了一行。</p>
+              <div class="inspiration-strip" aria-live="polite">
+                <span class="inspiration-label">灵感点</span>
+                <strong id="inspirationCount">0</strong>
+                <span id="inspirationStatus">命运显圣与厄兆启示，都会撕开预言的缝隙。</span>
+              </div>
             </div>
           </div>
           <article class="manifest">
@@ -524,7 +736,7 @@
           <button class="role" type="button" data-role="吟游诗人" role="listitem"><img src="./角色图片/游吟诗人.png" alt="吟游诗人角色图"><span class="role-copy"><small>CHARISMA</small><h3>吟游诗人</h3><p>靠一句话改变战局，也靠一句话把战局弄得更糟。</p></span></button>
           <button class="role" type="button" data-role="法师" role="listitem"><img src="./角色图片/法师.jpeg" alt="法师角色图"><span class="role-copy"><small>INTELLIGENCE</small><h3>法师</h3><p>把复杂问题变成火球能解决的简单问题。</p></span></button>
           <button class="role" type="button" data-role="游荡者" role="listitem"><img src="./角色图片/游荡者.png" alt="游荡者角色图"><span class="role-copy"><small>DEXTERITY</small><h3>游荡者</h3><p>门锁和规则都只是等待被绕过的建议。</p></span></button>
-          <button class="role" type="button" data-role="圣武士" role="listitem"><img src="./角色图片/圣武士.png" alt="圣武士角色图"><span class="role-copy"><small>STRENGTH</small><h3>圣武士</h3><p>站在队伍最前面，让誓言和重甲一起发光。</p></span></button>
+          <button class="role" type="button" data-role="圣武士" role="listitem" aria-label="选择圣武士；重甲上的暗色反光可以调查"><img src="./角色图片/圣武士.png" alt="圣武士角色图"><span class="rune-trigger rune-armor" data-rune="ᚪ" aria-hidden="true"></span><span class="role-copy"><small>STRENGTH</small><h3>圣武士</h3><p>站在队伍最前面，让誓言和重甲一起发光。</p></span></button>
         </div>
         <p class="role-result" id="roleResult" aria-live="polite">尚未选择，犹豫也是冒险者的权利。</p>
       </div>
@@ -539,11 +751,11 @@
           <p class="eyebrow">Camp rumor</p>
           <h2 id="poster-title">营地里已经有人<br>先把气氛炒热了</h2>
           <h3>这不是官方公告，是两位在等人的冒险者自己做的招募海报。</h3>
-          <p>它比契约更不正经，却更接近这次开团真正的气质。会乱选、会嘴硬、会被剧情和坏骰子一起推着跑，但每一个决定都会留下故事。</p>
+          <p>它比契约更不正经，却更接近这次开团真正的气质。会乱选、会嘴硬、会被剧情和坏骰子一起推着跑，但每一个决定都会<span class="rune-trigger" data-rune="ᛗ" tabindex="0" role="button" aria-label="检查海报文字中的异常反光">留下故事</span>。</p>
           <p>欢迎来到那个“整活也算数”的 B 市营地。</p>
           <div class="poster-points">
             <div>两个人已经就位，差你这个第三席把队伍从“能开”变成“有意思”。</div>
-            <div>海报是明线，密语是暗线。一个负责把你骗进来，一个负责证明你真的看懂了邀请。<span class="glyph-hint">地下传单的接头暗号写得很直白：已订莱。</span></div>
+            <div>海报是明线，密语是暗线。一个负责把你骗进来，一个负责证明你真的看懂了邀请。<span class="glyph-hint">地下传单的接头暗号写得很直白：一定来。</span></div>
           </div>
         </div>
       </div>
@@ -557,7 +769,7 @@
         </header>
         <div class="creed-list">
           <article class="creed-item"><em>I</em><h3>立于抉择之前，先听完每个人的主意</h3><p>不催对话，不抢选择，最离谱的方案也值得一次完整陈述。</p></article>
-          <article class="creed-item"><em>II</em><h3>刻下旅途中的失败，而不是急着读档</h3><p>坏骰子也会长出好故事，先看看命运准备把我们带去哪。</p></article>
+          <article class="creed-item"><em>II</em><h3>刻下旅途中的失败，而不是急着<span class="rune-trigger" data-rune="ᚹ" tabindex="0" role="button" aria-label="检查同行准则中被阴影遮住的词">读档</span></h3><p>坏骰子也会长出好故事，先看看命运准备把我们带去哪。</p></article>
           <article class="creed-item"><em>III</em><h3>有你在场，胜负才值得被营火记住</h3><p>配装没有标准答案，三个人都玩得开心，才算真正通关。</p></article>
         </div>
       </div>
@@ -590,28 +802,28 @@
   </main>
 
   <footer>
-    <div class="shell footer-inner"><span>私人开团邀请 · 非官方粉丝页</span><span>素材来自 <a href="https://baldursgate3.game/" target="_blank" rel="noreferrer">Baldur's Gate 3 官网</a> 与 <a href="https://store.steampowered.com/app/1086940/Baldurs_Gate_3/" target="_blank" rel="noreferrer">Steam 商店页</a>，版权归原权利方所有。</span></div>
+    <div class="shell footer-inner"><span>私人开团邀请 · 非官方粉丝页</span><span>素材来自 <a href="https://baldursgate3.game/" target="_blank" rel="noreferrer">Baldur's Gate 3 官网</a> 与 <a href="https://store.steampowered.com/app/1086940/Baldurs_Gate_3/" target="_blank" rel="noreferrer">Steam 商店页</a>，版权归原权利方所有。<span class="cipher-mark" aria-label="被灰烬遮住的十六进制校验串"> · 0x4A4F494E5553</span></span></div>
   </footer>
 
-  <dialog id="secretDialog" aria-labelledby="secretTitle">
+  <dialog id="secretDialog" aria-labelledby="secretTitle" aria-describedby="secretRiddle">
     <div class="dialog-body">
-      <div class="dialog-top"><div><p class="eyebrow">A message in ash</p><h3 id="secretTitle">旧信使的密语</h3></div><button class="close" id="closeSecret" type="button" aria-label="关闭">×</button></div>
-      <div class="riddle">“先去海报旁找到那句三字接头暗号，把它抄下来。再念它的音，最后交给旧式九键。数字会告诉你，真正要传回营火边的话是什么。”</div>
-      <div class="puzzle-panel" aria-label="网页密语机关">
-        <section class="puzzle-step" id="glyphStep">
+      <div class="dialog-top"><div><p class="eyebrow">A message in ash</p><h3 id="secretTitle">旧信使的双重密语</h3></div><button class="close" id="closeSecret" type="button" aria-label="关闭">×</button></div>
+      <div class="riddle" id="secretRiddle"><strong>第一重封印仍遵循旧信使的规矩。</strong>“先去海报旁找到那句三字接头暗号，把它抄下来。再念它的音，最后交给旧式九键。数字会告诉你，真正要传回营火边的话是什么。”</div>
+      <div class="puzzle-panel" aria-label="旧信使火漆印解谜机关">
+        <section class="puzzle-step active" id="glyphStep">
           <div class="step-head"><strong>第一步：抄下接头暗号</strong><span>就在海报区旁边那句更亮的提示里</span></div>
           <p class="step-copy">真正要抄的不是同行准则，而是海报边那句故意写得很显眼的三字暗号。</p>
           <div class="glyph-row">
-            <button class="glyph" type="button" data-glyph="已" aria-label="抄录第一枚线索">?</button>
-            <button class="glyph" type="button" data-glyph="订" aria-label="抄录第二枚线索">?</button>
-            <button class="glyph" type="button" data-glyph="莱" aria-label="抄录第三枚线索">?</button>
+            <button class="glyph" type="button" data-glyph="一" aria-label="抄录第一枚线索">?</button>
+            <button class="glyph" type="button" data-glyph="定" aria-label="抄录第二枚线索">?</button>
+            <button class="glyph" type="button" data-glyph="来" aria-label="抄录第三枚线索">?</button>
           </div>
           <p class="step-note" id="glyphNote" aria-live="polite">依次抄录三枚线索字。</p>
         </section>
         <section class="puzzle-step locked" id="soundStep" aria-disabled="true">
           <div class="step-head"><strong>第二步：别看字，看声音</strong><span>按顺序选出正确读音</span></div>
           <p class="step-copy">旧信使提醒过你：这一次要念它的音，而不是继续盯着字形。</p>
-          <div class="sound-row" id="soundRow">
+          <div class="sound-row">
             <div class="digit-slot" data-sound-slot>_</div>
             <div class="digit-slot" data-sound-slot>_</div>
             <div class="digit-slot" data-sound-slot>_</div>
@@ -630,7 +842,7 @@
         <section class="puzzle-step locked" id="digitStep" aria-disabled="true">
           <div class="step-head"><strong>第三步：九键译码</strong><span>根据字母所在按键写下九位数</span></div>
           <p class="step-copy">把读音拆成字母，去旧式九键里找到它们各自归属的数字。</p>
-          <div class="digit-row" id="digitRow">
+          <div class="digit-row">
             <div class="digit-slot" data-digit-slot>_</div>
             <div class="digit-slot" data-digit-slot>_</div>
             <div class="digit-slot" data-digit-slot>_</div>
@@ -641,7 +853,7 @@
             <div class="digit-slot" data-digit-slot>_</div>
             <div class="digit-slot" data-digit-slot>_</div>
           </div>
-          <div class="pad-grid" id="padGrid">
+          <div class="pad-grid">
             <button class="pad-key" type="button" data-digit="2"><strong>2</strong><small>ABC</small></button>
             <button class="pad-key" type="button" data-digit="3"><strong>3</strong><small>DEF</small></button>
             <button class="pad-key" type="button" data-digit="4"><strong>4</strong><small>GHI</small></button>
@@ -657,42 +869,163 @@
           </div>
           <p class="step-note" id="digitNote" aria-live="polite">读音被确认后，才能真正开始译码。</p>
         </section>
+        <div class="ultimate-gate locked" id="ultimateGate" aria-hidden="true">
+          <div class="ultimate-divider">终极谜题 · 古老神殿的内层封印</div>
+          <div class="riddle"><strong>你的脑海中有什么东西蠕动了一下……</strong>是夺心魔蝌蚪的共鸣。闭上眼，感知周围的环境。火漆不会回应蛮力，只会回应真正看见、理解并宣誓的人。</div>
+          <section class="puzzle-step locked" id="perceptionStep" aria-disabled="true">
+            <div class="step-head"><strong>第一阶段：感知检定</strong><span>寻找三个隐藏的远古符文</span></div>
+            <p class="step-copy">回到页面，在海报的文字、同行准则的阴影和圣武士的重甲反光里寻找异常。找到它们后，火漆会把符文刻进下方的空槽。</p>
+            <div class="rune-discovery-grid" aria-label="已感知的远古符文">
+              <div class="rune-slot" data-rune-slot="ᛗ"><strong>?</strong><small>感知未触及</small></div>
+              <div class="rune-slot" data-rune-slot="ᚹ"><strong>?</strong><small>感知未触及</small></div>
+              <div class="rune-slot" data-rune-slot="ᚪ"><strong>?</strong><small>感知未触及</small></div>
+            </div>
+            <p class="step-note" id="perceptionNote" aria-live="polite">已感知 0 / 3。线索不会主动喊你的名字。</p>
+          </section>
+          <section class="puzzle-step locked" id="pairingStep" aria-disabled="true">
+            <div class="step-head"><strong>第二阶段：智力检定 · 属性配对</strong><span>Arcana / History</span></div>
+            <p class="step-copy">将符文拖向它共鸣的神祇，或先点符文再点目标。三神同盟留下的不是祝福，而是暴政、谋杀与死亡的印记。</p>
+            <div class="pairing-board">
+              <div class="rune-pieces" aria-label="待配对的远古符文">
+                <button class="rune-piece" type="button" draggable="true" data-rune-option="ᛗ"><strong>ᛗ</strong><small>血刃的回声</small></button>
+                <button class="rune-piece" type="button" draggable="true" data-rune-option="ᚹ"><strong>ᚹ</strong><small>铁冠的阴影</small></button>
+                <button class="rune-piece" type="button" draggable="true" data-rune-option="ᚪ"><strong>ᚪ</strong><small>骨灰的寒意</small></button>
+              </div>
+              <div class="god-board" aria-label="三神同盟">
+                <button class="god-card" type="button" data-god="bane"><strong>班恩 · 暴政</strong><small>铁手攥紧王冠，臣服才是唯一的秩序。</small></button>
+                <button class="god-card" type="button" data-god="bhaal"><strong>巴尔 · 谋杀</strong><small>血迹是他写给凡人的第一封情书。</small></button>
+                <button class="god-card" type="button" data-god="myrkul"><strong>米尔寇 · 死亡</strong><small>骨灰落下时，所有名字都会变得安静。</small></button>
+              </div>
+            </div>
+            <p class="pairing-status" id="pairingStatus" aria-live="polite">先选择一枚符文，再将它交给正确的神祇。</p>
+          </section>
+          <section class="puzzle-step locked" id="oathStep" aria-disabled="true">
+            <div class="step-head"><strong>第三阶段：神性解码 · 最终誓言</strong><span>The Final Oath</span></div>
+            <p class="step-copy">圣坛已经升起。页脚版权声明中的十六进制校验串，是古老神殿留下的最后一层伪装：每两个十六进制字符代表一个字母。</p>
+            <p class="cipher-source">页脚的灰烬版权声明里藏着一串以 <code>0x</code> 开头的校验字符。将它按 ASCII 十六进制每两位拆解，再把得到的誓言交给火漆。</p>
+            <form class="oath-form" id="oathForm">
+              <input id="oathInput" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="12" placeholder="输入解出的誓言" aria-label="输入最终誓言">
+              <button class="btn btn-primary" type="submit">让火漆回应</button>
+            </form>
+            <p class="step-note" id="oathNote" aria-live="polite">先完成神性配对，圣坛才会允许你宣誓。</p>
+          </section>
+        </div>
       </div>
-      <p class="secret-result" id="secretResult" aria-live="polite">线索都在这封邀请里，顺着机关一步步推下去。</p>
+      <div class="inspiration-panel">
+        <span>Inspiration</span>
+        <strong id="dialogInspirationCount">0</strong>
+        <span id="inspirationHint">当骰面显现“天命二十”或“灾厄一刻”，预言将赐下一则启示。</span>
+        <button class="btn" id="useInspiration" type="button">消耗灵感</button>
+      </div>
+      <div class="puzzle-actions"><button class="btn reset-puzzle" id="resetPuzzle" type="button">重置解谜</button></div>
+      <p class="secret-result" id="secretResult" aria-live="polite">先解开旧信使留下的九键外层封印，火漆里面似乎还藏着别的东西。</p>
+    </div>
+    <div class="final-ritual" id="finalRitual" aria-hidden="true">
+      <div class="ritual-sigil" aria-hidden="true">
+        <span class="ritual-ring ritual-ring-outer"></span>
+        <span class="ritual-ring ritual-ring-inner"></span>
+        <span class="ritual-rune ritual-rune-one">ᛗ</span>
+        <span class="ritual-rune ritual-rune-two">ᚹ</span>
+        <span class="ritual-rune ritual-rune-three">ᚪ</span>
+        <span class="ritual-core">III</span>
+      </div>
+      <div class="ritual-copy"><strong>誓言已被铭记</strong><span>第三席 · 归位</span></div>
+      <div class="ritual-sparks" aria-hidden="true">
+        <i style="--x:-210px;--y:-170px;--delay:1.15s"></i>
+        <i style="--x:-128px;--y:-226px;--delay:1.28s"></i>
+        <i style="--x:-36px;--y:-250px;--delay:1.08s"></i>
+        <i style="--x:76px;--y:-238px;--delay:1.34s"></i>
+        <i style="--x:184px;--y:-182px;--delay:1.18s"></i>
+        <i style="--x:226px;--y:-70px;--delay:1.42s"></i>
+        <i style="--x:202px;--y:112px;--delay:1.22s"></i>
+        <i style="--x:106px;--y:204px;--delay:1.38s"></i>
+        <i style="--x:-28px;--y:232px;--delay:1.14s"></i>
+        <i style="--x:-146px;--y:190px;--delay:1.32s"></i>
+        <i style="--x:-226px;--y:84px;--delay:1.2s"></i>
+        <i style="--x:-244px;--y:-42px;--delay:1.46s"></i>
+      </div>
     </div>
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    const state = { role: "尚未决定先闯祸还是先救场的贵宾", roll: null, glyphs: [], sounds: [], digits: [] };
+    const state = {
+      role: "尚未决定先闯祸还是先救场的贵宾",
+      roll: null,
+      phase: "courierGlyph",
+      glyphs: [],
+      sounds: [],
+      digits: [],
+      foundRunes: new Set(),
+      selectedRune: null,
+      pairs: {},
+      inspiration: 0
+    };
+    const phaseRank = { courierGlyph: 0, courierSound: 1, courierDigits: 2, perception: 3, pairing: 4, oath: 5, complete: 6 };
+    const keypad = { a: 2, b: 2, c: 2, d: 3, e: 3, f: 3, g: 4, h: 4, i: 4, j: 5, k: 5, l: 5, m: 6, n: 6, o: 6, p: 7, q: 7, r: 7, s: 7, t: 8, u: 8, v: 8, w: 9, x: 9, y: 9, z: 9 };
+    const glyphAnswer = ["一", "定", "来"];
+    const soundAnswer = ["yi", "ding", "lai"];
+    const digitAnswer = [...soundAnswer.join("")].map((letter) => keypad[letter]).join("");
+    const runeKeys = ["ᛗ", "ᚹ", "ᚪ"];
+    const runeLore = {
+      "ᛗ": { title: "血刃的回声", clue: "它在血迹里寻找名字。" },
+      "ᚹ": { title: "铁冠的阴影", clue: "它把服从铸成秩序。" },
+      "ᚪ": { title: "骨灰的寒意", clue: "它让最后的声音归于寂静。" }
+    };
+    const pairAnswer = { "ᛗ": "bhaal", "ᚹ": "bane", "ᚪ": "myrkul" };
+    const cipherText = "0x4A4F494E5553";
+    const finalOath = cipherText.replace(/^0x/i, "").match(/.{2}/g).map((pair) => String.fromCharCode(parseInt(pair, 16))).join("");
     const fortunes = [
-      "大失败：骰子一头栽进墨水瓶，但招募官把你的袖口判成了入队印章。",
-      "检定未过：营地书记官一边摇头一边盖章，批语是“此人离谱，但必须带上”。",
+      "大失败：骰子滚进灰烬，但失败留下了一道能被追踪的灵感裂痕。",
+      "检定未过：营地书记官没有摇头，只把你的名字暂时压在羽毛笔下。",
       "平稳通过：油墨没飞，桌子没翻，你被以相当体面的方式写进了第三席名单。",
       "成功：火漆印啪地一声按下去，旁批写着“此人适合整活，准许入队”。",
       "大成功：整张招募令像被命运泼了金粉，第三席当场连名带座归你所有。"
     ];
-    const keypad = { a: 2, b: 2, c: 2, d: 3, e: 3, f: 3, g: 4, h: 4, i: 4, j: 5, k: 5, l: 5, m: 6, n: 6, o: 6, p: 7, q: 7, r: 7, s: 7, t: 8, u: 8, v: 8, w: 9, x: 9, y: 9, z: 9 };
-    const glyphAnswer = ["已", "订", "莱"];
-    const soundAnswer = ["yi", "ding", "lai"];
-    const digitAnswer = [...soundAnswer.join("")].map((letter) => keypad[letter]).join("");
     const d20 = document.querySelector("#d20");
     const rollButton = document.querySelector("#rollButton");
     const rollNote = document.querySelector("#rollNote");
+    const inspirationCount = document.querySelector("#inspirationCount");
+    const inspirationStatus = document.querySelector("#inspirationStatus");
     const roleResult = document.querySelector("#roleResult");
     const invitePreview = document.querySelector("#invitePreview");
     const toast = document.querySelector("#toast");
+    const dialog = document.querySelector("#secretDialog");
+    const finalRitual = document.querySelector("#finalRitual");
+    const glyphStep = document.querySelector("#glyphStep");
+    const soundStep = document.querySelector("#soundStep");
+    const digitStep = document.querySelector("#digitStep");
+    const ultimateGate = document.querySelector("#ultimateGate");
+    const perceptionStep = document.querySelector("#perceptionStep");
+    const pairingStep = document.querySelector("#pairingStep");
+    const oathStep = document.querySelector("#oathStep");
     const glyphButtons = [...document.querySelectorAll(".glyph")];
     const glyphNote = document.querySelector("#glyphNote");
-    const soundStep = document.querySelector("#soundStep");
     const soundSlots = [...document.querySelectorAll("[data-sound-slot]")];
     const soundButtons = [...document.querySelectorAll(".sound-chip")];
     const soundNote = document.querySelector("#soundNote");
-    const digitStep = document.querySelector("#digitStep");
     const digitSlots = [...document.querySelectorAll("[data-digit-slot]")];
     const digitButtons = [...document.querySelectorAll(".pad-key")];
     const digitNote = document.querySelector("#digitNote");
+    const resetSoundsButton = document.querySelector("#resetSounds");
+    const clearDigitsButton = document.querySelector("#clearDigits");
+    const checkSecretButton = document.querySelector("#checkSecret");
+    const perceptionNote = document.querySelector("#perceptionNote");
+    const pairingStatus = document.querySelector("#pairingStatus");
+    const oathNote = document.querySelector("#oathNote");
     const secretResult = document.querySelector("#secretResult");
+    const oathForm = document.querySelector("#oathForm");
+    const oathInput = document.querySelector("#oathInput");
+    const oathSubmit = oathForm.querySelector("button");
+    const dialogInspirationCount = document.querySelector("#dialogInspirationCount");
+    const inspirationHint = document.querySelector("#inspirationHint");
+    const runeTriggers = [...document.querySelectorAll(".rune-trigger[data-rune]")];
+    const runeSlots = [...document.querySelectorAll("[data-rune-slot]")];
+    const runePieces = [...document.querySelectorAll("[data-rune-option]")];
+    const godCards = [...document.querySelectorAll("[data-god]")];
+    runeTriggers.forEach((trigger) => {
+      trigger.dataset.originalLabel = trigger.getAttribute("aria-label") || "";
+    });
 
     function updateInvite() {
       const omen = state.roll ? `，命运骰为 ${state.roll}` : "";
@@ -703,65 +1036,62 @@
       toast.textContent = message;
       toast.classList.add("show");
       clearTimeout(showToast.timer);
-      showToast.timer = setTimeout(() => toast.classList.remove("show"), 2200);
+      showToast.timer = setTimeout(() => toast.classList.remove("show"), 2400);
     }
 
-    rollButton.addEventListener("click", () => {
-      rollButton.disabled = true;
-      d20.classList.remove("rolling");
-      void d20.offsetWidth;
-      d20.classList.add("rolling");
-      let ticks = 0;
-      const spin = setInterval(() => {
-        d20.textContent = Math.floor(Math.random() * 20) + 1;
-        ticks += 1;
-        if (ticks < 8) return;
-        clearInterval(spin);
-        const value = Math.floor(Math.random() * 20) + 1;
-        state.roll = value;
-        d20.textContent = value;
-        const tier = value === 1 ? 0 : value < 10 ? 1 : value < 16 ? 2 : value < 20 ? 3 : 4;
-        rollNote.textContent = fortunes[tier];
-        rollButton.textContent = "再掷一次";
-        rollButton.disabled = false;
-        updateInvite();
-      }, 70);
-    });
+    function stopFinalRitual() {
+      clearTimeout(stopFinalRitual.timer);
+      finalRitual.classList.remove("active");
+      document.body.classList.remove("final-ritual-open");
+    }
 
-    document.querySelectorAll(".role").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".role").forEach((item) => item.classList.remove("selected"));
-        button.classList.add("selected");
-        state.role = button.dataset.role;
-        roleResult.textContent = `身份已写入契约：${state.role}。你仍可在开团前反悔。`;
-        updateInvite();
+    function playFinalRitual() {
+      stopFinalRitual();
+      document.body.classList.remove("damage-flash");
+      dialog.classList.remove("damage-shake");
+      void finalRitual.offsetWidth;
+      document.body.classList.add("final-ritual-open");
+      finalRitual.classList.add("active");
+      const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      stopFinalRitual.timer = setTimeout(stopFinalRitual, reducedMotion ? 650 : 4700);
+    }
+
+    function syncInspiration() {
+      inspirationCount.textContent = state.inspiration;
+      dialogInspirationCount.textContent = state.inspiration;
+      document.querySelector("#useInspiration").disabled = state.inspiration < 1;
+    }
+
+    function setPhase(nextPhase) {
+      state.phase = nextPhase;
+      const currentRank = phaseRank[nextPhase];
+      [
+        [glyphStep, 0],
+        [soundStep, 1],
+        [digitStep, 2],
+        [perceptionStep, 3],
+        [pairingStep, 4],
+        [oathStep, 5]
+      ].forEach(([step, rank]) => {
+        const locked = rank > currentRank;
+        step.classList.toggle("locked", locked);
+        step.classList.toggle("active", rank === currentRank);
+        step.classList.toggle("done", rank < currentRank || nextPhase === "complete");
+        if (locked) step.setAttribute("aria-disabled", "true");
+        else step.removeAttribute("aria-disabled");
       });
-    });
-
-    document.querySelector("#copyInvite").addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(invitePreview.textContent);
-        showToast("入队宣言已复制，去回应你的队友吧。");
-      } catch (error) {
-        showToast("浏览器未允许复制，请手动选中宣言。");
-      }
-    });
-
-    const sunday = new Date();
-    sunday.setDate(sunday.getDate() + ((7 - sunday.getDay()) % 7 || 7));
-    document.querySelector("#nextSunday").textContent = `${sunday.getMonth() + 1} 月 ${sunday.getDate()} 日 · 周日晚`;
-    document.querySelector("#topbar").classList.toggle("scrolled", scrollY > 24);
-    addEventListener("scroll", () => document.querySelector("#topbar").classList.toggle("scrolled", scrollY > 24), { passive: true });
-
-    const dialog = document.querySelector("#secretDialog");
-    document.querySelector("#openSecret").addEventListener("click", () => dialog.showModal());
-    document.querySelector("#closeSecret").addEventListener("click", () => dialog.close());
-    dialog.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
-
-    function unlockStep(step, note, message) {
-      step.classList.remove("locked");
-      step.removeAttribute("aria-disabled");
-      note.textContent = message;
+      const ultimateUnlocked = currentRank >= phaseRank.perception;
+      ultimateGate.classList.toggle("locked", !ultimateUnlocked);
+      ultimateGate.setAttribute("aria-hidden", String(!ultimateUnlocked));
+      glyphButtons.forEach((button) => { button.disabled = nextPhase !== "courierGlyph"; });
+      soundButtons.forEach((button) => { button.disabled = nextPhase !== "courierSound"; });
+      digitButtons.forEach((button) => { button.disabled = nextPhase !== "courierDigits"; });
+      resetSoundsButton.disabled = nextPhase !== "courierSound" && nextPhase !== "courierDigits";
+      clearDigitsButton.disabled = nextPhase !== "courierDigits";
+      checkSecretButton.disabled = nextPhase !== "courierDigits";
+      oathInput.disabled = nextPhase !== "oath";
+      oathSubmit.disabled = nextPhase !== "oath";
+      renderPairing();
     }
 
     function syncSoundSlots() {
@@ -780,47 +1110,181 @@
       });
     }
 
-    function resetSounds() {
+    function renderRunes() {
+      runeSlots.forEach((slot) => {
+        const rune = slot.dataset.runeSlot;
+        const found = state.foundRunes.has(rune);
+        slot.classList.toggle("found", found);
+        slot.querySelector("strong").textContent = found ? rune : "?";
+        slot.querySelector("small").textContent = found ? `${runeLore[rune].title} · 已觉醒` : "感知未触及";
+        slot.title = found ? runeLore[rune].clue : "等待感知";
+      });
+      const count = state.foundRunes.size;
+      if (count < runeKeys.length) {
+        perceptionNote.textContent = `已感知 ${count} / 3。线索不会主动喊你的名字。`;
+      } else if (phaseRank[state.phase] < phaseRank.perception) {
+        perceptionNote.textContent = "三个远古符文已经集齐，但旧信使的九键外层封印仍未解开。";
+      } else {
+        perceptionNote.textContent = "三个远古符文已经在火漆中苏醒。智力检定开始。";
+      }
+    }
+
+    function renderPairing() {
+      runePieces.forEach((piece) => {
+        const rune = piece.dataset.runeOption;
+        const matched = Boolean(state.pairs[rune]);
+        piece.classList.toggle("selected", state.selectedRune === rune);
+        piece.classList.toggle("matched", matched);
+        piece.disabled = matched || state.phase !== "pairing";
+        piece.setAttribute("aria-pressed", String(state.selectedRune === rune));
+      });
+      godCards.forEach((card) => {
+        const god = card.dataset.god;
+        const matched = Object.values(state.pairs).includes(god);
+        card.classList.toggle("matched", matched);
+        card.disabled = matched || state.phase !== "pairing";
+      });
+    }
+
+    function discoverRune(trigger) {
+      const rune = trigger.dataset.rune;
+      if (state.foundRunes.has(rune)) {
+        showToast(`符文 ${rune} 已经被火漆记住。`);
+        return;
+      }
+      state.foundRunes.add(rune);
+      trigger.classList.add("rune-found");
+      trigger.setAttribute("aria-label", `已发现远古符文 ${rune}`);
+      renderRunes();
+      showToast(`感知成功：你从阴影里剥出了 ${rune}。`);
+      if (state.foundRunes.size === runeKeys.length) {
+        if (phaseRank[state.phase] >= phaseRank.perception) {
+          setPhase("pairing");
+          secretResult.textContent = "三个符文同时发热，神殿的三座石像从黑暗里浮现。";
+        } else {
+          secretResult.textContent = "你提前找齐了三枚符文，但九键外层封印仍压在神殿入口上。";
+        }
+      }
+    }
+
+    function damageFeedback() {
+      const damage = Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
+      document.body.classList.remove("damage-flash");
+      dialog.classList.remove("damage-shake");
+      void dialog.offsetWidth;
+      document.body.classList.add("damage-flash");
+      dialog.classList.add("damage-shake");
+      setTimeout(() => {
+        document.body.classList.remove("damage-flash");
+        dialog.classList.remove("damage-shake");
+      }, 460);
+      return damage;
+    }
+
+    function attemptPair(rune, god) {
+      if (state.phase !== "pairing" || !rune || !god || state.pairs[rune]) return;
+      if (pairAnswer[rune] !== god) {
+        const damage = damageFeedback();
+        state.selectedRune = null;
+        pairingStatus.textContent = `伤害判定：你受到了 ${damage} 点精神伤害（2d6），思维变得混乱。重新审视符文的共鸣。`;
+        renderPairing();
+        return;
+      }
+      state.pairs[rune] = god;
+      state.selectedRune = null;
+      renderPairing();
+      const matchedCount = Object.keys(state.pairs).length;
+      if (matchedCount === runeKeys.length) {
+        setPhase("oath");
+        pairingStatus.textContent = "三神的阴影彼此咬合，圣坛已经升起。";
+        oathNote.textContent = "最终誓言就在页面最下方的灰烬校验串里。";
+        secretResult.textContent = "班恩、巴尔与米尔寇的印记归位。现在，把神性解码成一句话。";
+      } else {
+        pairingStatus.textContent = `配对成功。石碑亮起 ${matchedCount} / 3 枚印记，继续寻找下一道共鸣。`;
+      }
+    }
+
+    function getInspirationHint() {
+      if (state.phase === "courierGlyph") {
+        return "旧信使旁批：海报旁那句故意写亮的三字暗号，是“一定来”。";
+      }
+      if (state.phase === "courierSound") {
+        return "旧信使旁批：不要解释字义，只按顺序念成 yi · ding · lai。";
+      }
+      if (state.phase === "courierDigits") {
+        return "旧信使旁批：把 yidinglai 拆成九个字母，再寻找每个字母所在的手机九键。";
+      }
+      if (state.phase === "perception") {
+        return "感知旁批：海报里的“留下故事”、同行准则里的“读档”和圣武士重甲上的暗色光斑，都值得调查。";
+      }
+      if (state.phase === "pairing") {
+        const rune = runeKeys.find((key) => !state.pairs[key]);
+        return rune ? `灵感旁批：${rune} 的${runeLore[rune].title}，正在寻找与${rune === "ᚹ" ? "铁冠" : rune === "ᛗ" ? "血刃" : "骨灰"}相称的神名。` : "灵感旁批：三神的印记已经全部归位。";
+      }
+      if (state.phase === "oath") {
+        return "灵感旁批：十六进制每两位拆成一个 ASCII 字符，4A 是 J，4F 是 O。";
+      }
+      return "誓言已经被火漆记下。灵感点可以留给下一场冒险。";
+    }
+
+    function useInspiration() {
+      if (!state.inspiration) {
+        showToast("你没有可消耗的灵感点。去掷一次 D20。");
+        return;
+      }
+      state.inspiration -= 1;
+      inspirationHint.textContent = getInspirationHint();
+      syncInspiration();
+      showToast("灵感点化成一行旁批，暂时照亮了你的思路。");
+    }
+
+    function resetCourierSounds() {
+      if (state.phase === "courierGlyph") {
+        showToast("先抄完三字接头暗号，译音板才会亮起。");
+        return;
+      }
+      if (phaseRank[state.phase] >= phaseRank.perception) {
+        showToast("终极封印已经开启。若要重走旧谜题，请使用“重置解谜”。");
+        return;
+      }
       state.sounds = [];
+      state.digits = [];
       soundButtons.forEach((button) => button.classList.remove("good", "bad"));
       syncSoundSlots();
-      soundNote.textContent = "按顺序选出这三个字真正该念出的音。";
-      digitStep.classList.add("locked");
-      digitStep.setAttribute("aria-disabled", "true");
-      digitNote.textContent = "读音被确认后，才能真正开始译码。";
-      state.digits = [];
       syncDigitSlots();
+      soundNote.textContent = "按顺序选出这三个字真正该念出的音。";
+      digitNote.textContent = "读音被确认后，才能真正开始译码。";
       secretResult.classList.remove("success");
-      secretResult.textContent = "线索都在这封邀请里，顺着机关一步步推下去。";
+      secretResult.textContent = "读音与数字已经擦除，旧信使仍在等待正确的顺序。";
+      setPhase("courierSound");
     }
 
     glyphButtons.forEach((button, index) => {
       button.addEventListener("click", () => {
-        if (state.glyphs.length !== index) return;
+        if (state.phase !== "courierGlyph" || state.glyphs.length !== index) return;
         state.glyphs.push(button.dataset.glyph);
         button.textContent = button.dataset.glyph;
         button.classList.add("revealed");
         glyphNote.textContent = state.glyphs.length < glyphAnswer.length
-          ? `已抄录 ${state.glyphs.join("、")}，继续回海报旁把接头暗号补全。`
+          ? `已抄录 ${state.glyphs.join("、")}，继续把接头暗号补全。`
           : `接头暗号已经抄好：${state.glyphs.join("")}。现在该听它的读音了。`;
-
         if (state.glyphs.length === glyphAnswer.length) {
-          unlockStep(soundStep, soundNote, "抛开字形，按顺序选出正确的拼音。");
-          secretResult.textContent = "火漆轻微发热，像是在催你继续往下推。";
+          setPhase("courierSound");
+          soundNote.textContent = "抛开字形，按顺序选出正确的拼音。";
+          secretResult.textContent = "外层火漆轻微发热，旧信使在催你继续。";
         }
       });
     });
 
     soundButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        if (soundStep.classList.contains("locked")) return;
+        if (state.phase !== "courierSound") return;
         const expected = soundAnswer[state.sounds.length];
         if (button.dataset.sound !== expected) {
           button.classList.add("bad");
-          soundNote.textContent = "这个音不对。先回海报边看看那句接头暗号，再按正常读法来。";
+          soundNote.textContent = "这个音不对。回想海报边的三字暗号，再按正常读法来。";
           return;
         }
-
         button.classList.remove("bad");
         button.classList.add("good");
         state.sounds.push(button.dataset.sound);
@@ -828,49 +1292,241 @@
         soundNote.textContent = state.sounds.length < soundAnswer.length
           ? `已确认 ${state.sounds.join(" · ")}，继续补全后面的读音。`
           : "读音确认完毕。现在把它拆成字母，去九键上找数字。";
-
         if (state.sounds.length === soundAnswer.length) {
-          unlockStep(digitStep, digitNote, "按读音的字母顺序输入九位数字。");
+          setPhase("courierDigits");
+          digitNote.textContent = "按读音的字母顺序输入九位数字。";
         }
       });
     });
 
-    document.querySelector("#resetSounds").addEventListener("click", resetSounds);
-
     digitButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        if (digitStep.classList.contains("locked")) return;
-        if (state.digits.length >= digitAnswer.length) return;
+        if (state.phase !== "courierDigits" || state.digits.length >= digitAnswer.length) return;
         state.digits.push(button.dataset.digit);
         syncDigitSlots();
         digitNote.textContent = state.digits.length < digitAnswer.length
           ? `已译出 ${state.digits.length} / ${digitAnswer.length} 位，继续按字母归属找下去。`
-          : "九位数字已写满，可以验证密语了。";
+          : "九位数字已写满，可以验证旧信使的密语了。";
       });
     });
 
-    document.querySelector("#clearDigits").addEventListener("click", () => {
+    resetSoundsButton.addEventListener("click", resetCourierSounds);
+    clearDigitsButton.addEventListener("click", () => {
+      if (state.phase !== "courierDigits") return;
       state.digits = [];
       syncDigitSlots();
       digitNote.textContent = "数字已清空。重新按照字母所在按键译码。";
       secretResult.classList.remove("success");
-      secretResult.textContent = "线索都在这封邀请里，顺着机关一步步推下去。";
+      secretResult.textContent = "外层火漆没有回应，九位数字仍需重写。";
     });
 
-    document.querySelector("#checkSecret").addEventListener("click", () => {
+    checkSecretButton.addEventListener("click", () => {
+      if (state.phase !== "courierDigits") return;
       const input = state.digits.join("");
-      if (input === digitAnswer) {
-        secretResult.classList.add("success");
-        secretResult.textContent = "密语正确：一定来。海报上的接头暗号只是引路，真正该带回营火边的话在这里。";
-      } else {
+      if (input !== digitAnswer) {
         secretResult.classList.remove("success");
-        secretResult.textContent = "火漆没有回应。先确认读音顺序，再检查每个字母落在了哪一个按键上。";
+        secretResult.textContent = "外层火漆没有回应。先确认读音顺序，再检查每个字母落在哪一个九键上。";
+        return;
+      }
+      const nextPhase = state.foundRunes.size === runeKeys.length ? "pairing" : "perception";
+      setPhase(nextPhase);
+      secretResult.textContent = state.foundRunes.size === runeKeys.length
+        ? "旧密语正确：一定来。内层封印裂开，三枚符文同时唤醒了神殿石像。"
+        : "旧密语正确：一定来。外层火漆剥落，夺心魔蝌蚪在更深处回应了你。";
+      perceptionNote.textContent = state.foundRunes.size === runeKeys.length
+        ? "三个远古符文已经在火漆中苏醒。智力检定开始。"
+        : `已感知 ${state.foundRunes.size} / 3。线索不会主动喊你的名字。`;
+      setTimeout(() => ultimateGate.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+    });
+
+    rollButton.addEventListener("click", () => {
+      rollButton.disabled = true;
+      d20.classList.remove("rolling");
+      void d20.offsetWidth;
+      d20.classList.add("rolling");
+      let ticks = 0;
+      const spin = setInterval(() => {
+        d20.textContent = Math.floor(Math.random() * 20) + 1;
+        ticks += 1;
+        if (ticks < 8) return;
+        clearInterval(spin);
+        const value = Math.floor(Math.random() * 20) + 1;
+        state.roll = value;
+        d20.textContent = value;
+        const tier = value === 1 ? 0 : value < 10 ? 1 : value < 16 ? 2 : value < 20 ? 3 : 4;
+        rollNote.textContent = fortunes[tier];
+        if (value === 20) {
+          state.inspiration += 1;
+          inspirationStatus.textContent = "天命二十 · 命运显圣：金色神谕落入火漆，你获得 1 点灵感。";
+        } else if (value === 1) {
+          state.inspiration += 1;
+          inspirationStatus.textContent = "灾厄一刻 · 厄兆启示：灰烬反而暴露真相，你获得 1 点灵感。";
+        } else {
+          inspirationStatus.textContent = "命运显圣与厄兆启示，都会撕开预言的缝隙。";
+        }
+        syncInspiration();
+        rollButton.textContent = "再掷一次";
+        rollButton.disabled = false;
+        updateInvite();
+      }, 70);
+    });
+
+    document.querySelectorAll(".role").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        document.querySelectorAll(".role").forEach((item) => item.classList.remove("selected"));
+        button.classList.add("selected");
+        state.role = button.dataset.role;
+        roleResult.textContent = `身份已写入契约：${state.role}。你仍可在开团前反悔。`;
+        updateInvite();
+        const armorHit = event.target instanceof Element && event.target.closest(".rune-armor");
+        if (button.dataset.role === "圣武士" && (armorHit || event.detail === 0)) {
+          discoverRune(button.querySelector(".rune-armor"));
+        }
+      });
+    });
+
+    runeTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", (event) => {
+        event.stopPropagation();
+        discoverRune(trigger);
+      });
+      trigger.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        event.stopPropagation();
+        discoverRune(trigger);
+      });
+    });
+
+    runePieces.forEach((piece) => {
+      piece.addEventListener("click", () => {
+        if (state.phase !== "pairing" || piece.disabled) return;
+        state.selectedRune = piece.dataset.runeOption;
+        pairingStatus.textContent = `已选中 ${state.selectedRune}。点击或拖动它对应的神祇。`;
+        renderPairing();
+      });
+      piece.addEventListener("dragstart", (event) => {
+        if (state.phase !== "pairing" || piece.disabled) return;
+        state.selectedRune = piece.dataset.runeOption;
+        event.dataTransfer.setData("text/plain", state.selectedRune);
+        event.dataTransfer.effectAllowed = "move";
+        renderPairing();
+      });
+    });
+
+    godCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        if (state.phase !== "pairing" || card.disabled) return;
+        if (!state.selectedRune) {
+          pairingStatus.textContent = "先选择一枚符文，再把它交给神祇。";
+          return;
+        }
+        attemptPair(state.selectedRune, card.dataset.god);
+      });
+      card.addEventListener("dragover", (event) => {
+        if (state.phase === "pairing" && !card.disabled) event.preventDefault();
+      });
+      card.addEventListener("drop", (event) => {
+        event.preventDefault();
+        if (state.phase !== "pairing" || card.disabled) return;
+        const rune = event.dataTransfer.getData("text/plain") || state.selectedRune;
+        attemptPair(rune, card.dataset.god);
+      });
+    });
+
+    oathForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (state.phase !== "oath") {
+        oathNote.textContent = "圣坛尚未打开。先完成三神配对。";
+        return;
+      }
+      const answer = oathInput.value.replace(/\s+/g, "").toUpperCase();
+      if (answer !== finalOath) {
+        const damage = damageFeedback();
+        oathNote.textContent = `火漆拒绝了这句誓言。你受到 ${damage} 点精神伤害，试着按每两位十六进制拆解。`;
+        secretResult.classList.remove("success");
+        return;
+      }
+      setPhase("complete");
+      oathInput.disabled = true;
+      oathSubmit.disabled = true;
+      oathNote.textContent = "誓言正确。圣坛承认了你的名字。";
+      secretResult.classList.add("success");
+      secretResult.textContent = "JOINUS，旧信使的火漆印碎裂成金色粉尘，第三席正式归你，把这份宣言带回营火边。";
+      playFinalRitual();
+      showToast("最终誓言成立：第三席已为你封存。");
+    });
+
+    document.querySelector("#useInspiration").addEventListener("click", useInspiration);
+    document.querySelector("#copyInvite").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(invitePreview.textContent);
+        showToast("入队宣言已复制，去回应你的队友吧。");
+      } catch (error) {
+        showToast("浏览器未允许复制，请手动选中宣言。");
       }
     });
 
+    document.querySelector("#resetPuzzle").addEventListener("click", () => {
+      stopFinalRitual();
+      state.phase = "courierGlyph";
+      state.glyphs = [];
+      state.sounds = [];
+      state.digits = [];
+      state.foundRunes.clear();
+      state.selectedRune = null;
+      state.pairs = {};
+      glyphButtons.forEach((button) => {
+        button.textContent = "?";
+        button.classList.remove("revealed");
+      });
+      soundButtons.forEach((button) => button.classList.remove("good", "bad"));
+      runeTriggers.forEach((trigger) => {
+        trigger.classList.remove("rune-found");
+        if (trigger.dataset.originalLabel) trigger.setAttribute("aria-label", trigger.dataset.originalLabel);
+        else trigger.removeAttribute("aria-label");
+      });
+      oathInput.value = "";
+      oathInput.disabled = false;
+      oathSubmit.disabled = false;
+      glyphNote.textContent = "依次抄录三枚线索字。";
+      soundNote.textContent = "先完成上一步，译音板才会亮起。";
+      digitNote.textContent = "读音被确认后，才能真正开始译码。";
+      pairingStatus.textContent = "先选择一枚符文，再将它交给正确的神祇。";
+      oathNote.textContent = "先完成神性配对，圣坛才会允许你宣誓。";
+      inspirationHint.textContent = "当骰面显现“天命二十”或“灾厄一刻”，预言将赐下一则启示。";
+      secretResult.classList.remove("success");
+      secretResult.textContent = "解谜已经重置。先从旧信使留下的三字暗号开始。";
+      syncSoundSlots();
+      syncDigitSlots();
+      renderRunes();
+      setPhase("courierGlyph");
+      showToast("双重火漆印已经恢复到未开启状态。");
+    });
+
+    const sunday = new Date();
+    sunday.setDate(sunday.getDate() + ((7 - sunday.getDay()) % 7 || 7));
+    document.querySelector("#nextSunday").textContent = `${sunday.getMonth() + 1} 月 ${sunday.getDate()} 日 · 周日晚`;
+    document.querySelector("#topbar").classList.toggle("scrolled", scrollY > 24);
+    addEventListener("scroll", () => document.querySelector("#topbar").classList.toggle("scrolled", scrollY > 24), { passive: true });
+    document.querySelector("#openSecret").addEventListener("click", () => {
+      if (!dialog.open) dialog.showModal();
+    });
+    document.querySelector("#closeSecret").addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
     dialog.addEventListener("close", () => {
+      stopFinalRitual();
+      document.body.classList.remove("damage-flash");
+      dialog.classList.remove("damage-shake");
       soundButtons.forEach((button) => button.classList.remove("bad"));
     });
+
+    renderRunes();
+    syncSoundSlots();
+    syncDigitSlots();
+    setPhase("courierGlyph");
+    syncInspiration();
+    updateInvite();
   </script>
 </body>
 </html>
