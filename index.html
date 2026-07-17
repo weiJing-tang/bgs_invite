@@ -133,6 +133,12 @@
     .hero-status { position: absolute; right: max(20px, calc((100vw - 1180px) / 2)); bottom: 72px; width: 225px; padding: 17px 18px; border-left: 1px solid var(--gold); background: rgba(9, 7, 6, 0.62); backdrop-filter: blur(8px); }
     .hero-status small { color: var(--gold); }
     .hero-status strong { display: block; margin-top: 6px; font-family: "STKaiti", "KaiTi", serif; font-size: 22px; }
+    .aside-whisper {
+      margin-top: 10px;
+      color: rgba(241,228,199,.42);
+      font-size: 11px;
+      line-height: 1.6;
+    }
 
     section { position: relative; padding: 92px 0; }
     .hero { padding: 0; }
@@ -196,6 +202,72 @@
     .role.selected::before { content: "已选择"; position: absolute; z-index: 2; top: 14px; right: 14px; padding: 6px 9px; background: var(--gold-light); color: #140d08; font-size: 11px; font-weight: 800; }
     .role-result { min-height: 24px; margin-top: 18px; color: var(--paper-dim); text-align: center; }
 
+    .poster-section { background: linear-gradient(180deg, #0d0908, #16100d 45%, #0c0807); }
+    .poster-layout {
+      display: grid;
+      grid-template-columns: 0.88fr 1.12fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .poster-frame {
+      position: relative;
+      padding: 14px;
+      border: 1px solid rgba(214,170,87,.3);
+      border-radius: 6px;
+      background: linear-gradient(145deg, rgba(28,20,16,.95), rgba(12,8,7,.95));
+      box-shadow: 0 26px 60px rgba(0,0,0,.35);
+    }
+    .poster-frame::before {
+      content: "营地私传";
+      position: absolute;
+      top: -12px;
+      left: 18px;
+      padding: 4px 10px;
+      border: 1px solid rgba(214,170,87,.4);
+      background: #120d0a;
+      color: var(--gold-light);
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+    .poster-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      border: 1px solid rgba(214,170,87,.18);
+    }
+    .poster-copy {
+      padding: 12px 0;
+    }
+    .poster-copy h3 {
+      margin: 0 0 16px;
+      font: 700 34px/1.2 "STKaiti", "KaiTi", serif;
+    }
+    .poster-copy p {
+      margin: 0 0 14px;
+      color: rgba(241,228,199,.68);
+      line-height: 1.8;
+    }
+    .poster-points {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .poster-points div {
+      padding: 14px 16px;
+      border-left: 2px solid rgba(214,170,87,.45);
+      background: rgba(255,255,255,.02);
+      color: var(--paper-dim);
+      line-height: 1.7;
+    }
+    .glyph-hint {
+      display: inline-block;
+      margin-top: 10px;
+      color: rgba(241,228,199,.46);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
     .creed { overflow: hidden; background: linear-gradient(135deg, #18110d, #0b0807 60%); }
     .creed::before { content: "III"; position: absolute; right: -18px; top: 10px; color: rgba(214,170,87,.035); font: 700 360px/1 Georgia, serif; }
     .creed-list { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -235,6 +307,98 @@
     .dialog-top h3 { margin: 0; font: 700 30px/1.2 "STKaiti", "KaiTi", serif; }
     .close { width: 34px; height: 34px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-size: 19px; }
     .riddle { margin: 20px 0; padding: 16px; border-left: 2px solid var(--gold); background: rgba(214,170,87,.06); color: var(--paper-dim); line-height: 1.8; }
+    .puzzle-panel { display: grid; gap: 14px; margin-top: 18px; }
+    .puzzle-step {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255,255,255,.018);
+    }
+    .puzzle-step.locked { opacity: .55; }
+    .puzzle-step.done { border-color: rgba(243,215,149,.5); box-shadow: inset 0 0 0 1px rgba(243,215,149,.24); }
+    .step-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 10px; }
+    .step-head strong { font-size: 15px; }
+    .step-head span { color: rgba(241,228,199,.5); font-size: 12px; }
+    .step-copy { margin: 0 0 14px; color: rgba(241,228,199,.68); line-height: 1.75; }
+    .glyph-row, .sound-row, .digit-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .digit-row { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+    .glyph, .sound-chip, .digit-slot {
+      min-height: 52px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #0d0908;
+      color: var(--paper-dim);
+    }
+    .glyph {
+      padding: 0;
+      cursor: pointer;
+      font: 700 25px/1 "STKaiti", "KaiTi", serif;
+      transition: transform 180ms ease, border-color 180ms ease, color 180ms ease;
+    }
+    .glyph:hover, .sound-chip:hover { transform: translateY(-1px); border-color: rgba(243,215,149,.46); color: var(--paper); }
+    .glyph.revealed {
+      border-color: rgba(243,215,149,.55);
+      color: var(--gold-light);
+      background: rgba(214,170,87,.09);
+    }
+    .sound-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .sound-chip {
+      padding: 0 12px;
+      cursor: pointer;
+      transition: transform 180ms ease, border-color 180ms ease, color 180ms ease, background 180ms ease;
+      text-transform: lowercase;
+    }
+    .sound-chip.good {
+      border-color: rgba(243,215,149,.55);
+      color: var(--gold-light);
+      background: rgba(214,170,87,.09);
+    }
+    .sound-chip.bad {
+      border-color: rgba(142,48,41,.6);
+      color: #f1b4ab;
+    }
+    .pad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .pad-key {
+      min-height: 64px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #0b0807;
+      color: var(--paper);
+      cursor: pointer;
+      text-align: center;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+    .pad-key:hover { transform: translateY(-1px); border-color: rgba(243,215,149,.5); background: rgba(214,170,87,.08); }
+    .pad-key strong { display: block; font: 700 22px/1 Georgia, serif; color: var(--gold-light); }
+    .pad-key small { display: block; margin-top: 6px; color: rgba(241,228,199,.52); letter-spacing: 1px; text-transform: uppercase; }
+    .digit-slot {
+      font: 700 24px/1 Georgia, serif;
+      color: rgba(243,215,149,.38);
+    }
+    .digit-slot.filled {
+      border-color: rgba(243,215,149,.55);
+      color: var(--gold-light);
+      background: rgba(214,170,87,.1);
+    }
+    .puzzle-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .step-note { min-height: 24px; margin: 12px 0 0; color: var(--paper-dim); line-height: 1.6; }
     .code-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
     .code-row input { min-width: 0; height: 48px; padding: 0 15px; border: 1px solid var(--line); border-radius: 4px; background: #090706; color: var(--paper); letter-spacing: 0; }
     .secret-result { min-height: 25px; margin: 14px 0 0; color: var(--paper-dim); line-height: 1.6; }
@@ -251,7 +415,7 @@
       .nav a:not(.nav-cta) { display: none; }
       .hero-content { width: min(720px, 90%); padding-bottom: 150px; }
       .hero-status { left: 20px; right: auto; bottom: 35px; }
-      .section-head, .omen-grid, .contract-layout { grid-template-columns: 1fr; }
+      .section-head, .omen-grid, .contract-layout, .poster-layout { grid-template-columns: 1fr; }
       .section-head { gap: 16px; }
       .role-grid { grid-template-columns: 1fr 1fr; }
       .creed-list { grid-template-columns: 1fr; }
@@ -281,6 +445,9 @@
       .contract-paper, .dialog-body { padding: 26px 20px; }
       .contract-actions { grid-template-columns: 1fr; }
       .code-row { grid-template-columns: 1fr; }
+      .glyph-row, .sound-row { grid-template-columns: 1fr 1fr 1fr; }
+      .digit-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .sound-grid, .pad-grid { grid-template-columns: 1fr 1fr; }
       .footer-inner { display: block; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -311,7 +478,7 @@
             <a class="btn" href="#contract">查看开团契约</a>
           </div>
         </div>
-        <aside class="hero-status" aria-label="队伍当前状态"><small>队伍状态</small><strong>2 / 3 · 等你入席</strong></aside>
+        <aside class="hero-status" aria-label="队伍当前状态"><small>队伍状态</small><strong>2 / 3 · 等你入席</strong><div class="aside-whisper">一直空着的位置，不会替别人留。</div></aside>
       </div>
     </section>
 
@@ -326,7 +493,7 @@
             <div class="d20-wrap">
               <div class="d20" id="d20" aria-live="polite">20</div>
               <button class="btn btn-primary" id="rollButton" type="button">掷一次 D20</button>
-              <p class="roll-note" id="rollNote">命运尚未落定。</p>
+              <p class="roll-note" id="rollNote">墨迹还没干，名单却已经给你预留了一行。</p>
             </div>
           </div>
           <article class="manifest">
@@ -363,6 +530,25 @@
       </div>
     </section>
 
+    <section class="poster-section" aria-labelledby="poster-title">
+      <div class="shell poster-layout">
+        <figure class="poster-frame">
+          <img src="./bg3-b-city-poster.jpg" alt="博德之门3风格的欢迎来到B市招募海报">
+        </figure>
+        <div class="poster-copy">
+          <p class="eyebrow">Camp rumor</p>
+          <h2 id="poster-title">营地里已经有人<br>先把气氛炒热了</h2>
+          <h3>这不是官方公告，是两位在等人的冒险者自己做的招募海报。</h3>
+          <p>它比契约更不正经，却更接近这次开团真正的气质。会乱选、会嘴硬、会被剧情和坏骰子一起推着跑，但每一个决定都会留下故事。</p>
+          <p>欢迎来到那个“整活也算数”的 B 市营地。</p>
+          <div class="poster-points">
+            <div>两个人已经就位，差你这个第三席把队伍从“能开”变成“有意思”。</div>
+            <div>海报是明线，密语是暗线。一个负责把你骗进来，一个负责证明你真的看懂了邀请。<span class="glyph-hint">地下传单的接头暗号写得很直白：已订莱。</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="creed" id="creed">
       <div class="shell">
         <header class="section-head">
@@ -382,11 +568,11 @@
         <div>
           <p class="eyebrow">The final pact</p>
           <h2>最后一步：<br>签下你的名字</h2>
-          <p class="section-intro" style="margin-top:20px">无需真的按手印。选好身份后，把邀请函复制回我，就算完成入队仪式。</p>
+          <p class="section-intro" style="margin-top:20px">来就行，无需真的按手印。选好身份后，把邀请函复制回我，就算完成入队仪式。</p>
           <div class="schedule">
             <div class="schedule-row"><span>集合地点</span><strong>语音频道 / 线上营地</strong></div>
             <div class="schedule-row"><span>预计时长</span><strong>2 - 3 小时，随时可休息</strong></div>
-            <div class="schedule-row"><span>需要准备</span><strong>游戏、耳机，以及一个坏主意</strong></div>
+            <div class="schedule-row"><span>需要准备</span><strong>电脑、游戏、耳机、以及一个充满坏主意的脑子</strong></div>
           </div>
         </div>
         <article class="contract-paper">
@@ -410,28 +596,103 @@
   <dialog id="secretDialog" aria-labelledby="secretTitle">
     <div class="dialog-body">
       <div class="dialog-top"><div><p class="eyebrow">A message in ash</p><h3 id="secretTitle">旧信使的密语</h3></div><button class="close" id="closeSecret" type="button" aria-label="关闭">×</button></div>
-      <div class="riddle">“取营火三则的开篇，把它们连成一句。不要看字，要念它的音。旧式信使不用字母，只用九宫格上的数字。”</div>
-      <div class="code-row"><input id="secretCode" type="text" inputmode="numeric" autocomplete="off" maxlength="7" placeholder="输入七位密语" aria-label="七位数字密语"><button class="btn btn-primary" id="checkSecret" type="button">验证密语</button></div>
-      <p class="secret-result" id="secretResult" aria-live="polite">线索都在这封邀请里。</p>
+      <div class="riddle">“先去海报旁找到那句三字接头暗号，把它抄下来。再念它的音，最后交给旧式九键。数字会告诉你，真正要传回营火边的话是什么。”</div>
+      <div class="puzzle-panel" aria-label="网页密语机关">
+        <section class="puzzle-step" id="glyphStep">
+          <div class="step-head"><strong>第一步：抄下接头暗号</strong><span>就在海报区旁边那句更亮的提示里</span></div>
+          <p class="step-copy">真正要抄的不是同行准则，而是海报边那句故意写得很显眼的三字暗号。</p>
+          <div class="glyph-row">
+            <button class="glyph" type="button" data-glyph="已" aria-label="抄录第一枚线索">?</button>
+            <button class="glyph" type="button" data-glyph="订" aria-label="抄录第二枚线索">?</button>
+            <button class="glyph" type="button" data-glyph="莱" aria-label="抄录第三枚线索">?</button>
+          </div>
+          <p class="step-note" id="glyphNote" aria-live="polite">依次抄录三枚线索字。</p>
+        </section>
+        <section class="puzzle-step locked" id="soundStep" aria-disabled="true">
+          <div class="step-head"><strong>第二步：别看字，看声音</strong><span>按顺序选出正确读音</span></div>
+          <p class="step-copy">旧信使提醒过你：这一次要念它的音，而不是继续盯着字形。</p>
+          <div class="sound-row" id="soundRow">
+            <div class="digit-slot" data-sound-slot>_</div>
+            <div class="digit-slot" data-sound-slot>_</div>
+            <div class="digit-slot" data-sound-slot>_</div>
+          </div>
+          <div class="sound-grid">
+            <button class="sound-chip" type="button" data-sound="yi">yi</button>
+            <button class="sound-chip" type="button" data-sound="ding">ding</button>
+            <button class="sound-chip" type="button" data-sound="lai">lai</button>
+            <button class="sound-chip" type="button" data-sound="ya">ya</button>
+            <button class="sound-chip" type="button" data-sound="ting">ting</button>
+            <button class="sound-chip" type="button" data-sound="nei">nei</button>
+          </div>
+          <div class="puzzle-actions"><button class="btn" id="resetSounds" type="button">重选读音</button></div>
+          <p class="step-note" id="soundNote" aria-live="polite">先完成上一步，译音板才会亮起。</p>
+        </section>
+        <section class="puzzle-step locked" id="digitStep" aria-disabled="true">
+          <div class="step-head"><strong>第三步：九键译码</strong><span>根据字母所在按键写下九位数</span></div>
+          <p class="step-copy">把读音拆成字母，去旧式九键里找到它们各自归属的数字。</p>
+          <div class="digit-row" id="digitRow">
+            <div class="digit-slot" data-digit-slot>_</div>
+            <div class="digit-slot" data-digit-slot>_</div>
+            <div class="digit-slot" data-digit-slot>_</div>
+            <div class="digit-slot" data-digit-slot>_</div>
+            <div class="digit-slot" data-digit-slot>_</div>
+            <div class="digit-slot" data-digit-slot>_</div>
+            <div class="digit-slot" data-digit-slot>_</div>
+            <div class="digit-slot" data-digit-slot>_</div>
+            <div class="digit-slot" data-digit-slot>_</div>
+          </div>
+          <div class="pad-grid" id="padGrid">
+            <button class="pad-key" type="button" data-digit="2"><strong>2</strong><small>ABC</small></button>
+            <button class="pad-key" type="button" data-digit="3"><strong>3</strong><small>DEF</small></button>
+            <button class="pad-key" type="button" data-digit="4"><strong>4</strong><small>GHI</small></button>
+            <button class="pad-key" type="button" data-digit="5"><strong>5</strong><small>JKL</small></button>
+            <button class="pad-key" type="button" data-digit="6"><strong>6</strong><small>MNO</small></button>
+            <button class="pad-key" type="button" data-digit="7"><strong>7</strong><small>PQRS</small></button>
+            <button class="pad-key" type="button" data-digit="8"><strong>8</strong><small>TUV</small></button>
+            <button class="pad-key" type="button" data-digit="9"><strong>9</strong><small>WXYZ</small></button>
+          </div>
+          <div class="puzzle-actions">
+            <button class="btn" id="clearDigits" type="button">清空数字</button>
+            <button class="btn btn-primary" id="checkSecret" type="button">验证密语</button>
+          </div>
+          <p class="step-note" id="digitNote" aria-live="polite">读音被确认后，才能真正开始译码。</p>
+        </section>
+      </div>
+      <p class="secret-result" id="secretResult" aria-live="polite">线索都在这封邀请里，顺着机关一步步推下去。</p>
     </div>
   </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    const state = { role: "尚未选择的冒险者", roll: null };
+    const state = { role: "尚未选择的冒险者", roll: null, glyphs: [], sounds: [], digits: [] };
     const fortunes = [
-      "大失败：你踩中了陷阱，但全队因此笑了十分钟。",
-      "检定未过：计划偏离航线，故事却开始变得有趣。",
-      "平稳通过：你可靠地接住了队伍的下一步。",
-      "成功：守卫相信了你刚编出来的完整身世。",
-      "大成功：命运确认，第三席确实属于你。"
+      "大失败：骰子一头栽进墨水瓶，但招募官只把你袖口判成了入队印章。",
+      "检定未过：营地书记官一边摇头一边盖章，批语是“此人离谱，但必须带上”。",
+      "平稳通过：油墨没飞，桌子没翻，你被以相当体面的方式写进了第三席名单。",
+      "成功：火漆印啪地一声按下去，旁批写着“此人适合整活，准许入队”。",
+      "大成功：整张招募令像被命运泼了金粉，第三席当场连名带座归你所有。"
     ];
+    const keypad = { a: 2, b: 2, c: 2, d: 3, e: 3, f: 3, g: 4, h: 4, i: 4, j: 5, k: 5, l: 5, m: 6, n: 6, o: 6, p: 7, q: 7, r: 7, s: 7, t: 8, u: 8, v: 8, w: 9, x: 9, y: 9, z: 9 };
+    const glyphAnswer = ["已", "订", "莱"];
+    const soundAnswer = ["yi", "ding", "lai"];
+    const digitAnswer = [...soundAnswer.join("")].map((letter) => keypad[letter]).join("");
     const d20 = document.querySelector("#d20");
     const rollButton = document.querySelector("#rollButton");
     const rollNote = document.querySelector("#rollNote");
     const roleResult = document.querySelector("#roleResult");
     const invitePreview = document.querySelector("#invitePreview");
     const toast = document.querySelector("#toast");
+    const glyphButtons = [...document.querySelectorAll(".glyph")];
+    const glyphNote = document.querySelector("#glyphNote");
+    const soundStep = document.querySelector("#soundStep");
+    const soundSlots = [...document.querySelectorAll("[data-sound-slot]")];
+    const soundButtons = [...document.querySelectorAll(".sound-chip")];
+    const soundNote = document.querySelector("#soundNote");
+    const digitStep = document.querySelector("#digitStep");
+    const digitSlots = [...document.querySelectorAll("[data-digit-slot]")];
+    const digitButtons = [...document.querySelectorAll(".pad-key")];
+    const digitNote = document.querySelector("#digitNote");
+    const secretResult = document.querySelector("#secretResult");
 
     function updateInvite() {
       const omen = state.roll ? `，命运骰为 ${state.roll}` : "";
@@ -497,19 +758,118 @@
     document.querySelector("#closeSecret").addEventListener("click", () => dialog.close());
     dialog.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
 
+    function unlockStep(step, note, message) {
+      step.classList.remove("locked");
+      step.removeAttribute("aria-disabled");
+      note.textContent = message;
+    }
+
+    function syncSoundSlots() {
+      soundSlots.forEach((slot, index) => {
+        const value = state.sounds[index];
+        slot.textContent = value || "_";
+        slot.classList.toggle("filled", Boolean(value));
+      });
+    }
+
+    function syncDigitSlots() {
+      digitSlots.forEach((slot, index) => {
+        const value = state.digits[index];
+        slot.textContent = value || "_";
+        slot.classList.toggle("filled", Boolean(value));
+      });
+    }
+
+    function resetSounds() {
+      state.sounds = [];
+      soundButtons.forEach((button) => button.classList.remove("good", "bad"));
+      syncSoundSlots();
+      soundNote.textContent = "按顺序选出这三个字真正该念出的音。";
+      digitStep.classList.add("locked");
+      digitStep.setAttribute("aria-disabled", "true");
+      digitNote.textContent = "读音被确认后，才能真正开始译码。";
+      state.digits = [];
+      syncDigitSlots();
+      secretResult.classList.remove("success");
+      secretResult.textContent = "线索都在这封邀请里，顺着机关一步步推下去。";
+    }
+
+    glyphButtons.forEach((button, index) => {
+      button.addEventListener("click", () => {
+        if (state.glyphs.length !== index) return;
+        state.glyphs.push(button.dataset.glyph);
+        button.textContent = button.dataset.glyph;
+        button.classList.add("revealed");
+        glyphNote.textContent = state.glyphs.length < glyphAnswer.length
+          ? `已抄录 ${state.glyphs.join("、")}，继续回海报旁把接头暗号补全。`
+          : `接头暗号已经抄好：${state.glyphs.join("")}。现在该听它的读音了。`;
+
+        if (state.glyphs.length === glyphAnswer.length) {
+          unlockStep(soundStep, soundNote, "抛开字形，按顺序选出正确的拼音。");
+          secretResult.textContent = "火漆轻微发热，像是在催你继续往下推。";
+        }
+      });
+    });
+
+    soundButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (soundStep.classList.contains("locked")) return;
+        const expected = soundAnswer[state.sounds.length];
+        if (button.dataset.sound !== expected) {
+          button.classList.add("bad");
+          soundNote.textContent = "这个音不对。先回海报边看看那句接头暗号，再按正常读法来。";
+          return;
+        }
+
+        button.classList.remove("bad");
+        button.classList.add("good");
+        state.sounds.push(button.dataset.sound);
+        syncSoundSlots();
+        soundNote.textContent = state.sounds.length < soundAnswer.length
+          ? `已确认 ${state.sounds.join(" · ")}，继续补全后面的读音。`
+          : "读音确认完毕。现在把它拆成字母，去九键上找数字。";
+
+        if (state.sounds.length === soundAnswer.length) {
+          unlockStep(digitStep, digitNote, "按读音的字母顺序输入九位数字。");
+        }
+      });
+    });
+
+    document.querySelector("#resetSounds").addEventListener("click", resetSounds);
+
+    digitButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (digitStep.classList.contains("locked")) return;
+        if (state.digits.length >= digitAnswer.length) return;
+        state.digits.push(button.dataset.digit);
+        syncDigitSlots();
+        digitNote.textContent = state.digits.length < digitAnswer.length
+          ? `已译出 ${state.digits.length} / ${digitAnswer.length} 位，继续按字母归属找下去。`
+          : "九位数字已写满，可以验证密语了。";
+      });
+    });
+
+    document.querySelector("#clearDigits").addEventListener("click", () => {
+      state.digits = [];
+      syncDigitSlots();
+      digitNote.textContent = "数字已清空。重新按照字母所在按键译码。";
+      secretResult.classList.remove("success");
+      secretResult.textContent = "线索都在这封邀请里，顺着机关一步步推下去。";
+    });
+
     document.querySelector("#checkSecret").addEventListener("click", () => {
-      const keypad = { a: 2, b: 2, c: 2, d: 3, e: 3, f: 3, g: 4, h: 4, i: 4, j: 5, k: 5, l: 5, m: 6, n: 6, o: 6, p: 7, q: 7, r: 7, s: 7, t: 8, u: 8, v: 8, w: 9, x: 9, y: 9, z: 9 };
-      const spokenClue = ["li", "ke", "you"].join("");
-      const answer = [...spokenClue].map((letter) => keypad[letter]).join("");
-      const input = document.querySelector("#secretCode").value.trim();
-      const result = document.querySelector("#secretResult");
-      if (input === answer) {
-        result.classList.add("success");
-        result.textContent = "密语正确：立刻有你，才是完整的三人队。把这句话带回营火边。";
+      const input = state.digits.join("");
+      if (input === digitAnswer) {
+        secretResult.classList.add("success");
+        secretResult.textContent = "密语正确：一定来。海报上的接头暗号只是引路，真正该带回营火边的话在这里。";
       } else {
-        result.classList.remove("success");
-        result.textContent = "火漆没有回应。再看看三条准则各自从哪个字开始。";
+        secretResult.classList.remove("success");
+        secretResult.textContent = "火漆没有回应。先确认读音顺序，再检查每个字母落在了哪一个按键上。";
       }
+    });
+
+    dialog.addEventListener("close", () => {
+      soundButtons.forEach((button) => button.classList.remove("bad"));
     });
   </script>
 </body>
