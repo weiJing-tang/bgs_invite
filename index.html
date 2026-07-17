@@ -3,660 +3,514 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#160d0b">
-  <title>快和我一起玩博德之门3</title>
+  <meta name="theme-color" content="#0b0807">
+  <meta name="description" content="一封等待第四位冒险者签下名字的博德之门3私人开团邀请。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 3 61 32 32 61 3 32Z' fill='%230b0807' stroke='%23d6aa57' stroke-width='3'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-size='23' fill='%23f3d795' font-family='serif'%3EIV%3C/text%3E%3C/svg%3E">
+  <title>第四席，留给你｜博德之门 3 开团邀请</title>
   <style>
     :root {
-      --bg: #130d0b;
-      --ink: #fff6e8;
-      --muted: #d6b988;
-      --gold: #d9a441;
-      --red: #a93625;
-      --green: #7aa66a;
-      --panel: rgba(23, 15, 12, 0.72);
-      --line: rgba(255, 224, 158, 0.24);
+      --night: #090706;
+      --night-soft: #15100d;
+      --paper: #f1e4c7;
+      --paper-dim: #cbbd9f;
+      --gold: #d6aa57;
+      --gold-light: #f3d795;
+      --blood: #8e3029;
+      --moss: #657761;
+      --line: rgba(226, 193, 123, 0.22);
+      --panel: rgba(17, 12, 10, 0.82);
       color-scheme: dark;
-      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at 12% 16%, rgba(181, 62, 38, 0.26), transparent 30rem),
-        radial-gradient(circle at 85% 26%, rgba(122, 166, 106, 0.22), transparent 28rem),
-        linear-gradient(145deg, #080605 0%, var(--bg) 48%, #22130f 100%);
-      color: var(--ink);
+      min-width: 320px;
+      background: var(--night);
+      color: var(--paper);
       overflow-x: hidden;
     }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background-image:
-        linear-gradient(90deg, rgba(10, 6, 5, 0.34), rgba(10, 6, 5, 0.9)),
-        url("https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/page_bg_generated_v6b.jpg?t=1777363040");
-      background-position: center top;
-      background-size: cover;
-      opacity: 0.78;
-      filter: saturate(1.08);
-    }
-
     body::after {
       content: "";
       position: fixed;
       inset: 0;
-      z-index: -1;
+      z-index: 20;
       pointer-events: none;
-      background:
-        linear-gradient(180deg, rgba(10, 6, 5, 0.1), rgba(10, 6, 5, 0.98) 88%),
-        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 4px);
+      opacity: 0.055;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
     }
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; text-decoration: none; }
+    button { color: inherit; }
+    :focus-visible { outline: 2px solid var(--gold-light); outline-offset: 4px; }
+    ::selection { background: var(--blood); color: white; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .serif { font-family: "STKaiti", "KaiTi", "FangSong", Georgia, serif; }
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
     }
-
-    .shell {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-    }
+    .eyebrow::before { content: ""; display: inline-block; width: 34px; height: 1px; margin: 0 10px 4px 0; background: var(--gold); }
 
     .topbar {
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 10;
-      backdrop-filter: blur(18px);
-      background: rgba(10, 6, 5, 0.68);
-      border-bottom: 1px solid rgba(255, 231, 169, 0.13);
+      left: 0;
+      right: 0;
+      z-index: 15;
+      border-bottom: 1px solid transparent;
+      transition: background 240ms ease, border-color 240ms ease;
     }
-
-    .topbar .shell {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .brand img {
-      width: min(170px, 42vw);
-      height: auto;
-      display: block;
-      filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.52));
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: rgba(255, 246, 232, 0.78);
-      font-size: 14px;
-      white-space: nowrap;
-    }
-
-    .nav a {
-      padding: 10px 12px;
-      border: 1px solid transparent;
-      border-radius: 999px;
-    }
-
-    .nav a:hover {
-      border-color: var(--line);
-      background: rgba(255, 235, 184, 0.08);
-    }
+    .topbar.scrolled { background: rgba(9, 7, 6, 0.88); border-color: var(--line); backdrop-filter: blur(16px); }
+    .topbar-inner { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .wordmark { display: flex; align-items: center; gap: 12px; font-family: "STKaiti", "KaiTi", serif; font-weight: 700; }
+    .mark { width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--gold); transform: rotate(45deg); color: var(--gold-light); }
+    .mark span { transform: rotate(-45deg); font-size: 12px; }
+    .nav { display: flex; align-items: center; gap: 26px; color: rgba(241, 228, 199, 0.68); font-size: 13px; }
+    .nav a { padding: 10px 0; border-bottom: 1px solid transparent; }
+    .nav a:hover { color: var(--paper); border-color: var(--gold); }
+    .nav-cta { padding: 10px 15px !important; border: 1px solid var(--line) !important; background: rgba(214, 170, 87, 0.08); }
 
     .hero {
-      min-height: calc(100vh - 72px);
-      display: grid;
-      align-items: center;
-      padding: 54px 0 36px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.78fr);
-      gap: 46px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      width: fit-content;
-      margin-bottom: 20px;
-      padding: 8px 12px;
-      border: 1px solid rgba(255, 221, 151, 0.28);
-      border-radius: 999px;
-      background: rgba(16, 9, 7, 0.62);
-      color: var(--muted);
-      font-size: 13px;
-      letter-spacing: 0;
-    }
-
-    h1 {
-      margin: 0;
-      max-width: 780px;
-      font-size: clamp(46px, 8.2vw, 104px);
-      line-height: 0.96;
-      letter-spacing: 0;
-      text-wrap: balance;
-      text-shadow: 0 10px 35px rgba(0, 0, 0, 0.72);
-    }
-
-    .hero-copy {
-      margin: 24px 0 0;
-      max-width: 690px;
-      color: rgba(255, 246, 232, 0.82);
-      font-size: clamp(18px, 2.4vw, 25px);
-      line-height: 1.65;
-    }
-
-    .cta-row {
+      position: relative;
+      min-height: 94vh;
       display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 34px;
+      align-items: flex-end;
+      isolation: isolate;
+      overflow: hidden;
+      background: #0b0807;
     }
-
-    .button {
-      min-height: 48px;
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-image: url("https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/page_bg_generated_v6b.jpg");
+      background-position: 62% top;
+      background-size: cover;
+      transform: scale(1.02);
+      animation: arrive 1.2s ease-out both;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(90deg, rgba(7, 5, 4, 0.96) 0%, rgba(7, 5, 4, 0.72) 43%, rgba(7, 5, 4, 0.12) 78%), linear-gradient(0deg, var(--night) 0%, transparent 38%, rgba(7, 5, 4, 0.24) 100%);
+    }
+    .hero-content { width: min(760px, 78%); padding: 154px 0 110px; animation: reveal 900ms 160ms ease-out both; }
+    .hero-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; color: var(--gold-light); font-size: 13px; }
+    .hero-kicker i { display: block; width: 48px; height: 1px; background: var(--gold); }
+    h1 { margin: 0; font-family: "STKaiti", "KaiTi", "FangSong", Georgia, serif; font-size: clamp(58px, 9vw, 116px); font-weight: 700; line-height: 0.94; letter-spacing: 0; text-shadow: 0 12px 40px rgba(0,0,0,.62); }
+    h1 span { display: block; margin-top: 10px; color: var(--gold-light); font-size: 0.54em; }
+    .hero-copy { max-width: 660px; margin: 28px 0 0; color: rgba(241, 228, 199, 0.78); font-size: clamp(17px, 2vw, 21px); line-height: 1.85; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .btn {
+      min-height: 50px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       padding: 0 20px;
-      border: 1px solid rgba(255, 231, 169, 0.34);
-      border-radius: 999px;
-      background: rgba(255, 238, 194, 0.1);
-      color: var(--ink);
-      font-weight: 700;
-      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.22);
-      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: rgba(15, 10, 8, 0.68);
+      cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
     }
+    .btn:hover { transform: translateY(-2px); border-color: rgba(243, 215, 149, 0.64); background: rgba(214, 170, 87, 0.12); }
+    .btn-primary { border-color: #c99a48; background: linear-gradient(135deg, #e6c476, #a66732); color: #171008; font-weight: 800; box-shadow: 0 10px 36px rgba(138, 75, 35, 0.3); }
+    .btn-primary:hover { background: linear-gradient(135deg, #f0d28e, #ba7a3c); }
+    .btn-icon { font-size: 19px; line-height: 1; }
+    .hero-status { position: absolute; right: max(20px, calc((100vw - 1180px) / 2)); bottom: 72px; width: 225px; padding: 17px 18px; border-left: 1px solid var(--gold); background: rgba(9, 7, 6, 0.62); backdrop-filter: blur(8px); }
+    .hero-status small { color: var(--gold); }
+    .hero-status strong { display: block; margin-top: 6px; font-family: "STKaiti", "KaiTi", serif; font-size: 22px; }
 
-    .button:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255, 231, 169, 0.68);
-      background: rgba(255, 238, 194, 0.16);
-    }
+    section { position: relative; padding: 92px 0; }
+    .hero { padding: 0; }
+    .section-head { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 50px; align-items: end; margin-bottom: 38px; }
+    h2 { margin: 0; font-family: "STKaiti", "KaiTi", "FangSong", Georgia, serif; font-size: clamp(36px, 5vw, 62px); line-height: 1.08; letter-spacing: 0; }
+    .section-intro { margin: 0; max-width: 620px; color: rgba(241, 228, 199, 0.66); line-height: 1.85; }
 
-    .button.primary {
-      border-color: rgba(255, 198, 92, 0.7);
-      background: linear-gradient(135deg, #f0bd62, #a93625);
-      color: #130b08;
-    }
-
-    .poster {
-      position: relative;
-      min-height: 520px;
-      border: 1px solid rgba(255, 231, 169, 0.18);
-      border-radius: 8px;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(10, 6, 5, 0.04), rgba(10, 6, 5, 0.75)),
-        url("https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/hero_capsule.jpg?t=1777363040");
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.46);
-    }
-
-    .poster::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(160deg, rgba(255, 220, 141, 0.12), transparent 34%),
-        linear-gradient(0deg, rgba(11, 7, 6, 0.86), transparent 52%);
-    }
-
-    .dice {
-      position: absolute;
-      right: 22px;
-      bottom: 22px;
-      width: 132px;
+    .omen { background: linear-gradient(180deg, var(--night), #100b09 48%, var(--night)); }
+    .omen-grid { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 24px; align-items: stretch; }
+    .dice-stage { min-height: 470px; display: grid; place-items: center; position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 6px; background: radial-gradient(circle, rgba(142, 48, 41, .25), transparent 55%), url("https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/hero_capsule.jpg") center/cover; }
+    .dice-stage::before { content: ""; position: absolute; inset: 0; background: rgba(9,7,6,.68); }
+    .d20-wrap { position: relative; z-index: 1; text-align: center; }
+    .d20 {
+      width: 168px;
       aspect-ratio: 1;
+      margin: 0 auto 24px;
       display: grid;
       place-items: center;
-      border: 1px solid rgba(255, 231, 169, 0.28);
-      border-radius: 8px;
-      background: rgba(11, 7, 6, 0.72);
-      color: var(--gold);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 54px;
-      font-weight: 700;
-      box-shadow: inset 0 0 34px rgba(217, 164, 65, 0.12);
+      border: 2px solid var(--gold);
+      background: rgba(15, 9, 7, .88);
+      clip-path: polygon(50% 0, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+      color: var(--gold-light);
+      font: 700 64px/1 Georgia, serif;
+      filter: drop-shadow(0 18px 30px rgba(0,0,0,.55));
     }
+    .d20.rolling { animation: roll 600ms cubic-bezier(.2,.8,.2,1); }
+    .roll-note { min-height: 26px; margin: 14px 18px 0; color: var(--paper-dim); }
+    .manifest { padding: 34px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(22, 15, 12, .72); }
+    .manifest h3 { margin: 0 0 22px; font: 700 30px/1.2 "STKaiti", "KaiTi", serif; }
+    .facts { display: grid; gap: 0; }
+    .fact { display: grid; grid-template-columns: 110px 1fr; gap: 18px; padding: 17px 0; border-top: 1px solid rgba(226,193,123,.14); }
+    .fact dt { color: var(--gold); font-size: 13px; }
+    .fact dd { margin: 0; color: rgba(241,228,199,.84); line-height: 1.6; }
+    .seat-meter { margin-top: 28px; }
+    .seat-label { display: flex; justify-content: space-between; margin-bottom: 10px; color: var(--paper-dim); font-size: 13px; }
+    .seats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .seat { height: 8px; background: var(--gold); }
+    .seat.open { background: transparent; border: 1px solid var(--gold); animation: pulse 1.8s infinite; }
 
-    .poster-note {
-      position: absolute;
-      left: 22px;
-      right: 172px;
-      bottom: 28px;
-      color: rgba(255, 246, 232, 0.88);
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    .poster-note strong {
-      display: block;
-      margin-bottom: 6px;
-      color: #fff0cf;
-      font-size: 18px;
-    }
-
-    section {
-      padding: 44px 0;
-    }
-
-    .section-title {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 24px;
-      margin-bottom: 22px;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: clamp(28px, 4vw, 48px);
-      line-height: 1.05;
-      letter-spacing: 0;
-    }
-
-    .section-title p {
-      margin: 0;
-      max-width: 460px;
-      color: rgba(255, 246, 232, 0.68);
-      line-height: 1.7;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .card {
-      min-height: 240px;
-      display: flex;
-      flex-direction: column;
-      justify-content: end;
-      padding: 22px;
-      border: 1px solid rgba(255, 231, 169, 0.16);
-      border-radius: 8px;
-      overflow: hidden;
-      background-color: var(--panel);
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.26);
+    .roles { background: #0d0908; }
+    .role-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .role {
       position: relative;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(0deg, rgba(10, 6, 5, 0.88), rgba(10, 6, 5, 0.12));
-    }
-
-    .card > * {
-      position: relative;
-    }
-
-    .card small {
-      color: var(--gold);
-      font-weight: 700;
-    }
-
-    .card h3 {
-      margin: 10px 0 8px;
-      font-size: 23px;
-      letter-spacing: 0;
-    }
-
-    .card p {
-      margin: 0;
-      color: rgba(255, 246, 232, 0.74);
-      line-height: 1.6;
-    }
-
-    .plan {
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(300px, 1.1fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .join-panel {
-      padding: 28px;
-      border: 1px solid rgba(255, 231, 169, 0.18);
-      border-radius: 8px;
-      background: rgba(16, 9, 7, 0.76);
-      box-shadow: 0 20px 54px rgba(0, 0, 0, 0.28);
-    }
-
-    .join-panel h2 {
-      margin-bottom: 18px;
-    }
-
-    .join-panel p {
-      margin: 0 0 20px;
-      color: rgba(255, 246, 232, 0.78);
-      line-height: 1.75;
-    }
-
-    .checks {
-      display: grid;
-      gap: 12px;
-      margin: 22px 0 0;
+      min-height: 330px;
       padding: 0;
-      list-style: none;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #17110e;
+      text-align: left;
+      cursor: pointer;
     }
+    .role img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; opacity: .58; filter: saturate(.7); transition: transform 500ms ease, opacity 300ms ease, filter 300ms ease; }
+    .role::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(7,5,4,.98), rgba(7,5,4,.08) 78%); }
+    .role-copy { position: absolute; z-index: 1; left: 20px; right: 20px; bottom: 20px; }
+    .role small { color: var(--gold-light); }
+    .role h3 { margin: 8px 0 7px; font: 700 26px/1.15 "STKaiti", "KaiTi", serif; }
+    .role p { margin: 0; color: rgba(241,228,199,.66); font-size: 13px; line-height: 1.6; }
+    .role:hover img, .role.selected img { transform: scale(1.045); opacity: .78; filter: saturate(1); }
+    .role.selected { border-color: var(--gold-light); box-shadow: inset 0 0 0 1px var(--gold-light); }
+    .role.selected::before { content: "已选择"; position: absolute; z-index: 2; top: 14px; right: 14px; padding: 6px 9px; background: var(--gold-light); color: #140d08; font-size: 11px; font-weight: 800; }
+    .role-result { min-height: 24px; margin-top: 18px; color: var(--paper-dim); text-align: center; }
 
-    .checks li {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
-      border: 1px solid rgba(255, 231, 169, 0.12);
-      border-radius: 8px;
-      background: rgba(255, 241, 205, 0.06);
+    .creed { overflow: hidden; background: linear-gradient(135deg, #18110d, #0b0807 60%); }
+    .creed::before { content: "IV"; position: absolute; right: -18px; top: 10px; color: rgba(214,170,87,.035); font: 700 360px/1 Georgia, serif; }
+    .creed-list { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .creed-item { min-height: 220px; padding: 30px; border-right: 1px solid var(--line); }
+    .creed-item:last-child { border-right: 0; }
+    .creed-item em { color: var(--gold); font: normal 13px/1 Georgia, serif; }
+    .creed-item h3 { margin: 44px 0 12px; font: 700 25px/1.25 "STKaiti", "KaiTi", serif; }
+    .creed-item p { margin: 0; color: rgba(241,228,199,.62); line-height: 1.7; }
+
+    .contract { background: #0a0706; }
+    .contract-layout { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 48px; align-items: start; }
+    .schedule { display: grid; gap: 12px; margin-top: 28px; }
+    .schedule-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+    .schedule-row span { color: var(--paper-dim); font-size: 13px; }
+    .schedule-row strong { text-align: right; }
+    .contract-paper { position: relative; padding: 38px; border: 1px solid #a88649; border-radius: 5px; background: linear-gradient(rgba(30,22,16,.94), rgba(17,12,10,.98)), repeating-linear-gradient(0deg, transparent 0 27px, rgba(226,193,123,.06) 28px); box-shadow: 0 30px 80px rgba(0,0,0,.4); }
+    .contract-paper::before, .contract-paper::after { content: ""; position: absolute; width: 26px; height: 26px; border-color: var(--gold); }
+    .contract-paper::before { left: 10px; top: 10px; border-left: 1px solid; border-top: 1px solid; }
+    .contract-paper::after { right: 10px; bottom: 10px; border-right: 1px solid; border-bottom: 1px solid; }
+    .contract-paper h3 { margin: 0; text-align: center; font: 700 33px/1.2 "STKaiti", "KaiTi", serif; }
+    .contract-paper > p { color: rgba(241,228,199,.67); line-height: 1.75; text-align: center; }
+    .invite-preview { margin: 24px 0; padding: 18px; border-left: 2px solid var(--blood); background: rgba(255,255,255,.025); color: var(--paper-dim); line-height: 1.75; }
+    .contract-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .secret-entry { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 22px; }
+    .seal { width: 32px; height: 32px; padding: 0; border: 1px solid rgba(214,170,87,.32); border-radius: 50%; background: rgba(142,48,41,.22); color: rgba(241,228,199,.56); cursor: pointer; font-family: Georgia, serif; }
+    .seal:hover { color: var(--gold-light); border-color: var(--gold); }
+    .secret-entry small { color: rgba(241,228,199,.36); }
+
+    footer { padding: 30px 0; border-top: 1px solid var(--line); color: rgba(241,228,199,.42); font-size: 12px; line-height: 1.75; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 32px; }
+    footer a { color: rgba(243,215,149,.7); text-decoration: underline; text-underline-offset: 3px; }
+
+    dialog { width: min(500px, calc(100% - 28px)); padding: 0; border: 1px solid var(--gold); border-radius: 6px; background: #130e0b; color: var(--paper); box-shadow: 0 30px 100px #000; }
+    dialog::backdrop { background: rgba(4,3,2,.82); backdrop-filter: blur(5px); }
+    .dialog-body { padding: 34px; }
+    .dialog-top { display: flex; align-items: start; justify-content: space-between; gap: 20px; }
+    .dialog-top h3 { margin: 0; font: 700 30px/1.2 "STKaiti", "KaiTi", serif; }
+    .close { width: 34px; height: 34px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-size: 19px; }
+    .riddle { margin: 20px 0; padding: 16px; border-left: 2px solid var(--gold); background: rgba(214,170,87,.06); color: var(--paper-dim); line-height: 1.8; }
+    .code-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+    .code-row input { min-width: 0; height: 48px; padding: 0 15px; border: 1px solid var(--line); border-radius: 4px; background: #090706; color: var(--paper); letter-spacing: 0; }
+    .secret-result { min-height: 25px; margin: 14px 0 0; color: var(--paper-dim); line-height: 1.6; }
+    .secret-result.success { color: var(--gold-light); }
+    .toast { position: fixed; left: 50%; bottom: 24px; z-index: 30; transform: translate(-50%, 20px); padding: 12px 16px; border: 1px solid var(--line); border-radius: 4px; background: rgba(15,10,8,.94); color: var(--paper); opacity: 0; pointer-events: none; transition: opacity 180ms ease, transform 180ms ease; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @keyframes arrive { from { opacity: 0; transform: scale(1.07); } to { opacity: 1; transform: scale(1.02); } }
+    @keyframes reveal { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+    @keyframes roll { 0% { transform: rotate(0) scale(1); } 45% { transform: rotate(190deg) scale(.82); } 100% { transform: rotate(360deg) scale(1); } }
+    @keyframes pulse { 50% { background: rgba(214,170,87,.35); box-shadow: 0 0 16px rgba(214,170,87,.5); } }
+
+    @media (max-width: 900px) {
+      .nav a:not(.nav-cta) { display: none; }
+      .hero-content { width: min(720px, 90%); padding-bottom: 150px; }
+      .hero-status { left: 20px; right: auto; bottom: 35px; }
+      .section-head, .omen-grid, .contract-layout { grid-template-columns: 1fr; }
+      .section-head { gap: 16px; }
+      .role-grid { grid-template-columns: 1fr 1fr; }
+      .creed-list { grid-template-columns: 1fr; }
+      .creed-item { min-height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+      .creed-item:last-child { border-bottom: 0; }
+      .creed-item h3 { margin-top: 22px; }
     }
-
-    .checks span {
-      width: 28px;
-      height: 28px;
-      display: inline-grid;
-      place-items: center;
-      flex: 0 0 auto;
-      border-radius: 999px;
-      background: rgba(122, 166, 106, 0.18);
-      color: #bde4a7;
-      font-weight: 800;
-    }
-
-    .party {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .class-tile {
-      min-height: 176px;
-      padding: 18px;
-      border: 1px solid rgba(255, 231, 169, 0.14);
-      border-radius: 8px;
-      background: rgba(16, 9, 7, 0.66);
-    }
-
-    .class-tile img {
-      width: 76px;
-      height: 76px;
-      object-fit: contain;
-      display: block;
-      margin-bottom: 18px;
-      filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.44));
-    }
-
-    .class-tile h3 {
-      margin: 0 0 8px;
-      font-size: 20px;
-    }
-
-    .class-tile p {
-      margin: 0;
-      color: rgba(255, 246, 232, 0.68);
-      line-height: 1.56;
-    }
-
-    .final {
-      padding: 42px 0 64px;
-      text-align: center;
-    }
-
-    .final-box {
-      padding: 42px 24px;
-      border: 1px solid rgba(255, 231, 169, 0.2);
-      border-radius: 8px;
-      background:
-        linear-gradient(135deg, rgba(169, 54, 37, 0.22), rgba(122, 166, 106, 0.18)),
-        rgba(16, 9, 7, 0.78);
-      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.36);
-    }
-
-    .final-box p {
-      width: min(680px, 100%);
-      margin: 18px auto 0;
-      color: rgba(255, 246, 232, 0.76);
-      line-height: 1.75;
-    }
-
-    footer {
-      padding: 22px 0 28px;
-      border-top: 1px solid rgba(255, 231, 169, 0.13);
-      color: rgba(255, 246, 232, 0.54);
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    footer a {
-      color: rgba(255, 226, 164, 0.86);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    @media (max-width: 860px) {
-      .topbar .shell {
-        min-height: 64px;
-      }
-
-      .nav {
-        display: none;
-      }
-
-      .hero {
-        padding-top: 34px;
-      }
-
-      .hero-grid,
-      .plan {
-        grid-template-columns: 1fr;
-      }
-
-      .poster {
-        min-height: 390px;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .section-title {
-        display: block;
-      }
-
-      .section-title p {
-        margin-top: 12px;
-      }
-    }
-
     @media (max-width: 560px) {
-      .shell {
-        width: min(100% - 24px, 1120px);
-      }
-
-      .hero-copy {
-        font-size: 17px;
-      }
-
-      .button {
-        width: 100%;
-      }
-
-      .poster {
-        min-height: 330px;
-      }
-
-      .dice {
-        width: 92px;
-        right: 16px;
-        bottom: 16px;
-        font-size: 40px;
-      }
-
-      .poster-note {
-        left: 16px;
-        right: 120px;
-        bottom: 18px;
-        font-size: 13px;
-      }
-
-      .party {
-        grid-template-columns: 1fr;
-      }
+      .shell { width: min(100% - 24px, 1180px); }
+      .topbar-inner { min-height: 62px; }
+      .nav-cta { display: none; }
+      .hero { min-height: 84svh; }
+      .hero::before { background-position: 65% top; }
+      .hero::after { background: linear-gradient(90deg, rgba(7,5,4,.94), rgba(7,5,4,.46)), linear-gradient(0deg, var(--night), transparent 55%); }
+      .hero-content { width: 100%; padding: 124px 0 168px; }
+      h1 { font-size: clamp(52px, 18vw, 78px); }
+      .hero-copy { font-size: 16px; line-height: 1.75; }
+      .actions .btn { width: 100%; }
+      section { padding: 68px 0; }
+      .omen { padding-top: 48px; }
+      .dice-stage { min-height: 390px; }
+      .manifest { padding: 25px 20px; }
+      .fact { grid-template-columns: 82px 1fr; }
+      .role-grid { grid-template-columns: 1fr; }
+      .role { min-height: 250px; }
+      .creed-item { padding: 26px 20px; }
+      .contract-paper, .dialog-body { padding: 26px 20px; }
+      .contract-actions { grid-template-columns: 1fr; }
+      .code-row { grid-template-columns: 1fr; }
+      .footer-inner { display: block; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="shell">
-      <a class="brand" href="#top" aria-label="回到顶部">
-        <img src="https://baldursgate3.game/png/logo-bg3.png" alt="Baldur's Gate 3">
-      </a>
+  <header class="topbar" id="topbar">
+    <div class="shell topbar-inner">
+      <a class="wordmark" href="#top" aria-label="回到页面顶部"><span class="mark" aria-hidden="true"><span>IV</span></span><span>遗忘国度 · 私人招募令</span></a>
       <nav class="nav" aria-label="页面导航">
-        <a href="#why">为什么现在玩</a>
-        <a href="#party">队伍配置</a>
-        <a href="#join">加入队伍</a>
+        <a href="#omen">命运检定</a><a href="#roles">选择身份</a><a href="#creed">同行准则</a><a class="nav-cta" href="#contract">签下契约</a>
       </nav>
     </div>
   </header>
 
   <main id="top">
-    <section class="hero">
-      <div class="shell hero-grid">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="shell">
+        <div class="hero-content">
+          <div class="hero-kicker"><i></i><span>一封只写给你的开团邀请</span></div>
+          <h1 id="hero-title">第四席<span>一直为你空着</span></h1>
+          <p class="hero-copy">今晚，剑湾的风会吹向博德之门。三位冒险者已经围坐营火旁，只差你带着好奇、坏主意和那一次关键的掷骰入席。</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#omen"><span class="btn-icon" aria-hidden="true">◆</span> 接受命运检定</a>
+            <a class="btn" href="#contract">查看开团契约</a>
+          </div>
+        </div>
+        <aside class="hero-status" aria-label="队伍当前状态"><small>队伍状态</small><strong>3 / 4 · 等你入席</strong></aside>
+      </div>
+    </section>
+
+    <section class="omen" id="omen">
+      <div class="shell">
+        <header class="section-head">
+          <div><p class="eyebrow">Fate check</p><h2>先让命运<br>替你开口</h2></div>
+          <p class="section-intro">不需要懂规则，也不用提前研究最优解。按下骰子，看看你今晚会以怎样的方式改变这段旅程。</p>
+        </header>
+        <div class="omen-grid">
+          <div class="dice-stage">
+            <div class="d20-wrap">
+              <div class="d20" id="d20" aria-live="polite">20</div>
+              <button class="btn btn-primary" id="rollButton" type="button">掷一次 D20</button>
+              <p class="roll-note" id="rollNote">命运尚未落定。</p>
+            </div>
+          </div>
+          <article class="manifest">
+            <p class="eyebrow">Campaign brief</p>
+            <h3>本次冒险简报</h3>
+            <dl class="facts">
+              <div class="fact"><dt>开团时间</dt><dd id="nextSunday">本周日晚</dd></div>
+              <div class="fact"><dt>游戏方式</dt><dd>多人联机 · 剧情优先 · 休闲推进</dd></div>
+              <div class="fact"><dt>入队门槛</dt><dd>零经验也欢迎，边走边学，不查攻略也能快乐</dd></div>
+              <div class="fact"><dt>唯一规则</dt><dd>可以失败，可以整活，但不要替队友做决定</dd></div>
+            </dl>
+            <div class="seat-meter" aria-label="队伍已有三人，还剩一个位置">
+              <div class="seat-label"><span>队伍席位</span><span>仅余 1 席</span></div>
+              <div class="seats"><i class="seat"></i><i class="seat"></i><i class="seat"></i><i class="seat open"></i></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="roles" id="roles">
+      <div class="shell">
+        <header class="section-head">
+          <div><p class="eyebrow">Choose your calling</p><h2>你想以什么<br>身份入队？</h2></div>
+          <p class="section-intro">职业只是起点，乐趣来自你做出的选择。先挑一个最像你的角色，我们会把它写进邀请函。</p>
+        </header>
+        <div class="role-grid" role="list" aria-label="可选择的队伍身份">
+          <button class="role" type="button" data-role="吟游诗人" role="listitem"><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/extras/3a7b2cb2594e1a27c2f3f0fa61d14d7d.webp" alt="博德之门3冒险场景"><span class="role-copy"><small>CHARISMA</small><h3>吟游诗人</h3><p>靠一句话改变战局，也靠一句话把战局弄得更糟。</p></span></button>
+          <button class="role" type="button" data-role="法师" role="listitem"><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/extras/fc234958f310d0a7380388308455d02f.webp" alt="博德之门3魔法场景"><span class="role-copy"><small>INTELLIGENCE</small><h3>法师</h3><p>把复杂问题变成火球能解决的简单问题。</p></span></button>
+          <button class="role" type="button" data-role="游荡者" role="listitem"><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/extras/de1c3f817c6e0604f5b039f2e7a95199.webp" alt="博德之门3探索场景"><span class="role-copy"><small>DEXTERITY</small><h3>游荡者</h3><p>门锁和规则都只是等待被绕过的建议。</p></span></button>
+          <button class="role" type="button" data-role="圣武士" role="listitem"><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/header.jpg" alt="博德之门3英雄群像"><span class="role-copy"><small>STRENGTH</small><h3>圣武士</h3><p>站在队伍最前面，让誓言和重甲一起发光。</p></span></button>
+        </div>
+        <p class="role-result" id="roleResult" aria-live="polite">尚未选择。犹豫也是冒险者的权利。</p>
+      </div>
+    </section>
+
+    <section class="creed" id="creed">
+      <div class="shell">
+        <header class="section-head">
+          <div><p class="eyebrow">Campfire creed</p><h2>营火边的<br>三条同行准则</h2></div>
+          <p class="section-intro">它们不是严肃的规章，只是我们希望共同守住的游戏方式。有些旅人会留意每句话开始的地方。</p>
+        </header>
+        <div class="creed-list">
+          <article class="creed-item"><em>I</em><h3>立于抉择之前，先听完每个人的主意</h3><p>不催对话，不抢选择。最离谱的方案也值得一次完整陈述。</p></article>
+          <article class="creed-item"><em>II</em><h3>刻下旅途中的失败，而不是急着读档</h3><p>坏骰子也会长出好故事，先看看命运准备把我们带去哪。</p></article>
+          <article class="creed-item"><em>III</em><h3>有你在场，胜负才值得被营火记住</h3><p>配装没有标准答案。四个人都玩得开心，才算真正通关。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contract" id="contract">
+      <div class="shell contract-layout">
         <div>
-          <div class="eyebrow">私人开团邀请 · 非官方粉丝页</div>
-          <h1>快和我一起玩博德之门3</h1>
-          <p class="hero-copy">
-            队伍缺你。今晚从营地出发，骰子交给命运，选择交给我们。你负责嘴硬、整活、过检定，剩下的让冒险自己长出来。
-          </p>
-          <div class="cta-row">
-            <a class="button primary" href="#join">🎲 我加入</a>
-            <a class="button" href="https://store.steampowered.com/app/1086940/Baldurs_Gate_3/" target="_blank" rel="noreferrer">看 Steam 页面</a>
+          <p class="eyebrow">The final pact</p>
+          <h2>最后一步：<br>签下你的名字</h2>
+          <p class="section-intro" style="margin-top:20px">无需真的按手印。选好身份后，把邀请函复制回我，就算完成入队仪式。</p>
+          <div class="schedule">
+            <div class="schedule-row"><span>集合地点</span><strong>语音频道 / 线上营地</strong></div>
+            <div class="schedule-row"><span>预计时长</span><strong>2 - 3 小时，随时可休息</strong></div>
+            <div class="schedule-row"><span>需要准备</span><strong>游戏、耳机，以及一个坏主意</strong></div>
           </div>
         </div>
-        <aside class="poster" aria-label="博德之门3官方视觉素材">
-          <div class="poster-note">
-            <strong>目标：四人小队成团</strong>
-            休闲推进，剧情优先，可以失败，可以嘴炮，也可以把计划执行得很离谱。
+        <article class="contract-paper">
+          <h3>第四位冒险者契约</h3>
+          <p>本人自愿加入这支不太可靠但足够快乐的队伍。</p>
+          <div class="invite-preview" id="invitePreview">我接受邀请，将以“尚未选择的冒险者”身份加入队伍。这个周日，营火边见。</div>
+          <div class="contract-actions">
+            <button class="btn btn-primary" id="copyInvite" type="button">复制我的入队宣言</button>
+            <a class="btn" href="https://store.steampowered.com/app/1086940/Baldurs_Gate_3/" target="_blank" rel="noreferrer">查看 Steam 页面</a>
           </div>
-          <div class="dice" aria-hidden="true">20</div>
-        </aside>
-      </div>
-    </section>
-
-    <section id="why">
-      <div class="shell">
-        <div class="section-title">
-          <h2>这次不当独狼</h2>
-          <p>博德之门3最快乐的地方，是几个人一起做出离谱但合理的决定，然后一起承担后果。</p>
-        </div>
-        <div class="cards">
-          <article class="card" style="background-image: url('https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/extras/3a7b2cb2594e1a27c2f3f0fa61d14d7d.webp?t=1777363040');">
-            <small>01</small>
-            <h3>一起过剧情</h3>
-            <p>对话、选择、阵营、关系，全都能现场争论，现场后悔。</p>
-          </article>
-          <article class="card" style="background-image: url('https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/extras/fc234958f310d0a7380388308455d02f.webp?t=1777363040');">
-            <small>02</small>
-            <h3>一起打架</h3>
-            <p>你推人，我放火，他补刀。战斗计划也许会成功，也许会变成名场面。</p>
-          </article>
-          <article class="card" style="background-image: url('https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/extras/de1c3f817c6e0604f5b039f2e7a95199.webp?t=1777363040');">
-            <small>03</small>
-            <h3>一起整活</h3>
-            <p>摸箱子、开锁、潜行、乱试法术。只要存档还在，世界就还有救。</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="party">
-      <div class="shell plan">
-        <div class="join-panel">
-          <h2>队伍急招</h2>
-          <p>
-            不限职业，不限流派。会玩当然好，不会玩也完全可以。你只需要带着好奇心来，剩下的我们边走边学。
-          </p>
-          <ul class="checks">
-            <li><span>✓</span> 可以慢慢看剧情，不催主线</li>
-            <li><span>✓</span> 可以语音聊天，也可以安静打字</li>
-            <li><span>✓</span> 可以认真打，也可以适度整活</li>
-          </ul>
-        </div>
-
-        <div class="party" aria-label="推荐职业方向">
-          <article class="class-tile">
-            <img src="https://baldursgate3.game/classes/bard.png" alt="Bard icon">
-            <h3>吟游诗人</h3>
-            <p>嘴炮担当。能打，能奶，能过检定，还能把场面聊得更热闹。</p>
-          </article>
-          <article class="class-tile">
-            <img src="https://baldursgate3.game/classes/wizard.png" alt="Wizard icon">
-            <h3>法师</h3>
-            <p>负责把问题变复杂，再用更大的法术把问题解决。</p>
-          </article>
-          <article class="class-tile">
-            <img src="https://baldursgate3.game/classes/rogue.png" alt="Rogue icon">
-            <h3>游荡者</h3>
-            <p>开锁、偷袭、潜入，最适合第一个说“我有个想法”的人。</p>
-          </article>
-          <article class="class-tile">
-            <img src="https://baldursgate3.game/classes/paladin.png" alt="Paladin icon">
-            <h3>圣武士</h3>
-            <p>正面开团担当。誓言很硬，伤害也很硬。</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="join" class="final">
-      <div class="shell">
-        <div class="final-box">
-          <h2>这周日就开局？</h2>
-          <p>
-            看到这里就说明命运已经投出了骰子。把这页发给你，就是想说：快来，队里真的差你一个。
-          </p>
-          <div class="cta-row" style="justify-content: center;">
-            <a class="button primary" href="weixin://">微信回我：我来！</a>
-            <a class="button" href="https://baldursgate3.game/" target="_blank" rel="noreferrer">官方主页</a>
-          </div>
-        </div>
+          <div class="secret-entry"><button class="seal" id="openSecret" type="button" aria-label="打开旧信使的火漆印">✦</button><small>旧信使的火漆印似乎能被打开</small></div>
+        </article>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="shell">
-      本页为私人游戏邀请页，非 Larian Studios、Wizards of the Coast 或 Steam 官方页面。Baldur's Gate 3、相关商标、角色、图片与素材归各自权利方所有。页面引用公开官方素材：<a href="https://baldursgate3.game/" target="_blank" rel="noreferrer">Baldur's Gate 3 官方网站</a>、<a href="https://store.steampowered.com/app/1086940/Baldurs_Gate_3/" target="_blank" rel="noreferrer">Steam 商店页</a>。
-    </div>
+    <div class="shell footer-inner"><span>私人开团邀请 · 非官方粉丝页</span><span>素材来自 <a href="https://baldursgate3.game/" target="_blank" rel="noreferrer">Baldur's Gate 3 官网</a> 与 <a href="https://store.steampowered.com/app/1086940/Baldurs_Gate_3/" target="_blank" rel="noreferrer">Steam 商店页</a>，版权归原权利方所有。</span></div>
   </footer>
+
+  <dialog id="secretDialog" aria-labelledby="secretTitle">
+    <div class="dialog-body">
+      <div class="dialog-top"><div><p class="eyebrow">A message in ash</p><h3 id="secretTitle">旧信使的密语</h3></div><button class="close" id="closeSecret" type="button" aria-label="关闭">×</button></div>
+      <div class="riddle">“取营火三则的开篇，把它们连成一句。不要看字，要念它的音。旧式信使不用字母，只用九宫格上的数字。”</div>
+      <div class="code-row"><input id="secretCode" type="text" inputmode="numeric" autocomplete="off" maxlength="7" placeholder="输入七位密语" aria-label="七位数字密语"><button class="btn btn-primary" id="checkSecret" type="button">验证密语</button></div>
+      <p class="secret-result" id="secretResult" aria-live="polite">线索都在这封邀请里。</p>
+    </div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const state = { role: "尚未选择的冒险者", roll: null };
+    const fortunes = [
+      "大失败：你踩中了陷阱，但全队因此笑了十分钟。",
+      "检定未过：计划偏离航线，故事却开始变得有趣。",
+      "平稳通过：你可靠地接住了队伍的下一步。",
+      "成功：守卫相信了你刚编出来的完整身世。",
+      "大成功：命运确认，第四席确实属于你。"
+    ];
+    const d20 = document.querySelector("#d20");
+    const rollButton = document.querySelector("#rollButton");
+    const rollNote = document.querySelector("#rollNote");
+    const roleResult = document.querySelector("#roleResult");
+    const invitePreview = document.querySelector("#invitePreview");
+    const toast = document.querySelector("#toast");
+
+    function updateInvite() {
+      const omen = state.roll ? `，命运骰为 ${state.roll}` : "";
+      invitePreview.textContent = `我接受邀请，将以“${state.role}”身份加入队伍${omen}。这个周日，营火边见。`;
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    rollButton.addEventListener("click", () => {
+      rollButton.disabled = true;
+      d20.classList.remove("rolling");
+      void d20.offsetWidth;
+      d20.classList.add("rolling");
+      let ticks = 0;
+      const spin = setInterval(() => {
+        d20.textContent = Math.floor(Math.random() * 20) + 1;
+        ticks += 1;
+        if (ticks < 8) return;
+        clearInterval(spin);
+        const value = Math.floor(Math.random() * 20) + 1;
+        state.roll = value;
+        d20.textContent = value;
+        const tier = value === 1 ? 0 : value < 10 ? 1 : value < 16 ? 2 : value < 20 ? 3 : 4;
+        rollNote.textContent = fortunes[tier];
+        rollButton.textContent = "再掷一次";
+        rollButton.disabled = false;
+        updateInvite();
+      }, 70);
+    });
+
+    document.querySelectorAll(".role").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".role").forEach((item) => item.classList.remove("selected"));
+        button.classList.add("selected");
+        state.role = button.dataset.role;
+        roleResult.textContent = `身份已写入契约：${state.role}。你仍可在开团前反悔。`;
+        updateInvite();
+      });
+    });
+
+    document.querySelector("#copyInvite").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(invitePreview.textContent);
+        showToast("入队宣言已复制，去回应你的队友吧。");
+      } catch (error) {
+        showToast("浏览器未允许复制，请手动选中宣言。");
+      }
+    });
+
+    const sunday = new Date();
+    sunday.setDate(sunday.getDate() + ((7 - sunday.getDay()) % 7 || 7));
+    document.querySelector("#nextSunday").textContent = `${sunday.getMonth() + 1} 月 ${sunday.getDate()} 日 · 周日晚`;
+    document.querySelector("#topbar").classList.toggle("scrolled", scrollY > 24);
+    addEventListener("scroll", () => document.querySelector("#topbar").classList.toggle("scrolled", scrollY > 24), { passive: true });
+
+    const dialog = document.querySelector("#secretDialog");
+    document.querySelector("#openSecret").addEventListener("click", () => dialog.showModal());
+    document.querySelector("#closeSecret").addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
+
+    document.querySelector("#checkSecret").addEventListener("click", () => {
+      const keypad = { a: 2, b: 2, c: 2, d: 3, e: 3, f: 3, g: 4, h: 4, i: 4, j: 5, k: 5, l: 5, m: 6, n: 6, o: 6, p: 7, q: 7, r: 7, s: 7, t: 8, u: 8, v: 8, w: 9, x: 9, y: 9, z: 9 };
+      const spokenClue = ["li", "ke", "you"].join("");
+      const answer = [...spokenClue].map((letter) => keypad[letter]).join("");
+      const input = document.querySelector("#secretCode").value.trim();
+      const result = document.querySelector("#secretResult");
+      if (input === answer) {
+        result.classList.add("success");
+        result.textContent = "密语正确：立刻有你，才是完整的四人队。把这句话带回营火边。";
+      } else {
+        result.classList.remove("success");
+        result.textContent = "火漆没有回应。再看看三条准则各自从哪个字开始。";
+      }
+    });
+  </script>
 </body>
 </html>
