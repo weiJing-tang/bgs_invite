@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0807">
-  <meta name="description" content="一封等待第三位冒险者签下名字的博德之门3私人开团邀请。">
+  <meta name="description" content="一封等待冒险者签下名字的博德之门3私人开团邀请。">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 3 61 32 32 61 3 32Z' fill='%230b0807' stroke='%23d6aa57' stroke-width='3'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-size='23' fill='%23f3d795' font-family='serif'%3EIII%3C/text%3E%3C/svg%3E">
-  <title>第三席，留给你｜博德之门 3 开团邀请</title>
+  <title>营火在等你｜博德之门 3 开团邀请</title>
   <style>
     :root {
       --night: #090706;
@@ -78,6 +78,19 @@
     .nav a { padding: 10px 0; border-bottom: 1px solid transparent; }
     .nav a:hover { color: var(--paper); border-color: var(--gold); }
     .nav-cta { padding: 10px 15px !important; border: 1px solid var(--line) !important; background: rgba(214, 170, 87, 0.08); }
+    .nav-reset {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 10px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: rgba(241, 228, 199, 0.58);
+      cursor: pointer;
+    }
+    .nav-reset:hover { color: var(--paper); border-color: var(--line); background: rgba(214,170,87,.06); }
+    .nav-reset-icon { color: var(--gold-light); font: 700 18px/1 Georgia, serif; }
 
     .hero {
       position: relative;
@@ -110,8 +123,9 @@
     .hero-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; color: var(--gold-light); font-size: 13px; }
     .hero-kicker i { display: block; width: 48px; height: 1px; background: var(--gold); }
     h1 { margin: 0; font-family: "STKaiti", "KaiTi", "FangSong", Georgia, serif; font-size: clamp(58px, 9vw, 116px); font-weight: 700; line-height: 0.94; letter-spacing: 0; text-shadow: 0 12px 40px rgba(0,0,0,.62); }
-    h1 span { display: block; margin-top: 10px; color: var(--gold-light); font-size: 0.54em; }
-    .hero-copy { max-width: 660px; margin: 28px 0 0; color: rgba(241, 228, 199, 0.78); font-size: clamp(17px, 2vw, 21px); line-height: 1.85; }
+    h1 b { display: block; font-weight: inherit; }
+    h1 span { display: block; margin-top: 10px; color: var(--gold-light); font-size: 0.54em; overflow-wrap: anywhere; }
+    .hero-copy { max-width: 660px; margin: 28px 0 0; color: rgba(241, 228, 199, 0.78); font-size: clamp(17px, 2vw, 21px); line-height: 1.85; overflow-wrap: anywhere; }
     .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
     .btn {
       min-height: 50px;
@@ -191,9 +205,10 @@
     .fact dd { margin: 0; color: rgba(241,228,199,.84); line-height: 1.6; }
     .seat-meter { margin-top: 28px; }
     .seat-label { display: flex; justify-content: space-between; margin-bottom: 10px; color: var(--paper-dim); font-size: 13px; }
-    .seats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .seat { height: 8px; background: var(--gold); }
-    .seat.open { background: transparent; border: 1px solid var(--gold); animation: pulse 1.8s infinite; }
+    .quest-progress { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .quest-progress i { height: 8px; border: 1px solid rgba(214,170,87,.45); background: transparent; transition: background 300ms ease, box-shadow 300ms ease; }
+    .quest-progress i.awake { background: var(--gold); box-shadow: 0 0 14px rgba(214,170,87,.28); }
+    .quest-progress i.current { animation: pulse 1.8s infinite; }
 
     .roles { background: #0d0908; }
     .role-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
@@ -218,6 +233,16 @@
     .role.selected { border-color: var(--gold-light); box-shadow: inset 0 0 0 1px var(--gold-light); }
     .role.selected::before { content: "已选择"; position: absolute; z-index: 2; top: 14px; right: 14px; padding: 6px 9px; background: var(--gold-light); color: #140d08; font-size: 11px; font-weight: 800; }
     .role-result { min-height: 24px; margin-top: 18px; color: var(--paper-dim); text-align: center; }
+    .camp-reactions {
+      max-width: 760px;
+      margin: 20px auto 0;
+      padding: 16px 18px;
+      border-top: 1px solid rgba(214,170,87,.24);
+      border-bottom: 1px solid rgba(214,170,87,.12);
+      background: linear-gradient(90deg, transparent, rgba(142,48,41,.07) 16%, rgba(214,170,87,.04) 84%, transparent);
+    }
+    .camp-reactions p { display: grid; grid-template-columns: 92px 1fr; gap: 14px; margin: 0; color: rgba(241,228,199,.64); font: italic 13px/1.7 Georgia, "STKaiti", serif; }
+    .camp-reactions strong { color: var(--gold-light); font-style: normal; text-align: right; }
 
     .poster-section { background: linear-gradient(180deg, #0d0908, #16100d 45%, #0c0807); }
     .poster-layout {
@@ -322,7 +347,9 @@
     }
     .rune-trigger:hover::after,
     .rune-trigger:focus-visible::after,
-    .rune-trigger.rune-found::after { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0); }
+    .rune-trigger.rune-found::after,
+    .rune-trigger.inspiration-reveal::after { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0); }
+    .rune-trigger.inspiration-reveal::after { animation: inspiration-rune 1.15s ease-in-out infinite; }
     .rune-armor {
       position: absolute;
       z-index: 3;
@@ -355,17 +382,71 @@
     .schedule-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 15px 0; border-bottom: 1px solid var(--line); }
     .schedule-row span { color: var(--paper-dim); font-size: 13px; }
     .schedule-row strong { text-align: right; }
-    .contract-paper { position: relative; padding: 38px; border: 1px solid #a88649; border-radius: 5px; background: linear-gradient(rgba(30,22,16,.94), rgba(17,12,10,.98)), repeating-linear-gradient(0deg, transparent 0 27px, rgba(226,193,123,.06) 28px); box-shadow: 0 30px 80px rgba(0,0,0,.4); }
+    .contract-paper { position: relative; padding: 38px; border: 1px solid #a88649; border-radius: 5px; background: linear-gradient(rgba(30,22,16,.94), rgba(17,12,10,.98)), repeating-linear-gradient(0deg, transparent 0 27px, rgba(226,193,123,.06) 28px); box-shadow: 0 30px 80px rgba(0,0,0,.4); transition: border-color 360ms ease, box-shadow 360ms ease; }
     .contract-paper::before, .contract-paper::after { content: ""; position: absolute; width: 26px; height: 26px; border-color: var(--gold); }
     .contract-paper::before { left: 10px; top: 10px; border-left: 1px solid; border-top: 1px solid; }
     .contract-paper::after { right: 10px; bottom: 10px; border-right: 1px solid; border-bottom: 1px solid; }
     .contract-paper h3 { margin: 0; text-align: center; font: 700 33px/1.2 "STKaiti", "KaiTi", serif; }
     .contract-paper > p { color: rgba(241,228,199,.67); line-height: 1.75; text-align: center; }
-    .invite-preview { margin: 24px 0; padding: 18px; border-left: 2px solid var(--blood); background: rgba(255,255,255,.025); color: var(--paper-dim); line-height: 1.75; }
+    .signature-field { display: grid; gap: 8px; margin-top: 22px; color: var(--gold); font-size: 12px; }
+    .signature-field input, .oath-field input {
+      width: 100%;
+      min-width: 0;
+      height: 48px;
+      padding: 0 15px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: #090706;
+      color: var(--paper);
+    }
+    .signature-field input { font-family: "STKaiti", "KaiTi", serif; font-size: 18px; }
+    .signature-field input::placeholder, .oath-field input::placeholder { color: rgba(241,228,199,.32); }
+    .invite-preview { margin: 20px 0 24px; padding: 18px; border-left: 2px solid var(--blood); background: rgba(255,255,255,.025); color: var(--paper-dim); line-height: 1.75; }
     .contract-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .download-contract[hidden] { display: none; }
+    .download-contract:not([hidden]) { grid-column: 1 / -1; }
+    .signed-mark {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(214,170,87,.24);
+      color: var(--paper-dim);
+      font: italic 13px/1.6 Georgia, "STKaiti", serif;
+    }
+    .signed-mark strong { display: block; color: var(--gold-light); font-size: 20px; }
+    .signed-mark > span { min-width: 0; overflow-wrap: anywhere; }
+    .signed-seal {
+      width: 62px;
+      height: 62px;
+      flex: 0 0 62px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 32%, #b74b3d, var(--blood) 56%, #3a100c);
+      color: var(--gold-light);
+      font: 700 20px/1 Georgia, serif;
+      transform: rotate(-9deg);
+      box-shadow: 0 0 0 4px rgba(142,48,41,.2), inset 0 0 18px rgba(0,0,0,.45);
+    }
+    body.contract-bound .contract-paper,
+    body.absolute-bound .contract-paper { border-color: var(--gold-light); box-shadow: 0 30px 90px rgba(0,0,0,.48), 0 0 32px rgba(214,170,87,.12); }
+    body.contract-bound .signed-mark,
+    body.absolute-bound .signed-mark { display: flex; }
     .secret-entry { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 22px; }
-    .seal { width: 32px; height: 32px; padding: 0; border: 1px solid rgba(214,170,87,.32); border-radius: 50%; background: rgba(142,48,41,.22); color: rgba(241,228,199,.56); cursor: pointer; font-family: Georgia, serif; }
+    .seal { position: relative; width: 32px; height: 32px; padding: 0; border: 1px solid rgba(214,170,87,.32); border-radius: 50%; background: rgba(142,48,41,.22); color: rgba(241,228,199,.56); cursor: pointer; font-family: Georgia, serif; overflow: hidden; }
     .seal:hover { color: var(--gold-light); border-color: var(--gold); }
+    .seal::before, .seal::after { content: ""; position: absolute; left: 50%; top: 4px; width: 1px; height: 25px; background: #180806; opacity: 0; transform-origin: center; pointer-events: none; }
+    .seal[data-crack="1"]::before { opacity: .65; transform: rotate(18deg); }
+    .seal[data-crack="2"]::before { opacity: .8; transform: rotate(18deg); box-shadow: 5px 6px 0 #180806; }
+    .seal[data-crack="2"]::after { opacity: .55; transform: rotate(-42deg) translate(3px, 5px); }
+    .seal[data-crack="3"]::before, .seal[data-crack="4"]::before, .seal[data-crack="5"]::before { opacity: 1; transform: rotate(18deg); box-shadow: 5px 6px 0 #180806, -6px 12px 0 #180806; }
+    .seal[data-crack="3"]::after, .seal[data-crack="4"]::after, .seal[data-crack="5"]::after { opacity: .8; transform: rotate(-42deg) translate(3px, 5px); box-shadow: 7px -5px 0 #180806; }
+    .seal[data-crack="4"] { box-shadow: 0 0 18px rgba(214,170,87,.38), inset 0 0 12px rgba(243,215,149,.14); }
+    .seal[data-crack="5"] { color: var(--gold-light); border-color: var(--gold-light); box-shadow: 0 0 22px rgba(214,170,87,.55); }
     .secret-entry small { color: rgba(241,228,199,.36); }
 
     footer { padding: 30px 0; border-top: 1px solid var(--line); color: rgba(241,228,199,.42); font-size: 12px; line-height: 1.75; }
@@ -461,9 +542,14 @@
     .god-card[data-god="bane"] { border-left: 2px solid #7d8c91; }
     .god-card[data-god="bhaal"] { border-left: 2px solid var(--blood); }
     .god-card[data-god="myrkul"] { border-left: 2px solid #8c7e6f; }
+    .god-card.eliminated { opacity: .32; filter: grayscale(1); text-decoration: line-through; cursor: not-allowed; }
     .pairing-status { min-height: 23px; margin: 13px 0 0; color: var(--paper-dim); line-height: 1.6; }
-    .oath-form { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
-    .oath-form input { min-width: 0; height: 48px; padding: 0 15px; border: 1px solid var(--line); border-radius: 4px; background: #090706; color: var(--paper); letter-spacing: 2px; text-transform: uppercase; }
+    .oath-form { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1fr) auto; gap: 10px; align-items: end; }
+    .oath-field { display: grid; gap: 7px; color: var(--gold); font-size: 11px; }
+    .oath-field.code input { letter-spacing: 2px; text-transform: uppercase; }
+    .decode-slots { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 7px; max-width: 390px; margin: 0 0 14px; }
+    .decode-slots span { min-height: 38px; display: grid; place-items: center; border-bottom: 1px solid rgba(214,170,87,.38); color: rgba(243,215,149,.3); font: 700 19px/1 "Courier New", monospace; }
+    .decode-slots span.revealed { color: var(--gold-light); border-color: var(--gold); text-shadow: 0 0 12px rgba(214,170,87,.48); }
     .cipher-source { margin: 0 0 14px; padding: 13px 14px; border-left: 2px solid var(--blood); background: rgba(142,48,41,.08); color: rgba(241,228,199,.66); line-height: 1.65; }
     .cipher-source code { color: var(--gold-light); font-family: "Courier New", monospace; letter-spacing: 1px; user-select: all; }
     .inspiration-panel { display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: center; gap: 10px; margin-top: 16px; padding: 12px 13px; border: 1px solid rgba(214,170,87,.28); background: rgba(214,170,87,.05); }
@@ -589,6 +675,55 @@
       opacity: 0;
     }
     .final-ritual.active .ritual-sparks i { animation: ritual-spark 2.3s var(--delay) cubic-bezier(.2,.7,.2,1) both; }
+    .final-ritual.absolute {
+      background: radial-gradient(circle at center, rgba(63,96,76,.36), rgba(8,12,10,.97) 52%, #020403 78%), #020403;
+    }
+    .final-ritual.absolute::after { box-shadow: inset 0 0 120px 45px rgba(0,0,0,.96), inset 0 0 34px rgba(125,171,139,.62); }
+    .final-ritual.absolute .ritual-ring-outer { border-color: rgba(174,211,174,.78); }
+    .final-ritual.absolute .ritual-ring-inner { border-color: rgba(202,232,195,.72); }
+    .final-ritual.absolute .ritual-rune { background: radial-gradient(circle, rgba(54,92,70,.98), rgba(8,18,13,.98) 68%); color: #d7edcf; box-shadow: 0 0 28px rgba(109,158,122,.72); }
+    .final-ritual.absolute .ritual-core { border-color: #a7c9a8; background: radial-gradient(circle at 38% 34%, #779b7d, #345c43 52%, #0d1d14); color: #e3f2d9; box-shadow: 0 0 0 8px rgba(3,8,5,.84), 0 0 55px rgba(92,143,106,.92), inset 0 0 24px rgba(0,0,0,.7); }
+    .final-ritual.absolute .ritual-copy strong { color: #d8edcf; text-shadow: 0 0 26px rgba(122,171,134,.62), 0 4px 18px #000; }
+    .final-ritual.absolute .ritual-sparks i { background: #d7edcf; box-shadow: 0 0 10px #95bd9b, 0 0 22px #274f36; }
+    .narrator {
+      position: fixed;
+      left: 50%;
+      bottom: 34px;
+      z-index: 120;
+      width: min(620px, calc(100% - 32px));
+      padding: 14px 18px;
+      border-top: 1px solid rgba(214,170,87,.5);
+      border-bottom: 1px solid rgba(214,170,87,.18);
+      background: linear-gradient(90deg, transparent, rgba(8,6,5,.94) 12%, rgba(8,6,5,.94) 88%, transparent);
+      color: rgba(241,228,199,.82);
+      text-align: center;
+      font: italic 15px/1.7 Georgia, "STKaiti", serif;
+      opacity: 0;
+      transform: translate(-50%, 14px);
+      pointer-events: none;
+    }
+    .narrator strong { display: block; margin-bottom: 2px; color: var(--gold-light); font: 700 11px/1.4 "Microsoft YaHei", sans-serif; text-transform: uppercase; }
+    .narrator.show { animation: narrator-rise 5.2s ease both; }
+    .edge-runes { position: fixed; right: 14px; top: 50%; z-index: 14; display: grid; gap: 9px; transform: translateY(-50%); pointer-events: none; }
+    .edge-rune { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid rgba(214,170,87,.12); background: rgba(9,7,6,.64); color: rgba(241,228,199,.14); font: 700 18px/1 Georgia, serif; transition: color 260ms ease, border-color 260ms ease, box-shadow 260ms ease; }
+    .edge-rune.awake { color: var(--gold-light); border-color: rgba(214,170,87,.52); box-shadow: 0 0 18px rgba(142,48,41,.32); animation: rune-flicker 3.6s infinite; }
+    .world-embers { position: fixed; inset: 0; z-index: 13; overflow: hidden; pointer-events: none; }
+    .world-ember { position: absolute; bottom: -18px; width: var(--size); height: calc(var(--size) * 2.6); border-radius: 50%; background: var(--gold-light); box-shadow: 0 0 8px var(--gold), 0 0 16px var(--blood); opacity: 0; animation: world-ember-rise var(--duration) var(--delay) ease-out both; }
+    .world-embers.absolute .world-ember { background: #d7edcf; box-shadow: 0 0 8px #8db394, 0 0 16px #315e3e; }
+    body.mind-warp .hero-copy,
+    body.mind-warp .section-intro,
+    body.mind-warp .roll-note { animation: mind-warp 680ms steps(2, end) both; }
+    body.contract-bound .hero::after { background: linear-gradient(90deg, rgba(7,5,4,.94), rgba(7,5,4,.58) 45%, rgba(142,48,41,.08) 78%), linear-gradient(0deg, var(--night), transparent 42%); }
+    body.contract-bound .hero-status { border-color: var(--gold-light); box-shadow: 0 0 34px rgba(214,170,87,.12); }
+    body.absolute-bound {
+      --gold: #91b397;
+      --gold-light: #d7edcf;
+      --blood: #345c43;
+      --line: rgba(163,199,169,.24);
+    }
+    body.absolute-bound .hero::before { filter: saturate(.62) hue-rotate(62deg) contrast(1.08); }
+    body.absolute-bound .hero::after { background: linear-gradient(90deg, rgba(2,7,4,.97), rgba(4,12,7,.7) 48%, rgba(38,79,49,.18) 80%), linear-gradient(0deg, #050907, transparent 44%); }
+    body.absolute-bound .signed-seal { background: radial-gradient(circle at 38% 32%, #75987a, #31583f 58%, #0c1d13); }
     .toast { position: fixed; left: 50%; bottom: 24px; z-index: 30; transform: translate(-50%, 20px); padding: 12px 16px; border: 1px solid var(--line); border-radius: 4px; background: rgba(15,10,8,.94); color: var(--paper); opacity: 0; pointer-events: none; transition: opacity 180ms ease, transform 180ms ease; }
     .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
@@ -606,6 +741,11 @@
     @keyframes ritual-core { 0%, 28% { opacity: 0; transform: translate(-50%, -50%) scale(.2) rotate(-24deg); } 46% { opacity: 1; transform: translate(-50%, -50%) scale(1.16) rotate(3deg); } 58%, 82% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.35); } }
     @keyframes ritual-copy { 0%, 48% { opacity: 0; transform: translateY(22px); } 62%, 86% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-8px); } }
     @keyframes ritual-spark { 0%, 20% { opacity: 0; transform: translate(0,0) scale(.3) rotate(0); } 36% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(.1) rotate(220deg); } }
+    @keyframes narrator-rise { 0% { opacity: 0; transform: translate(-50%, 14px); } 10%, 82% { opacity: 1; transform: translate(-50%, 0); } 100% { opacity: 0; transform: translate(-50%, -6px); } }
+    @keyframes rune-flicker { 0%, 16%, 20%, 72%, 76%, 100% { opacity: .9; } 18%, 74% { opacity: .48; } }
+    @keyframes inspiration-rune { 0%, 100% { filter: brightness(1); box-shadow: 0 0 0 3px rgba(9,7,6,.72), 0 0 24px rgba(142,48,41,.72), inset 0 0 14px rgba(214,170,87,.16); } 50% { filter: brightness(1.45); box-shadow: 0 0 0 4px rgba(9,7,6,.72), 0 0 38px rgba(243,215,149,.72), inset 0 0 18px rgba(214,170,87,.26); } }
+    @keyframes mind-warp { 0%, 100% { filter: none; transform: none; text-shadow: none; } 28% { filter: blur(.7px); transform: translateX(2px); text-shadow: -2px 0 rgba(142,48,41,.8), 2px 0 rgba(214,170,87,.45); } 58% { filter: blur(.35px); transform: translateX(-2px); text-shadow: 2px 0 rgba(142,48,41,.72), -2px 0 rgba(214,170,87,.4); } }
+    @keyframes world-ember-rise { 0% { opacity: 0; transform: translate3d(0, 0, 0) rotate(0); } 12% { opacity: .9; } 74% { opacity: .5; } 100% { opacity: 0; transform: translate3d(var(--drift), -105vh, 0) rotate(210deg); } }
 
     @media (max-width: 900px) {
       .nav a:not(.nav-cta) { display: none; }
@@ -620,13 +760,15 @@
       .creed-item h3 { margin-top: 22px; }
     }
     @media (max-width: 560px) {
-      .shell { width: min(100% - 24px, 1180px); }
+      .shell { width: calc(100% - 24px); max-width: 1180px; }
       .topbar-inner { min-height: 62px; }
       .nav-cta { display: none; }
+      .nav-reset { width: 38px; padding: 0; justify-content: center; }
+      .nav-reset-label { display: none; }
       .hero { min-height: 84svh; }
       .hero::before { background-position: 65% top; }
       .hero::after { background: linear-gradient(90deg, rgba(7,5,4,.94), rgba(7,5,4,.46)), linear-gradient(0deg, var(--night), transparent 55%); }
-      .hero-content { width: 100%; padding: 124px 0 168px; }
+      .hero-content { width: 100%; min-width: 0; padding: 124px 0 168px; }
       h1 { font-size: clamp(52px, 18vw, 78px); }
       .hero-copy { font-size: 16px; line-height: 1.75; }
       .actions .btn { width: 100%; }
@@ -647,6 +789,10 @@
       .sound-grid, .pad-grid { grid-template-columns: 1fr 1fr; }
       .inspiration-panel { grid-template-columns: auto 1fr; }
       .inspiration-panel .btn { grid-column: 1 / -1; width: 100%; }
+      .camp-reactions p { grid-template-columns: 1fr; gap: 2px; }
+      .camp-reactions strong { text-align: left; }
+      .edge-runes { right: 8px; top: auto; bottom: 8px; grid-template-columns: repeat(3, 30px); transform: none; }
+      .edge-rune { width: 30px; height: 30px; }
       .reset-puzzle { margin-left: 0; }
       .ritual-sigil { width: 250px; height: 250px; }
       .ritual-ring-inner { inset: 50px; }
@@ -660,6 +806,8 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .final-ritual.active { visibility: visible; opacity: 1; animation: none !important; }
+      .narrator.show { opacity: 1; transform: translate(-50%, 0); animation: none !important; }
     }
   </style>
 </head>
@@ -669,6 +817,7 @@
       <a class="wordmark" href="#top" aria-label="回到页面顶部"><span class="mark" aria-hidden="true"><span>III</span></span><span>遗忘国度 · 私人招募令</span></a>
       <nav class="nav" aria-label="页面导航">
         <a href="#omen">命运检定</a><a href="#roles">选择身份</a><a href="#creed">同行准则</a><a class="nav-cta" href="#contract">签下契约</a>
+        <button class="nav-reset" id="resetPage" type="button" title="清除所有进度并重置网页"><span class="nav-reset-icon" aria-hidden="true">↻</span><span class="nav-reset-label">重置</span></button>
       </nav>
     </div>
   </header>
@@ -678,14 +827,14 @@
       <div class="shell">
         <div class="hero-content">
           <div class="hero-kicker"><i></i><span>一封只写给你的开团邀请</span></div>
-          <h1 id="hero-title">第三席<span>一直为你空着</span></h1>
-          <p class="hero-copy">今晚，剑湾的风会吹向博德之门。两位冒险者已经围坐营火旁，只差你带着好奇、坏主意和那一次关键的掷骰入席。</p>
+          <h1 id="hero-title"><b id="heroTitleMain">冒险召集</b><span id="heroSubtitle">等待你的回应</span></h1>
+          <p class="hero-copy" id="heroCopy">今晚，剑湾的风会吹向博德之门。营火已经点亮，只等你带着好奇、坏主意和那一次关键的掷骰踏入故事。</p>
           <div class="actions">
             <a class="btn btn-primary" href="#omen"><span class="btn-icon" aria-hidden="true">◆</span> 接受命运检定</a>
             <a class="btn" href="#contract">查看开团契约</a>
           </div>
         </div>
-        <aside class="hero-status" aria-label="队伍当前状态"><small>队伍状态</small><strong>2 / 3 · 等你入席</strong><div class="aside-whisper">一直空着的位置，不会替别人留。</div></aside>
+        <aside class="hero-status" aria-label="邀请当前状态"><small>邀请状态</small><strong id="heroStatus">密封 · 等待回应</strong><div class="aside-whisper" id="heroWhisper">火漆尚未承认任何名字。</div></aside>
       </div>
     </section>
 
@@ -717,9 +866,9 @@
               <div class="fact"><dt>入队门槛</dt><dd>零经验也欢迎，边走边学，不查攻略也能快乐</dd></div>
               <div class="fact"><dt>唯一规则</dt><dd>可以失败，可以整活，但不要让队友替你做决定</dd></div>
             </dl>
-            <div class="seat-meter" aria-label="队伍已有两人，还剩一个位置">
-              <div class="seat-label"><span>队伍席位</span><span>仅余 1 席</span></div>
-              <div class="seats"><i class="seat"></i><i class="seat"></i><i class="seat open"></i></div>
+            <div class="seat-meter" aria-label="邀请契约响应进度">
+              <div class="seat-label"><span>契约响应</span><span id="manifestStatus">等待冒险者</span></div>
+              <div class="quest-progress" id="questProgress" aria-hidden="true"><i></i><i></i><i></i></div>
             </div>
           </article>
         </div>
@@ -739,6 +888,9 @@
           <button class="role" type="button" data-role="圣武士" role="listitem" aria-label="选择圣武士；重甲上的暗色反光可以调查"><img src="./角色图片/圣武士.png" alt="圣武士角色图"><span class="rune-trigger rune-armor" data-rune="ᚪ" aria-hidden="true"></span><span class="role-copy"><small>STRENGTH</small><h3>圣武士</h3><p>站在队伍最前面，让誓言和重甲一起发光。</p></span></button>
         </div>
         <p class="role-result" id="roleResult" aria-live="polite">尚未选择，犹豫也是冒险者的权利。</p>
+        <aside class="camp-reactions" aria-label="营地同伴反应" aria-live="polite">
+          <p><strong id="roleReactionSpeaker">营火</strong><span id="roleReaction">火焰安静燃烧，像是在等一个尚未说出口的身份。</span></p>
+        </aside>
       </div>
     </section>
 
@@ -750,11 +902,11 @@
         <div class="poster-copy">
           <p class="eyebrow">Camp rumor</p>
           <h2 id="poster-title">营地里已经有人<br>先把气氛炒热了</h2>
-          <h3>这不是官方公告，是两位在等人的冒险者自己做的招募海报。</h3>
+          <h3>这不是官方公告，是营地里的冒险者自己做的招募海报。</h3>
           <p>它比契约更不正经，却更接近这次开团真正的气质。会乱选、会嘴硬、会被剧情和坏骰子一起推着跑，但每一个决定都会<span class="rune-trigger" data-rune="ᛗ" tabindex="0" role="button" aria-label="检查海报文字中的异常反光">留下故事</span>。</p>
           <p>欢迎来到那个“整活也算数”的 B 市营地。</p>
           <div class="poster-points">
-            <div>两个人已经就位，差你这个第三席把队伍从“能开”变成“有意思”。</div>
+            <div>地图已经摊开，补给也堆在营火旁。现在只差你让这次冒险真正开始。</div>
             <div>海报是明线，密语是暗线。一个负责把你骗进来，一个负责证明你真的看懂了邀请。<span class="glyph-hint">地下传单的接头暗号写得很直白：一定来。</span></div>
           </div>
         </div>
@@ -770,7 +922,7 @@
         <div class="creed-list">
           <article class="creed-item"><em>I</em><h3>立于抉择之前，先听完每个人的主意</h3><p>不催对话，不抢选择，最离谱的方案也值得一次完整陈述。</p></article>
           <article class="creed-item"><em>II</em><h3>刻下旅途中的失败，而不是急着<span class="rune-trigger" data-rune="ᚹ" tabindex="0" role="button" aria-label="检查同行准则中被阴影遮住的词">读档</span></h3><p>坏骰子也会长出好故事，先看看命运准备把我们带去哪。</p></article>
-          <article class="creed-item"><em>III</em><h3>有你在场，胜负才值得被营火记住</h3><p>配装没有标准答案，三个人都玩得开心，才算真正通关。</p></article>
+          <article class="creed-item"><em>III</em><h3>有你在场，胜负才值得被营火记住</h3><p>配装没有标准答案，同行的人都玩得开心，才算真正通关。</p></article>
         </div>
       </div>
     </section>
@@ -787,14 +939,17 @@
             <div class="schedule-row"><span>需要准备</span><strong>电脑、游戏、耳机、以及一个充满坏主意的脑子</strong></div>
           </div>
         </div>
-        <article class="contract-paper">
-          <h3>第三位冒险者契约</h3>
-          <p>本人自愿加入这支不太可靠但足够快乐的队伍。</p>
+        <article class="contract-paper" id="contractPaper">
+          <h3 id="contractTitle">营火冒险者契约</h3>
+          <p id="contractIntro">本人自愿回应这封邀请，加入这支不太可靠但足够快乐的队伍。</p>
+          <label class="signature-field" for="contractNameInput"><span>受邀者署名</span><input id="contractNameInput" type="text" autocomplete="name" maxlength="24" placeholder="在契约上写下你的名字"></label>
           <div class="invite-preview" id="invitePreview">我接受邀请，将以“尚未决定先闯祸还是先救场的贵宾”身份加入队伍。这个周日，营火边见。</div>
           <div class="contract-actions">
             <button class="btn btn-primary" id="copyInvite" type="button">复制我的入队宣言</button>
             <a class="btn" href="https://store.steampowered.com/app/1086940/Baldurs_Gate_3/" target="_blank" rel="noreferrer">查看 Steam 页面</a>
+            <button class="btn download-contract" id="downloadContract" type="button" hidden>下载已签契约 PNG</button>
           </div>
+          <div class="signed-mark" id="signedMark"><span><small>契约签署人</small><strong id="signedName">尚未署名</strong><span id="signedMeta">等待火漆确认</span></span><i class="signed-seal" id="signedSeal" aria-hidden="true">誓</i></div>
           <div class="secret-entry"><button class="seal" id="openSecret" type="button" aria-label="打开旧信使的火漆印">✦</button><small>旧信使的火漆印似乎能被打开</small></div>
         </article>
       </div>
@@ -903,8 +1058,10 @@
             <div class="step-head"><strong>第三阶段：神性解码 · 最终誓言</strong><span>The Final Oath</span></div>
             <p class="step-copy">圣坛已经升起。页脚版权声明中的十六进制校验串，是古老神殿留下的最后一层伪装：每两个十六进制字符代表一个字母。</p>
             <p class="cipher-source">页脚的灰烬版权声明里藏着一串以 <code>0x</code> 开头的校验字符。将它按 ASCII 十六进制每两位拆解，再把得到的誓言交给火漆。</p>
+            <div class="decode-slots" id="decodeSlots" aria-label="誓言解码进度"><span>_</span><span>_</span><span>_</span><span>_</span><span>_</span><span>_</span></div>
             <form class="oath-form" id="oathForm">
-              <input id="oathInput" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="12" placeholder="输入解出的誓言" aria-label="输入最终誓言">
+              <label class="oath-field" for="oathNameInput"><span>冒险者署名</span><input id="oathNameInput" type="text" autocomplete="name" maxlength="24" placeholder="名字不可留白"></label>
+              <label class="oath-field code" for="oathInput"><span>最终誓言</span><input id="oathInput" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="12" placeholder="输入解出的誓言"></label>
               <button class="btn btn-primary" type="submit">让火漆回应</button>
             </form>
             <p class="step-note" id="oathNote" aria-live="polite">先完成神性配对，圣坛才会允许你宣誓。</p>
@@ -927,9 +1084,9 @@
         <span class="ritual-rune ritual-rune-one">ᛗ</span>
         <span class="ritual-rune ritual-rune-two">ᚹ</span>
         <span class="ritual-rune ritual-rune-three">ᚪ</span>
-        <span class="ritual-core">III</span>
+        <span class="ritual-core" id="ritualCore">誓</span>
       </div>
-      <div class="ritual-copy"><strong>誓言已被铭记</strong><span>第三席 · 归位</span></div>
+      <div class="ritual-copy"><strong id="ritualTitle">誓言已被铭记</strong><span id="ritualSubtitle">冒险契约 · 已缔结</span></div>
       <div class="ritual-sparks" aria-hidden="true">
         <i style="--x:-210px;--y:-170px;--delay:1.15s"></i>
         <i style="--x:-128px;--y:-226px;--delay:1.28s"></i>
@@ -946,11 +1103,17 @@
       </div>
     </div>
   </dialog>
+  <aside class="narrator" id="narrator" aria-live="polite" aria-atomic="true" hidden><strong>旁白</strong><span id="narratorText"></span></aside>
+  <div class="edge-runes" aria-hidden="true"><i class="edge-rune" data-edge-rune="ᛗ">ᛗ</i><i class="edge-rune" data-edge-rune="ᚹ">ᚹ</i><i class="edge-rune" data-edge-rune="ᚪ">ᚪ</i></div>
+  <div class="world-embers" id="worldEmbers" aria-hidden="true"></div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
+    const DEFAULT_ROLE = "尚未决定先闯祸还是先救场的贵宾";
+    const STORAGE_KEY = "bg3-invitation-contract-v2";
     const state = {
-      role: "尚未决定先闯祸还是先救场的贵宾",
+      name: "",
+      role: DEFAULT_ROLE,
       roll: null,
       phase: "courierGlyph",
       glyphs: [],
@@ -959,7 +1122,13 @@
       foundRunes: new Set(),
       selectedRune: null,
       pairs: {},
-      inspiration: 0
+      eliminatedPairs: new Set(),
+      inspiration: 0,
+      inspirationUsed: new Set(),
+      oathReveal: 0,
+      ending: null,
+      completedAt: null,
+      damageNarrated: false
     };
     const phaseRank = { courierGlyph: 0, courierSound: 1, courierDigits: 2, perception: 3, pairing: 4, oath: 5, complete: 6 };
     const keypad = { a: 2, b: 2, c: 2, d: 3, e: 3, f: 3, g: 4, h: 4, i: 4, j: 5, k: 5, l: 5, m: 6, n: 6, o: 6, p: 7, q: 7, r: 7, s: 7, t: 8, u: 8, v: 8, w: 9, x: 9, y: 9, z: 9 };
@@ -976,22 +1145,52 @@
     const cipherText = "0x4A4F494E5553";
     const finalOath = cipherText.replace(/^0x/i, "").match(/.{2}/g).map((pair) => String.fromCharCode(parseInt(pair, 16))).join("");
     const fortunes = [
-      "大失败：骰子滚进灰烬，但失败留下了一道能被追踪的灵感裂痕。",
+      "灾厄一刻：骰子滚进灰烬，但失败留下了一道能被追踪的灵感裂痕。",
       "检定未过：营地书记官没有摇头，只把你的名字暂时压在羽毛笔下。",
-      "平稳通过：油墨没飞，桌子没翻，你被以相当体面的方式写进了第三席名单。",
-      "成功：火漆印啪地一声按下去，旁批写着“此人适合整活，准许入队”。",
-      "大成功：整张招募令像被命运泼了金粉，第三席当场连名带座归你所有。"
+      "平稳通过：油墨没飞，桌子没翻，你被相当体面地写进了冒险者名册。",
+      "检定成功：火漆印清脆落下，命运批注此人适合把正经旅途带向意外。",
+      "天命二十：整张招募令像被命运泼了金粉，你的名字直接跃上契约。"
     ];
+    const roleReactions = {
+      "吟游诗人": ["阿斯代伦", "哦，好极了。至少这次陷入麻烦之前，会有人替它配上合适的韵脚。"],
+      "法师": ["盖尔", "明智的选择。知识、克制，以及在必要时把整个房间变成火海。"],
+      "游荡者": ["暗影心", "只要你开锁时别顺手检查我的行囊，我们应该会相处得不错。"],
+      "圣武士": ["卡菈克", "重甲、誓言、冲在最前面。很好，我已经开始喜欢这个计划了。"]
+    };
     const d20 = document.querySelector("#d20");
     const rollButton = document.querySelector("#rollButton");
     const rollNote = document.querySelector("#rollNote");
     const inspirationCount = document.querySelector("#inspirationCount");
     const inspirationStatus = document.querySelector("#inspirationStatus");
     const roleResult = document.querySelector("#roleResult");
+    const roleReactionSpeaker = document.querySelector("#roleReactionSpeaker");
+    const roleReaction = document.querySelector("#roleReaction");
     const invitePreview = document.querySelector("#invitePreview");
+    const contractPaper = document.querySelector("#contractPaper");
+    const contractTitle = document.querySelector("#contractTitle");
+    const contractIntro = document.querySelector("#contractIntro");
+    const contractNameInput = document.querySelector("#contractNameInput");
+    const oathNameInput = document.querySelector("#oathNameInput");
+    const downloadContractButton = document.querySelector("#downloadContract");
+    const signedName = document.querySelector("#signedName");
+    const signedMeta = document.querySelector("#signedMeta");
+    const signedSeal = document.querySelector("#signedSeal");
+    const heroTitleMain = document.querySelector("#heroTitleMain");
+    const heroSubtitle = document.querySelector("#heroSubtitle");
+    const heroCopy = document.querySelector("#heroCopy");
+    const heroStatus = document.querySelector("#heroStatus");
+    const heroWhisper = document.querySelector("#heroWhisper");
+    const manifestStatus = document.querySelector("#manifestStatus");
+    const questMarks = [...document.querySelectorAll("#questProgress i")];
     const toast = document.querySelector("#toast");
+    const narrator = document.querySelector("#narrator");
+    const narratorText = document.querySelector("#narratorText");
+    const worldEmbers = document.querySelector("#worldEmbers");
     const dialog = document.querySelector("#secretDialog");
     const finalRitual = document.querySelector("#finalRitual");
+    const ritualCore = document.querySelector("#ritualCore");
+    const ritualTitle = document.querySelector("#ritualTitle");
+    const ritualSubtitle = document.querySelector("#ritualSubtitle");
     const glyphStep = document.querySelector("#glyphStep");
     const soundStep = document.querySelector("#soundStep");
     const digitStep = document.querySelector("#digitStep");
@@ -1017,19 +1216,47 @@
     const oathForm = document.querySelector("#oathForm");
     const oathInput = document.querySelector("#oathInput");
     const oathSubmit = oathForm.querySelector("button");
+    const decodeSlots = [...document.querySelectorAll("#decodeSlots span")];
     const dialogInspirationCount = document.querySelector("#dialogInspirationCount");
     const inspirationHint = document.querySelector("#inspirationHint");
+    const useInspirationButton = document.querySelector("#useInspiration");
+    const sealButton = document.querySelector("#openSecret");
     const runeTriggers = [...document.querySelectorAll(".rune-trigger[data-rune]")];
     const runeSlots = [...document.querySelectorAll("[data-rune-slot]")];
     const runePieces = [...document.querySelectorAll("[data-rune-option]")];
     const godCards = [...document.querySelectorAll("[data-god]")];
+    const edgeRunes = [...document.querySelectorAll("[data-edge-rune]")];
+    const roleButtons = [...document.querySelectorAll(".role")];
     runeTriggers.forEach((trigger) => {
       trigger.dataset.originalLabel = trigger.getAttribute("aria-label") || "";
     });
 
     function updateInvite() {
       const omen = state.roll ? `，命运骰为 ${state.roll}` : "";
-      invitePreview.textContent = `我接受邀请，将以“${state.role}”身份加入队伍${omen}。这个周日，营火边见。`;
+      const signer = state.name.trim() ? `${state.name.trim()} 接受邀请` : "我接受邀请";
+      const ending = state.ending === "absolute"
+        ? "火漆上的名字仍然清晰，只是笔迹已经不再属于凡人。"
+        : "这个周日，营火边见。";
+      invitePreview.textContent = `${signer}，将以“${state.role}”身份加入队伍${omen}。${ending}`;
+    }
+
+    function syncName(value) {
+      state.name = value.replace(/\s{2,}/g, " ").slice(0, 24);
+      if (contractNameInput.value !== state.name) contractNameInput.value = state.name;
+      if (oathNameInput.value !== state.name) oathNameInput.value = state.name;
+      updateInvite();
+    }
+
+    function formatCompletionDate(value) {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "未知时刻";
+      return new Intl.DateTimeFormat("zh-CN", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      }).format(date);
     }
 
     function showToast(message) {
@@ -1039,16 +1266,68 @@
       showToast.timer = setTimeout(() => toast.classList.remove("show"), 2400);
     }
 
+    function narrate(message, speaker = "旁白") {
+      clearTimeout(narrate.timer);
+      narrator.hidden = false;
+      narrator.querySelector("strong").textContent = speaker;
+      narratorText.textContent = message;
+      narrator.classList.remove("show");
+      void narrator.offsetWidth;
+      narrator.classList.add("show");
+      narrate.timer = setTimeout(() => {
+        narrator.classList.remove("show");
+        narrator.hidden = true;
+      }, 5300);
+    }
+
+    function updateRoleReaction(role) {
+      const reaction = roleReactions[role];
+      if (!reaction) {
+        roleReactionSpeaker.textContent = "营火";
+        roleReaction.textContent = "火焰安静燃烧，像是在等一个尚未说出口的身份。";
+        return;
+      }
+      roleReactionSpeaker.textContent = reaction[0];
+      roleReaction.textContent = reaction[1];
+    }
+
+    function updateDiceReaction(value) {
+      if (!value) {
+        roleReactionSpeaker.textContent = "命运";
+        roleReaction.textContent = "骰子仍停在掌心，所有结果都还没有发生。";
+      } else if (value === 20) {
+        roleReactionSpeaker.textContent = "威尔";
+        roleReaction.textContent = "天命站在你这一边。记住这一刻，往后的传说会从这里起笔。";
+      } else if (value === 1) {
+        roleReactionSpeaker.textContent = "阿斯代伦";
+        roleReaction.textContent = "灾难性的开场。我承认，这反而让我对接下来的旅程更感兴趣了。";
+      } else if (value <= 6) {
+        roleReactionSpeaker.textContent = "卡菈克";
+        roleReaction.textContent = "骰子不帮忙？那就靠我们自己。反正撞开门也算开门。";
+      } else if (value <= 14) {
+        roleReactionSpeaker.textContent = "暗影心";
+        roleReaction.textContent = "命运没有表态。很好，至少它暂时还没决定针对谁。";
+      } else {
+        roleReactionSpeaker.textContent = "盖尔";
+        roleReaction.textContent = "相当漂亮的结果。理性告诉我别得意，但理性偶尔也可以闭嘴。";
+      }
+    }
+
     function stopFinalRitual() {
       clearTimeout(stopFinalRitual.timer);
       finalRitual.classList.remove("active");
       document.body.classList.remove("final-ritual-open");
     }
 
-    function playFinalRitual() {
+    function playFinalRitual(ending) {
       stopFinalRitual();
       document.body.classList.remove("damage-flash");
       dialog.classList.remove("damage-shake");
+      const absolute = ending === "absolute";
+      finalRitual.classList.toggle("absolute", absolute);
+      ritualCore.textContent = absolute ? "◉" : "誓";
+      ritualTitle.textContent = absolute ? "意志已被接管" : "誓言已被铭记";
+      ritualSubtitle.textContent = absolute ? "至上真神 · 已听见你的回应" : "冒险契约 · 已缔结";
       void finalRitual.offsetWidth;
       document.body.classList.add("final-ritual-open");
       finalRitual.classList.add("active");
@@ -1059,7 +1338,43 @@
     function syncInspiration() {
       inspirationCount.textContent = state.inspiration;
       dialogInspirationCount.textContent = state.inspiration;
-      document.querySelector("#useInspiration").disabled = state.inspiration < 1;
+      const used = state.inspirationUsed.has(state.phase);
+      const unavailable = state.inspiration < 1 || used || state.phase === "complete";
+      useInspirationButton.disabled = unavailable;
+      useInspirationButton.textContent = state.phase === "complete"
+        ? "封印已解"
+        : used
+          ? "本阶段已启示"
+          : "消耗灵感";
+    }
+
+    function updateQuestProgress() {
+      const rank = phaseRank[state.phase];
+      const thresholds = [0, phaseRank.perception, phaseRank.complete];
+      questMarks.forEach((mark, index) => {
+        const awake = rank >= thresholds[index];
+        const nextThreshold = thresholds.findIndex((threshold) => threshold > rank);
+        mark.classList.toggle("awake", awake);
+        mark.classList.toggle("current", index === nextThreshold);
+      });
+      if (state.phase === "complete") {
+        manifestStatus.textContent = state.ending === "absolute" ? "印记已经倒转" : "冒险者已响应";
+      } else if (rank >= phaseRank.perception) {
+        manifestStatus.textContent = "内层封印已开启";
+      } else {
+        manifestStatus.textContent = "等待冒险者";
+      }
+    }
+
+    function updateSealCracks() {
+      const rank = phaseRank[state.phase];
+      const crack = rank >= phaseRank.complete ? 5
+        : rank >= phaseRank.oath ? 4
+          : rank >= phaseRank.perception ? 3
+            : rank >= phaseRank.courierDigits ? 2
+              : rank >= phaseRank.courierSound ? 1
+                : 0;
+      sealButton.dataset.crack = String(crack);
     }
 
     function setPhase(nextPhase) {
@@ -1090,8 +1405,12 @@
       clearDigitsButton.disabled = nextPhase !== "courierDigits";
       checkSecretButton.disabled = nextPhase !== "courierDigits";
       oathInput.disabled = nextPhase !== "oath";
+      oathNameInput.disabled = nextPhase !== "oath";
       oathSubmit.disabled = nextPhase !== "oath";
       renderPairing();
+      syncInspiration();
+      updateQuestProgress();
+      updateSealCracks();
     }
 
     function syncSoundSlots() {
@@ -1110,6 +1429,15 @@
       });
     }
 
+    function renderOathDecode() {
+      const source = state.ending === "absolute" ? "ABSOLU" : finalOath;
+      decodeSlots.forEach((slot, index) => {
+        const revealed = index < state.oathReveal;
+        slot.textContent = revealed ? source[index] : "_";
+        slot.classList.toggle("revealed", revealed);
+      });
+    }
+
     function renderRunes() {
       runeSlots.forEach((slot) => {
         const rune = slot.dataset.runeSlot;
@@ -1118,6 +1446,9 @@
         slot.querySelector("strong").textContent = found ? rune : "?";
         slot.querySelector("small").textContent = found ? `${runeLore[rune].title} · 已觉醒` : "感知未触及";
         slot.title = found ? runeLore[rune].clue : "等待感知";
+      });
+      edgeRunes.forEach((mark) => {
+        mark.classList.toggle("awake", state.foundRunes.has(mark.dataset.edgeRune));
       });
       const count = state.foundRunes.size;
       if (count < runeKeys.length) {
@@ -1141,8 +1472,12 @@
       godCards.forEach((card) => {
         const god = card.dataset.god;
         const matched = Object.values(state.pairs).includes(god);
+        const eliminated = Boolean(state.selectedRune) && state.eliminatedPairs.has(`${state.selectedRune}:${god}`);
         card.classList.toggle("matched", matched);
-        card.disabled = matched || state.phase !== "pairing";
+        card.classList.toggle("eliminated", eliminated);
+        card.disabled = matched || eliminated || state.phase !== "pairing";
+        if (eliminated) card.setAttribute("aria-label", `${card.textContent.trim()}，已被命运启示排除`);
+        else card.removeAttribute("aria-label");
       });
     }
 
@@ -1153,6 +1488,7 @@
         return;
       }
       state.foundRunes.add(rune);
+      trigger.classList.remove("inspiration-reveal");
       trigger.classList.add("rune-found");
       trigger.setAttribute("aria-label", `已发现远古符文 ${rune}`);
       renderRunes();
@@ -1178,11 +1514,16 @@
         document.body.classList.remove("damage-flash");
         dialog.classList.remove("damage-shake");
       }, 460);
+      if (!state.damageNarrated) {
+        state.damageNarrated = true;
+        narrate("疼痛从眼后炸开。蝌蚪并不关心你是否准备好，它只在意你终于碰到了某种真相。");
+      }
       return damage;
     }
 
     function attemptPair(rune, god) {
       if (state.phase !== "pairing" || !rune || !god || state.pairs[rune]) return;
+      if (state.eliminatedPairs.has(`${rune}:${god}`)) return;
       if (pairAnswer[rune] !== god) {
         const damage = damageFeedback();
         state.selectedRune = null;
@@ -1196,6 +1537,7 @@
       const matchedCount = Object.keys(state.pairs).length;
       if (matchedCount === runeKeys.length) {
         setPhase("oath");
+        renderOathDecode();
         pairingStatus.textContent = "三神的阴影彼此咬合，圣坛已经升起。";
         oathNote.textContent = "最终誓言就在页面最下方的灰烬校验串里。";
         secretResult.textContent = "班恩、巴尔与米尔寇的印记归位。现在，把神性解码成一句话。";
@@ -1206,36 +1548,67 @@
 
     function getInspirationHint() {
       if (state.phase === "courierGlyph") {
-        return "旧信使旁批：海报旁那句故意写亮的三字暗号，是“一定来”。";
+        return "旧信使启示：海报旁那句故意写亮的三字暗号，是“一定来”。";
       }
       if (state.phase === "courierSound") {
-        return "旧信使旁批：不要解释字义，只按顺序念成 yi · ding · lai。";
+        return "旧信使启示：不要解释字义，只按顺序念成 yi · ding · lai。";
       }
       if (state.phase === "courierDigits") {
-        return "旧信使旁批：把 yidinglai 拆成九个字母，再寻找每个字母所在的手机九键。";
-      }
-      if (state.phase === "perception") {
-        return "感知旁批：海报里的“留下故事”、同行准则里的“读档”和圣武士重甲上的暗色光斑，都值得调查。";
-      }
-      if (state.phase === "pairing") {
-        const rune = runeKeys.find((key) => !state.pairs[key]);
-        return rune ? `灵感旁批：${rune} 的${runeLore[rune].title}，正在寻找与${rune === "ᚹ" ? "铁冠" : rune === "ᛗ" ? "血刃" : "骨灰"}相称的神名。` : "灵感旁批：三神的印记已经全部归位。";
-      }
-      if (state.phase === "oath") {
-        return "灵感旁批：十六进制每两位拆成一个 ASCII 字符，4A 是 J，4F 是 O。";
+        return "旧信使启示：把 yidinglai 拆成九个字母，再寻找每个字母所在的手机九键。";
       }
       return "誓言已经被火漆记下。灵感点可以留给下一场冒险。";
     }
 
     function useInspiration() {
+      if (state.inspirationUsed.has(state.phase)) {
+        showToast("命运在这个阶段已经回应过一次。");
+        return;
+      }
       if (!state.inspiration) {
         showToast("你没有可消耗的灵感点。去掷一次 D20。");
         return;
       }
+      let hint = getInspirationHint();
+      if (state.phase === "perception") {
+        const target = runeTriggers.find((trigger) => !state.foundRunes.has(trigger.dataset.rune));
+        if (!target) {
+          showToast("所有远古符文都已经被你感知。");
+          return;
+        }
+        target.classList.add("inspiration-reveal");
+        hint = `命运启示：${target.dataset.rune} 正在页面的一处异常阴影里短暂显形。`;
+        const anchor = target.closest(".role") || target;
+        setTimeout(() => anchor.scrollIntoView({ behavior: "smooth", block: "center" }), 120);
+        setTimeout(() => target.classList.remove("inspiration-reveal"), 6500);
+        if (dialog.open) dialog.close();
+      } else if (state.phase === "pairing") {
+        const rune = runeKeys.find((key) => !state.pairs[key]);
+        if (!rune) {
+          showToast("所有神性配对都已经完成。");
+          return;
+        }
+        state.selectedRune = rune;
+        const occupied = Object.values(state.pairs);
+        const wrongCard = godCards.find((card) => card.dataset.god !== pairAnswer[rune] && !occupied.includes(card.dataset.god));
+        if (wrongCard) {
+          state.eliminatedPairs.add(`${rune}:${wrongCard.dataset.god}`);
+          hint = `命运启示：${rune} 与“${wrongCard.querySelector("strong").textContent}”之间没有任何共鸣。`;
+          pairingStatus.textContent = `灵感锁定了 ${rune}，并抹去了一条错误的神性连线。`;
+        } else {
+          hint = `命运启示：${rune} 面前只剩最后一座尚未归位的神像。`;
+          pairingStatus.textContent = `灵感锁定了 ${rune}，其余错误道路已经全部闭合。`;
+        }
+        renderPairing();
+      } else if (state.phase === "oath") {
+        state.oathReveal = Math.max(state.oathReveal, 2);
+        renderOathDecode();
+        hint = "命运启示：灰烬中浮出了誓言的前两个字母 J · O。";
+      }
       state.inspiration -= 1;
-      inspirationHint.textContent = getInspirationHint();
+      state.inspirationUsed.add(state.phase);
+      inspirationHint.textContent = hint;
       syncInspiration();
-      showToast("灵感点化成一行旁批，暂时照亮了你的思路。");
+      showToast("灵感化作命运启示，改变了当前检定。");
     }
 
     function resetCourierSounds() {
@@ -1257,6 +1630,408 @@
       secretResult.classList.remove("success");
       secretResult.textContent = "读音与数字已经擦除，旧信使仍在等待正确的顺序。";
       setPhase("courierSound");
+    }
+
+    function clearWorldEmbers() {
+      clearTimeout(clearWorldEmbers.timer);
+      clearTimeout(startWorldEmbers.timer);
+      worldEmbers.replaceChildren();
+      worldEmbers.classList.remove("absolute");
+    }
+
+    function startWorldEmbers(ending) {
+      clearWorldEmbers();
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      worldEmbers.classList.toggle("absolute", ending === "absolute");
+      const fragment = document.createDocumentFragment();
+      for (let index = 0; index < 58; index += 1) {
+        const ember = document.createElement("i");
+        ember.className = "world-ember";
+        ember.style.left = `${Math.random() * 100}%`;
+        ember.style.setProperty("--size", `${1 + Math.random() * 3}px`);
+        ember.style.setProperty("--drift", `${-90 + Math.random() * 180}px`);
+        ember.style.setProperty("--duration", `${4.8 + Math.random() * 3.4}s`);
+        ember.style.setProperty("--delay", `${Math.random() * 2.2}s`);
+        fragment.appendChild(ember);
+      }
+      worldEmbers.appendChild(fragment);
+      clearWorldEmbers.timer = setTimeout(clearWorldEmbers, 10500);
+    }
+
+    function fillCompletedPuzzle() {
+      state.glyphs = [...glyphAnswer];
+      state.sounds = [...soundAnswer];
+      state.digits = [...digitAnswer];
+      state.foundRunes = new Set(runeKeys);
+      state.pairs = { ...pairAnswer };
+      state.selectedRune = null;
+      state.oathReveal = decodeSlots.length;
+      glyphButtons.forEach((button) => {
+        button.textContent = button.dataset.glyph;
+        button.classList.add("revealed");
+      });
+      soundButtons.forEach((button) => {
+        button.classList.toggle("good", soundAnswer.includes(button.dataset.sound));
+        button.classList.remove("bad");
+      });
+      runeTriggers.forEach((trigger) => {
+        trigger.classList.add("rune-found");
+        trigger.classList.remove("inspiration-reveal");
+        trigger.setAttribute("aria-label", `已发现远古符文 ${trigger.dataset.rune}`);
+      });
+      syncSoundSlots();
+      syncDigitSlots();
+      renderRunes();
+      renderOathDecode();
+    }
+
+    function saveCompletion() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          version: 2,
+          name: state.name.trim(),
+          role: state.role,
+          roll: state.roll,
+          ending: state.ending,
+          completedAt: state.completedAt
+        }));
+      } catch (error) {
+        showToast("契约已经成立，但浏览器没有允许长期保存这份记录。");
+      }
+    }
+
+    function applyCompletionState({ restored = false } = {}) {
+      const absolute = state.ending === "absolute";
+      const displayName = state.name.trim();
+      const completedLabel = formatCompletionDate(state.completedAt);
+      document.body.classList.toggle("contract-bound", !absolute);
+      document.body.classList.toggle("absolute-bound", absolute);
+      heroTitleMain.textContent = absolute ? "意志已归一" : "契约已缔结";
+      heroSubtitle.textContent = absolute ? `${displayName}，祂已经看见你` : `${displayName}，营火记住了你`;
+      heroCopy.textContent = absolute
+        ? "火漆倒转，墨迹像活物一样钻回羊皮纸。邀请仍然有效，只是回应它的存在已经不再属于营火。"
+        : "你的名字已经越过旧信使与古老神殿，落在营火边的冒险者名册上。接下来，只剩真正出发。";
+      heroStatus.textContent = absolute ? "印记倒转 · 意志已响应" : "已签署 · 冒险者已响应";
+      heroWhisper.textContent = absolute ? "某种更古老的存在，正在借你的眼睛阅读契约。" : "下一次掷骰，将发生在真正的旅途中。";
+      contractTitle.textContent = absolute ? `${displayName} · 倒转之契` : `${displayName}的冒险者契约`;
+      contractIntro.textContent = absolute
+        ? "名字仍在契约上，但签署它的意志已经被另一道目光覆盖。"
+        : "火漆已经确认这份回应。营火会为每一次选择、失败与意外留下位置。";
+      signedName.textContent = displayName;
+      signedMeta.textContent = `${state.role} · D20 ${state.roll || "未掷"} · ${completedLabel}`;
+      signedSeal.textContent = absolute ? "眼" : "誓";
+      d20.textContent = state.roll || "—";
+      contractNameInput.disabled = true;
+      oathNameInput.disabled = true;
+      oathInput.disabled = true;
+      oathSubmit.disabled = true;
+      downloadContractButton.hidden = false;
+      roleButtons.forEach((button) => {
+        button.disabled = true;
+        button.classList.toggle("selected", button.dataset.role === state.role);
+      });
+      rollButton.disabled = true;
+      rollButton.textContent = "命运已落定";
+      roleResult.textContent = `身份已写入契约：${state.role}。火漆已经确认这次选择。`;
+      inspirationStatus.textContent = absolute
+        ? "命运的声音已经远去，另一道意志接管了骰面。"
+        : "契约已签署。剩余灵感会被保留到真正的冒险。";
+      oathInput.value = absolute ? "ABSOLUTE" : finalOath;
+      oathNote.textContent = absolute
+        ? "圣坛接受了另一句誓言。火漆上的神性已经倒转。"
+        : "誓言正确。圣坛承认了你的名字。";
+      secretResult.classList.add("success");
+      secretResult.textContent = absolute
+        ? "ABSOLUTE。旧信使的火漆没有碎裂，而是像一只眼睛般睁开。"
+        : "JOINUS。旧信使的火漆碎成金色粉尘，冒险契约已经正式成立。";
+      inspirationHint.textContent = absolute
+        ? "命运已经停止提供启示。某种意志正在替它回答。"
+        : "誓言已经被火漆记下。灵感点可以留给下一场冒险。";
+      updateRoleReaction(state.role);
+      if (state.roll) updateDiceReaction(state.roll);
+      updateInvite();
+      renderOathDecode();
+      updateQuestProgress();
+      updateSealCracks();
+      syncInspiration();
+      if (restored) {
+        rollNote.textContent = state.roll
+          ? fortunes[state.roll === 1 ? 0 : state.roll < 10 ? 1 : state.roll < 16 ? 2 : state.roll < 20 ? 3 : 4]
+          : "契约已经签署，骰面记录在旧信使遗失的那一页。";
+      }
+    }
+
+    function finishOath(ending) {
+      state.ending = ending;
+      state.completedAt = new Date().toISOString();
+      state.oathReveal = decodeSlots.length;
+      setPhase("complete");
+      applyCompletionState();
+      saveCompletion();
+      playFinalRitual(ending);
+      if (ending === "absolute") {
+        narrate("你没有说出神殿期待的誓言。可黑暗仍然回答了你，而且它似乎早就知道你的名字。");
+        showToast("隐藏誓言成立：印记已经倒转。");
+      } else {
+        narrate(`${state.name.trim()}。名字落入火漆，营火旁的所有人都在同一刻抬起了头。`);
+        showToast("最终誓言成立：冒险契约已缔结。");
+      }
+      startWorldEmbers.timer = setTimeout(() => startWorldEmbers(ending), 3300);
+    }
+
+    function restoreCompletion() {
+      let saved;
+      try {
+        saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+      } catch (error) {
+        return false;
+      }
+      if (!saved || saved.version !== 2 || !saved.name || !["camp", "absolute"].includes(saved.ending)) return false;
+      state.name = String(saved.name).slice(0, 24);
+      state.role = roleButtons.some((button) => button.dataset.role === saved.role) ? saved.role : DEFAULT_ROLE;
+      state.roll = Number.isInteger(saved.roll) && saved.roll >= 1 && saved.roll <= 20 ? saved.roll : null;
+      state.ending = saved.ending;
+      state.completedAt = saved.completedAt || new Date().toISOString();
+      state.inspiration = 0;
+      state.inspirationUsed = new Set();
+      state.eliminatedPairs = new Set();
+      fillCompletedPuzzle();
+      syncName(state.name);
+      if (state.roll) d20.textContent = state.roll;
+      setPhase("complete");
+      applyCompletionState({ restored: true });
+      return true;
+    }
+
+    function roundedRectPath(context, x, y, width, height, radius) {
+      const r = Math.min(radius, width / 2, height / 2);
+      context.beginPath();
+      context.moveTo(x + r, y);
+      context.arcTo(x + width, y, x + width, y + height, r);
+      context.arcTo(x + width, y + height, x, y + height, r);
+      context.arcTo(x, y + height, x, y, r);
+      context.arcTo(x, y, x + width, y, r);
+      context.closePath();
+    }
+
+    function drawWrappedText(context, text, x, y, maxWidth, lineHeight) {
+      let line = "";
+      let cursorY = y;
+      for (const character of text) {
+        const testLine = line + character;
+        if (context.measureText(testLine).width > maxWidth && line) {
+          context.fillText(line, x, cursorY);
+          line = character;
+          cursorY += lineHeight;
+        } else {
+          line = testLine;
+        }
+      }
+      if (line) context.fillText(line, x, cursorY);
+      return cursorY;
+    }
+
+    function downloadContractImage() {
+      if (state.phase !== "complete") {
+        showToast("契约尚未签署，暂时无法生成凭证。");
+        return;
+      }
+      const absolute = state.ending === "absolute";
+      const canvas = document.createElement("canvas");
+      canvas.width = 1600;
+      canvas.height = 1000;
+      const context = canvas.getContext("2d");
+      const colors = absolute
+        ? { bg: "#07100a", panel: "#0f1c14", paper: "#dcebd6", dim: "#9fbaa2", gold: "#9cc1a2", blood: "#31583f", dark: "#020503" }
+        : { bg: "#130d0a", panel: "#241912", paper: "#f1e4c7", dim: "#cbbd9f", gold: "#d6aa57", blood: "#8e3029", dark: "#090706" };
+      const background = context.createLinearGradient(0, 0, 1600, 1000);
+      background.addColorStop(0, colors.panel);
+      background.addColorStop(1, colors.bg);
+      context.fillStyle = background;
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.globalAlpha = .08;
+      context.fillStyle = colors.paper;
+      for (let index = 0; index < 900; index += 1) {
+        context.fillRect(Math.random() * 1600, Math.random() * 1000, 1, 1);
+      }
+      context.globalAlpha = 1;
+      context.strokeStyle = colors.gold;
+      context.lineWidth = 3;
+      context.strokeRect(58, 58, 1484, 884);
+      context.lineWidth = 1;
+      context.strokeRect(76, 76, 1448, 848);
+      [["M", 112, 118], ["W", 1442, 118], ["A", 112, 884], ["III", 1402, 884]].forEach(([mark, x, y]) => {
+        context.fillStyle = colors.gold;
+        context.font = "700 28px Georgia, serif";
+        context.fillText(mark, x, y);
+      });
+      context.fillStyle = colors.gold;
+      context.font = "700 22px Georgia, serif";
+      context.fillText(absolute ? "THE INVERTED PACT" : "THE CAMPFIRE PACT", 130, 158);
+      context.fillStyle = colors.paper;
+      context.font = '700 72px "Microsoft YaHei", "KaiTi", serif';
+      context.fillText(absolute ? "倒转之契" : "营火冒险者契约", 130, 250);
+      context.fillStyle = colors.dim;
+      context.font = '28px "Microsoft YaHei", sans-serif';
+      context.fillText("旧信使火漆印 · 私人开团邀请凭证", 134, 304);
+      context.strokeStyle = colors.blood;
+      context.lineWidth = 5;
+      context.beginPath();
+      context.moveTo(132, 346);
+      context.lineTo(1020, 346);
+      context.stroke();
+      context.fillStyle = colors.gold;
+      context.font = '700 22px "Microsoft YaHei", sans-serif';
+      context.fillText("签署人", 134, 420);
+      context.fillStyle = colors.paper;
+      context.font = '700 50px "KaiTi", "Microsoft YaHei", serif';
+      context.fillText(state.name.trim(), 134, 482);
+      context.strokeStyle = colors.gold;
+      context.lineWidth = 1;
+      context.beginPath();
+      context.moveTo(134, 504);
+      context.lineTo(900, 504);
+      context.stroke();
+      context.fillStyle = colors.dim;
+      context.font = '26px "Microsoft YaHei", sans-serif';
+      context.fillText(`身份：${state.role}`, 134, 572);
+      context.fillText(`命运骰：${state.roll || "未掷 D20"}`, 134, 622);
+      context.fillText(`签署时间：${formatCompletionDate(state.completedAt)}`, 134, 672);
+      context.fillText(`最终誓言：${absolute ? "ABSOLUTE" : finalOath}`, 134, 722);
+      context.fillStyle = colors.paper;
+      context.font = 'italic 29px "KaiTi", "Microsoft YaHei", serif';
+      drawWrappedText(
+        context,
+        absolute
+          ? "火漆没有碎裂。它睁开了眼睛，并将这个名字交给了更古老的意志。"
+          : "愿每一次失败都长出故事，愿每一次选择都值得被营火记住。",
+        134,
+        800,
+        920,
+        48
+      );
+      context.save();
+      context.translate(1280, 610);
+      context.rotate(-.12);
+      context.fillStyle = colors.blood;
+      context.beginPath();
+      context.arc(0, 0, 132, 0, Math.PI * 2);
+      context.fill();
+      context.strokeStyle = colors.gold;
+      context.lineWidth = 8;
+      context.stroke();
+      context.beginPath();
+      context.arc(0, 0, 102, 0, Math.PI * 2);
+      context.stroke();
+      context.fillStyle = colors.paper;
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.font = "700 62px Georgia, serif";
+      context.fillText(absolute ? "◉" : "III", 0, 2);
+      context.font = '700 18px "Microsoft YaHei", sans-serif';
+      context.fillText(absolute ? "至上真神" : "契约已缔结", 0, 78);
+      context.restore();
+      context.fillStyle = colors.gold;
+      context.font = "18px Georgia, serif";
+      context.textAlign = "right";
+      context.fillText("BALDUR'S GATE 3 · UNOFFICIAL PRIVATE INVITATION", 1466, 890);
+      const safeName = state.name.trim().replace(/[\\/:*?"<>|]/g, "_") || "冒险者";
+      const link = document.createElement("a");
+      link.download = `${safeName}-营火冒险契约.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+      showToast("已生成可分享的契约 PNG。");
+    }
+
+    function resetExperience() {
+      stopFinalRitual();
+      clearWorldEmbers();
+      clearTimeout(narrate.timer);
+      narrator.classList.remove("show");
+      narrator.hidden = true;
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (error) {
+        // Local storage may be unavailable when opened from a restricted file context.
+      }
+      state.name = "";
+      state.role = DEFAULT_ROLE;
+      state.roll = null;
+      state.phase = "courierGlyph";
+      state.glyphs = [];
+      state.sounds = [];
+      state.digits = [];
+      state.foundRunes = new Set();
+      state.selectedRune = null;
+      state.pairs = {};
+      state.eliminatedPairs = new Set();
+      state.inspiration = 0;
+      state.inspirationUsed = new Set();
+      state.oathReveal = 0;
+      state.ending = null;
+      state.completedAt = null;
+      state.damageNarrated = false;
+      document.body.classList.remove("contract-bound", "absolute-bound", "mind-warp", "damage-flash");
+      finalRitual.classList.remove("absolute");
+      heroTitleMain.textContent = "冒险召集";
+      heroSubtitle.textContent = "等待你的回应";
+      heroCopy.textContent = "今晚，剑湾的风会吹向博德之门。营火已经点亮，只等你带着好奇、坏主意和那一次关键的掷骰踏入故事。";
+      heroStatus.textContent = "密封 · 等待回应";
+      heroWhisper.textContent = "火漆尚未承认任何名字。";
+      contractTitle.textContent = "营火冒险者契约";
+      contractIntro.textContent = "本人自愿回应这封邀请，加入这支不太可靠但足够快乐的队伍。";
+      contractNameInput.disabled = false;
+      downloadContractButton.hidden = true;
+      signedName.textContent = "尚未署名";
+      signedMeta.textContent = "等待火漆确认";
+      signedSeal.textContent = "誓";
+      d20.textContent = "20";
+      d20.classList.remove("rolling");
+      rollButton.disabled = false;
+      rollButton.textContent = "掷一次 D20";
+      rollNote.textContent = "墨迹还没干，名单却已经给你预留了一行。";
+      inspirationStatus.textContent = "命运显圣与厄兆启示，都会撕开预言的缝隙。";
+      roleButtons.forEach((button) => {
+        button.disabled = false;
+        button.classList.remove("selected");
+      });
+      roleResult.textContent = "尚未选择，犹豫也是冒险者的权利。";
+      updateRoleReaction();
+      glyphButtons.forEach((button) => {
+        button.textContent = "?";
+        button.classList.remove("revealed");
+      });
+      soundButtons.forEach((button) => button.classList.remove("good", "bad"));
+      runeTriggers.forEach((trigger) => {
+        trigger.classList.remove("rune-found", "inspiration-reveal");
+        if (trigger.dataset.originalLabel) trigger.setAttribute("aria-label", trigger.dataset.originalLabel);
+        else trigger.removeAttribute("aria-label");
+      });
+      oathInput.value = "";
+      syncName("");
+      glyphNote.textContent = "依次抄录三枚线索字。";
+      soundNote.textContent = "先完成上一步，译音板才会亮起。";
+      digitNote.textContent = "读音被确认后，才能真正开始译码。";
+      pairingStatus.textContent = "先选择一枚符文，再将它交给正确的神祇。";
+      oathNote.textContent = "先完成神性配对，圣坛才会允许你宣誓。";
+      inspirationHint.textContent = "当骰面显现“天命二十”或“灾厄一刻”，预言将赐下一则启示。";
+      secretResult.classList.remove("success");
+      secretResult.textContent = "解谜已经重置。先从旧信使留下的三字暗号开始。";
+      syncSoundSlots();
+      syncDigitSlots();
+      renderRunes();
+      renderOathDecode();
+      setPhase("courierGlyph");
+      showToast("双重火漆印与签署记录已经恢复到未开启状态。");
+    }
+
+    function resetWholePage() {
+      const confirmed = window.confirm("确定重置整份邀请吗？署名、骰子、职业、谜题进度和已保存结局都会被清除。");
+      if (!confirmed) return;
+      if (dialog.open) dialog.close();
+      resetExperience();
+      const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
     }
 
     glyphButtons.forEach((button, index) => {
@@ -1336,11 +2111,13 @@
       perceptionNote.textContent = state.foundRunes.size === runeKeys.length
         ? "三个远古符文已经在火漆中苏醒。智力检定开始。"
         : `已感知 ${state.foundRunes.size} / 3。线索不会主动喊你的名字。`;
+      narrate("火漆内部传来一声不属于蜡块的裂响。旧信使递送的，从来不只是一句暗号。");
       setTimeout(() => ultimateGate.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
     });
 
     rollButton.addEventListener("click", () => {
       rollButton.disabled = true;
+      document.body.classList.add("mind-warp");
       d20.classList.remove("rolling");
       void d20.offsetWidth;
       d20.classList.add("rolling");
@@ -1350,6 +2127,7 @@
         ticks += 1;
         if (ticks < 8) return;
         clearInterval(spin);
+        document.body.classList.remove("mind-warp");
         const value = Math.floor(Math.random() * 20) + 1;
         state.roll = value;
         d20.textContent = value;
@@ -1367,16 +2145,18 @@
         syncInspiration();
         rollButton.textContent = "再掷一次";
         rollButton.disabled = false;
+        updateDiceReaction(value);
         updateInvite();
       }, 70);
     });
 
-    document.querySelectorAll(".role").forEach((button) => {
+    roleButtons.forEach((button) => {
       button.addEventListener("click", (event) => {
-        document.querySelectorAll(".role").forEach((item) => item.classList.remove("selected"));
+        roleButtons.forEach((item) => item.classList.remove("selected"));
         button.classList.add("selected");
         state.role = button.dataset.role;
         roleResult.textContent = `身份已写入契约：${state.role}。你仍可在开团前反悔。`;
+        updateRoleReaction(state.role);
         updateInvite();
         const armorHit = event.target instanceof Element && event.target.closest(".rune-armor");
         if (button.dataset.role === "圣武士" && (armorHit || event.detail === 0)) {
@@ -1440,69 +2220,48 @@
         oathNote.textContent = "圣坛尚未打开。先完成三神配对。";
         return;
       }
+      const name = oathNameInput.value.trim();
+      if (!name) {
+        oathNote.textContent = "圣坛拒绝无名的誓言。先在契约上留下你的名字。";
+        oathNameInput.focus();
+        return;
+      }
+      syncName(name);
       const answer = oathInput.value.replace(/\s+/g, "").toUpperCase();
-      if (answer !== finalOath) {
+      if (answer !== finalOath && answer !== "ABSOLUTE") {
         const damage = damageFeedback();
         oathNote.textContent = `火漆拒绝了这句誓言。你受到 ${damage} 点精神伤害，试着按每两位十六进制拆解。`;
         secretResult.classList.remove("success");
         return;
       }
-      setPhase("complete");
-      oathInput.disabled = true;
-      oathSubmit.disabled = true;
-      oathNote.textContent = "誓言正确。圣坛承认了你的名字。";
-      secretResult.classList.add("success");
-      secretResult.textContent = "JOINUS，旧信使的火漆印碎裂成金色粉尘，第三席正式归你，把这份宣言带回营火边。";
-      playFinalRitual();
-      showToast("最终誓言成立：第三席已为你封存。");
+      finishOath(answer === "ABSOLUTE" ? "absolute" : "camp");
     });
 
-    document.querySelector("#useInspiration").addEventListener("click", useInspiration);
+    contractNameInput.addEventListener("input", (event) => syncName(event.target.value));
+    oathNameInput.addEventListener("input", (event) => syncName(event.target.value));
+    useInspirationButton.addEventListener("click", useInspiration);
+    downloadContractButton.addEventListener("click", downloadContractImage);
+    document.querySelector("#resetPage").addEventListener("click", resetWholePage);
     document.querySelector("#copyInvite").addEventListener("click", async () => {
       try {
+        if (!navigator.clipboard) throw new Error("Clipboard API unavailable");
         await navigator.clipboard.writeText(invitePreview.textContent);
         showToast("入队宣言已复制，去回应你的队友吧。");
       } catch (error) {
-        showToast("浏览器未允许复制，请手动选中宣言。");
+        const fallback = document.createElement("textarea");
+        fallback.value = invitePreview.textContent;
+        fallback.setAttribute("readonly", "");
+        fallback.style.position = "fixed";
+        fallback.style.opacity = "0";
+        document.body.appendChild(fallback);
+        fallback.select();
+        const copied = document.execCommand("copy");
+        fallback.remove();
+        showToast(copied ? "入队宣言已复制，去回应你的队友吧。" : "浏览器未允许复制，请手动选中宣言。");
       }
     });
 
-    document.querySelector("#resetPuzzle").addEventListener("click", () => {
-      stopFinalRitual();
-      state.phase = "courierGlyph";
-      state.glyphs = [];
-      state.sounds = [];
-      state.digits = [];
-      state.foundRunes.clear();
-      state.selectedRune = null;
-      state.pairs = {};
-      glyphButtons.forEach((button) => {
-        button.textContent = "?";
-        button.classList.remove("revealed");
-      });
-      soundButtons.forEach((button) => button.classList.remove("good", "bad"));
-      runeTriggers.forEach((trigger) => {
-        trigger.classList.remove("rune-found");
-        if (trigger.dataset.originalLabel) trigger.setAttribute("aria-label", trigger.dataset.originalLabel);
-        else trigger.removeAttribute("aria-label");
-      });
-      oathInput.value = "";
-      oathInput.disabled = false;
-      oathSubmit.disabled = false;
-      glyphNote.textContent = "依次抄录三枚线索字。";
-      soundNote.textContent = "先完成上一步，译音板才会亮起。";
-      digitNote.textContent = "读音被确认后，才能真正开始译码。";
-      pairingStatus.textContent = "先选择一枚符文，再将它交给正确的神祇。";
-      oathNote.textContent = "先完成神性配对，圣坛才会允许你宣誓。";
-      inspirationHint.textContent = "当骰面显现“天命二十”或“灾厄一刻”，预言将赐下一则启示。";
-      secretResult.classList.remove("success");
-      secretResult.textContent = "解谜已经重置。先从旧信使留下的三字暗号开始。";
-      syncSoundSlots();
-      syncDigitSlots();
-      renderRunes();
-      setPhase("courierGlyph");
-      showToast("双重火漆印已经恢复到未开启状态。");
-    });
+    document.querySelector("#resetPuzzle").addEventListener("click", resetExperience);
 
     const sunday = new Date();
     sunday.setDate(sunday.getDate() + ((7 - sunday.getDay()) % 7 || 7));
@@ -1522,11 +2281,14 @@
     });
 
     renderRunes();
+    renderOathDecode();
     syncSoundSlots();
     syncDigitSlots();
-    setPhase("courierGlyph");
-    syncInspiration();
-    updateInvite();
+    if (!restoreCompletion()) {
+      setPhase("courierGlyph");
+      syncInspiration();
+      updateInvite();
+    }
   </script>
 </body>
 </html>
